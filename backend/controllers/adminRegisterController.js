@@ -2,7 +2,7 @@ import { Admin } from "../models/adminRegisterSchema.js";
 import { handleValidationError } from "../middlewares/errorHandler.js";
 
 export const adminRegister= async (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { email, name, phno, password } = req.body;
   try {
       if (!email || !name || !phno || !password  ) {
