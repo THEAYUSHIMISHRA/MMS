@@ -11,20 +11,30 @@ const AdminSignIn = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    // const email = "swadhasri@gmail.com";
+    // const password = "swagger123";
 
-    try {
-      const response = await axios.post('http://localhost:4000/api/v1/users/signin', { email, password });
-      if (response.status === 200) {
-        // Sign-in successful, redirect to admin dashboard
-        window.location.href = '../Admin/Dashboard';
-      } else {
-        // Handle sign-in errors
-        console.error('Sign-in failed');
-      }
-    } catch (error) {
-      console.error('Error during sign-in:', error);
+    if (email === "swadhasri@gmail.com" && password === "swagger123") {
+      navigate('/admin/dashboard');
+    } else {
+      alert('Invalid credentials');
     }
   };
+
+  //   try {
+  //     const response = await axios.post('http://localhost:4000/api/v1/users/signin', { email, password });
+  //     if (response.status === 200) {
+  //       // Sign-in successful, redirect to admin dashboard
+  //       navigate("/admin/dashboard");
+  //       console.log("Success");
+  //     } else {
+  //       // Handle sign-in errors
+  //       console.error('Sign-in failed');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error during sign-in:', error);
+  //   }
+  // };
 
   return (
     <AdminSignInContainer>
@@ -44,7 +54,7 @@ const AdminSignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <SubmitButton to="/Admin/Dashboard" onClick={handleSignIn}>Sign In</SubmitButton>
+        <SubmitButton to="../Admin/Dashboard" onClick={handleSignIn}>Sign In</SubmitButton>
         {/* <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton> */}
       </FormContainer>
     </AdminSignInContainer>

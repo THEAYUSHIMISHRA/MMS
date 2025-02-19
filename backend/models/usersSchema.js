@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
+//import { adminRegister } from "../controllers/adminRegisterController";
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// export const Admin = mongoose.model('Admin Register', userSchema);
+//export const Admin = mongoose.model('Admin Register', userSchema);
 export const AdminLogin = mongoose.model('Admin Login', userSchema);
 export const Student = mongoose.model('Student Login', userSchema);
 export const Teacher = mongoose.model('Teacher Login', userSchema);
