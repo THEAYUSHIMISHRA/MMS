@@ -44,11 +44,12 @@ export const TextArea = styled.textarea`
 export const Button = styled.button`
   padding: 8px 16px;
   font-size: 16px;
-  background-color: #007bff;
+  background-color:rgb(55, 86, 119);
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-right: 10px;
 `;
 
 export const AnnouncementList = styled.ul`

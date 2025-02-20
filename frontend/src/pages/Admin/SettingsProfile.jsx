@@ -14,11 +14,11 @@ import {
 
 const SettingsProfile = () => {
   const teacherInfo = {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    phone: '123-456-7890',
-    address: '123 Main St, City, Country',
-    qualification: 'Master of Education',
+    name: 'Swadha Sri',
+    email: 'swadhasri@gmail.com',
+    phone: '1020345678',
+    address: 'Banasthali Vidyapith, Tonk',
+    qualification: 'Bachelor of Technology(IT)',
   };
 
   return (

@@ -23,6 +23,7 @@ config();
 app.use(
     cors({
         origin: process.env.FRONTEND_URL || "*",
+        credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
     })
 );
@@ -46,6 +47,7 @@ app.use("/api/v1/register", adminRegisterRouter);
 
 // Global Error Handler
 app.use((err, req, res, next) => {
+    res.json({ messgae: "Backend is connected to Frontend"})
     errorHandler(err, req, res, next);
 });
 

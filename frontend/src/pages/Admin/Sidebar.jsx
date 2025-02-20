@@ -13,13 +13,13 @@ const SidebarContainer = styled.div`
   background-color: #2c3e50; /* Dark blue background */
   color: white;
   overflow-y: auto; /* Enable vertical scrolling */
-  padding-top: 60px;
+  padding-top: 20px;
   transition: width 0.3s ease; /* Smooth width transition */
   z-index: 100; /* Ensure sidebar stays above content */
 `;
 
 const SidebarHeader = styled.div`
-  padding: 5px;
+  padding: 1px;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -60,7 +60,7 @@ const Logo = styled.img`
 const ToggleButton = styled.div`
   position: absolute;
   top: 20px;
-  right: 0;
+  right: 0px;
   width: 30px;
   height: 30px;
   background-color: #34495e; /* Darker background */
@@ -86,7 +86,7 @@ const Sidebar = () => {
   };
 
   return (
-    <SidebarContainer style={{ width: isOpen ? '250px' : '80px' }}>
+    <SidebarContainer style={{ width: isOpen ? '250px' : '40px' }}>
       <SidebarHeader>
         <Logo src="/logo1.png" alt="Logo" />
       </SidebarHeader>
@@ -123,10 +123,10 @@ const Sidebar = () => {
           <SidebarIcon><BsCalendar /></SidebarIcon>
           <StyledLink to="/admin/attendance">Attendance</StyledLink>
         </SidebarNavItem>
-        <SidebarNavItem>
+        {/* <SidebarNavItem>
           <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/admin/library">Library</StyledLink>
-        </SidebarNavItem>
+        </SidebarNavItem> */}
         <SidebarNavItem>
           <SidebarIcon><BsChatDots /></SidebarIcon>
           <StyledLink to="/admin/communication">Announcement</StyledLink>
@@ -140,9 +140,9 @@ const Sidebar = () => {
           <StyledLink to="/admin/settings">Settings & Profile</StyledLink>
         </SidebarNavItem>
       </SidebarNav>
-      <ToggleButton onClick={toggleSidebar}>
+      {/* <ToggleButton onClick={toggleSidebar}>
         <ToggleIcon isOpen={isOpen}>▲</ToggleIcon>
-      </ToggleButton>
+      </ToggleButton> */}
     </SidebarContainer>
   );
 };

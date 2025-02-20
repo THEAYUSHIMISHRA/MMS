@@ -6,6 +6,7 @@ import React from "react";
 const Sidebar = () => {
   return <div style={{ padding: "20px", background: "#007bff", color: "white" }}>Sidebar</div>;
 };
+
 export const SidebarContainer = styled.div`
   position: fixed;
   top: 0;

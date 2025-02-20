@@ -4,7 +4,8 @@ import validator from "validator";
 const eventsSchema = new mongoose.Schema({
   events: {
     type: String,
-    required: true
+    required: true,
+    validate: [validator.isEmail, "Please provide a valid email"],
   },
 });
 

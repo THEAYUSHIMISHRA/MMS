@@ -15,7 +15,7 @@ export const Content = styled.div`
 `;
 
 export const ProfileHeader = styled.h1`
-  font-size: 24px;
+  font-size: 30px;
   margin-bottom: 20px;
 `;
 
@@ -28,7 +28,7 @@ export const ProfileLabel = styled.label`
 `;
 
 export const ProfileInfo = styled.p`
-  margin-bottom: 10px;
+  margin: 10px;
 `;
 
 export const EditButton = styled.button`
@@ -38,6 +38,7 @@ export const EditButton = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 20px;
 `;
 
 export const ProfileDetail = styled.div`

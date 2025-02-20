@@ -1,9 +1,9 @@
 // AdminDashboard.js
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
-import EventCalendar from './EventCalender';
+//import EventCalendar from './EventCalender';
 import Announcement from './Announcement';
-import Performance from './Performance';
+//import Performance from './Performance';
 import axios from 'axios';
 import {
   AdminDashboardContainer,
@@ -20,9 +20,9 @@ import {
 
 const AdminDashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [events, setEvents] = useState([]);
+  //const [events, setEvents] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
-  const [studentPerformance, setStudentPerformance] = useState([]);
+  //const [studentPerformance, setStudentPerformance] = useState([]);
 
   useEffect(() => {
     fetchEvents();
@@ -66,27 +66,27 @@ const AdminDashboard = () => {
             <SectionTitle>Overview</SectionTitle>
             <CardContainer>
               <Card>
-                <CardTitle>Total Students</CardTitle>
-                <CardContent>500</CardContent>
+                <CardTitle>Total Mentees</CardTitle>
+                <CardContent>00</CardContent>
               </Card>
               <Card>
-                <CardTitle>Total Teachers</CardTitle>
-                <CardContent>50</CardContent>
+                <CardTitle>Total Mentors</CardTitle>
+                <CardContent>00</CardContent>
               </Card>
               <Card>
-                <CardTitle>Total Classes</CardTitle>
-                <CardContent>50</CardContent>
+                <CardTitle>Total Teams</CardTitle>
+                <CardContent>00</CardContent>
               </Card>
             </CardContainer>
           </Section>
 
-          <Section>
+          {/* <Section>
             <EventCalendar events={events} />
-          </Section>
+          </Section> */}
         </TopContent>
 
         <BottomContent>
-          <Performance studentPerformance={studentPerformance} />
+          {/* <Performance studentPerformance={studentPerformance} /> */}
           <Announcement announcements={announcements} />
         </BottomContent>
       </Content>

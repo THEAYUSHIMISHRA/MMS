@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
@@ -57,6 +58,17 @@ const Announcement = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4000/api/v1/announcements/${id}`);
+      toast.success('Announcement deleted successfully');
+      setAnnouncements(announcements.filter(item => item._id !== id)); // Remove deleted item from state
+    } catch (error) {
+      console.error('Error deleting announcement:', error);
+      toast.error('Error deleting announcement');
+    }
+  };
+  
   return (
     <AnnouncementContainer>
       <ToastContainer />
@@ -77,14 +89,19 @@ const Announcement = () => {
             />
           </FormGroup>
           <Button type="submit">Send Announcement</Button>
+          <Button type="button" onClick={() => setAnnouncement('')}>Clear Announcement</Button>
         </AnnouncementForm>
 
         {/* Display Announcements */}
-        <h2>Announcements</h2>
+        <h2>Announcements Done:</h2>
         <AnnouncementList>
           {announcements.map((announcement) => (
             <AnnouncementItem key={announcement._id}>
               <AnnouncementContent>{announcement.announcement}</AnnouncementContent>
+              {/* <div>
+                <button onClick={() => handleDelete(announcement._id)}>Delete</button>
+              </div> */}
+              <Button onClick={() => handleDelete(announcement._id)}>Delete Announcement</Button>
             </AnnouncementItem>
           ))}
         </AnnouncementList>
