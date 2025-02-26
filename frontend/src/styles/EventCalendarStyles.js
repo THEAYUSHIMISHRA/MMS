@@ -12,8 +12,7 @@ export const EventCalendarContainer = styled.div`
 
 export const Content = styled.div`
   flex: 1;
-  padding: 20px;
-
+  padding: 120px;
   @media (max-width: 768px) {
   padding: 10px;
 }
@@ -39,10 +38,11 @@ export const Events = styled.div`
 export const Event = styled.div`
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color:rgb(255, 255, 255);
   border-radius: 5px;
   &:hover {
-  background-color: #e0e0e0;
+  background-color:rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   }
 `;
 

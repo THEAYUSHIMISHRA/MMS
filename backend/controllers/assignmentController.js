@@ -8,7 +8,7 @@ export const createAssignment = async (req, res, next) => {
   const { title, description, cardID, deadline } = req.body;
   try {
     if (!title || !description || !cardID || !deadline) {
-      handleValidationError("Please Fill Full Form!", 400);
+      return res.status(400).json({ success: false, message: "Please fill the forms" });
     }
     await Assignment.create({ title, description, cardID, deadline });
     res.status(201).json({

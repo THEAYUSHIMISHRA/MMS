@@ -6,7 +6,7 @@ export const createAnnouncement = async (req, res, next) => {
   const { announcement } = req.body;
   try {
       if (!announcement ) {
-        handleValidationError("Please Fill Form!", 400);
+        return res.status(400).json({ success: false, message: "Please fill the forms" });
   }
   await Announcement.create({ announcement});
   res.status(200).json({

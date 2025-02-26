@@ -6,7 +6,7 @@ export const createClass = async (req, res, next) => {
   const {cardID } = req.body;
   try {
     if (!cardID ) {
-      handleValidationError("Please Fill Form!", 400);
+      return res.status(400).json({ success: false, message: "Please fill the forms" });
   }
   await Class.create({ cardID });
   res.status(200).json({

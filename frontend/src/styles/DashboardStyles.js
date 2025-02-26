@@ -57,7 +57,7 @@ export const Card = styled.div`
 export const CardTitle = styled.h3`
   font-size: 18px;
   margin-bottom: 10px;
-  color: #007bff; 
+  color:rgb(255, 255, 255); 
 `;
 
 export const CardContent = styled.p`

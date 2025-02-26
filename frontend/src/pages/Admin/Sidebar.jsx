@@ -95,10 +95,10 @@ const Sidebar = () => {
           <SidebarIcon><BsGraphUp /></SidebarIcon>
           <StyledLink to="/admin/dashboard">Dashboard</StyledLink>
         </SidebarNavItem>
-        <SidebarNavItem>
+        {/* <SidebarNavItem>
           <SidebarIcon><BsPeople /></SidebarIcon>
           <StyledLink to="/admin/classes">Classes</StyledLink>
-        </SidebarNavItem>
+        </SidebarNavItem> */}
         <SidebarNavItem>
           <SidebarIcon><BsPeople /></SidebarIcon>
           <StyledLink to="/admin/students">Students</StyledLink>
@@ -107,22 +107,22 @@ const Sidebar = () => {
           <SidebarIcon><BsPerson /></SidebarIcon>
           <StyledLink to="/admin/teachers">Teachers</StyledLink>
         </SidebarNavItem>
-        <SidebarNavItem>
+        {/* <SidebarNavItem>
           <SidebarIcon><BsFileText /></SidebarIcon>
           <StyledLink to="/admin/assignments">Assignments</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
+        </SidebarNavItem> */}
+        {/* <SidebarNavItem>
           <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/admin/exams">Exams</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
+        </SidebarNavItem> */}
+        {/* <SidebarNavItem>
           <SidebarIcon><BsGraphDown /></SidebarIcon>
           <StyledLink to="/admin/performance">Performance</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
+        </SidebarNavItem> */}
+        {/* <SidebarNavItem>
           <SidebarIcon><BsCalendar /></SidebarIcon>
           <StyledLink to="/admin/attendance">Attendance</StyledLink>
-        </SidebarNavItem>
+        </SidebarNavItem> */}
         {/* <SidebarNavItem>
           <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/admin/library">Library</StyledLink>

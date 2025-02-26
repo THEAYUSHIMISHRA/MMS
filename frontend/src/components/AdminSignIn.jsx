@@ -7,34 +7,35 @@ import axios from 'axios';
 const AdminSignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     // const email = "swadhasri@gmail.com";
     // const password = "swagger123";
 
-    if (email === "swadhasri@gmail.com" && password === "swagger123") {
-      navigate('/admin/dashboard');
-    } else {
-      alert('Invalid credentials');
+    // if (email === "swadhasri@gmail.com" && password === "swagger123") {
+    //   navigate('/admin/dashboard');
+    // } else {
+    //   alert('Invalid credentials');
+    // }
+
+    try {
+      const response = await axios.post('http://localhost:4000/api/v1/users/admin/signin', { email, password });
+      
+      if (response.data.success) {
+        // Sign-in successful, redirect to admin dashboard
+        localStorage.setItem("adminEmail", response.data.admin.email);
+        window.location.href = "/admin/dashboard";
+        console.log("Success");
+      } else {
+        // Handle sign-in errors
+        console.error('Sign-in failed');
+      }
+    } catch (error) {
+      console.error('Error during sign-in:', error);
     }
   };
-
-  //   try {
-  //     const response = await axios.post('http://localhost:4000/api/v1/users/signin', { email, password });
-  //     if (response.status === 200) {
-  //       // Sign-in successful, redirect to admin dashboard
-  //       navigate("/admin/dashboard");
-  //       console.log("Success");
-  //     } else {
-  //       // Handle sign-in errors
-  //       console.error('Sign-in failed');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error during sign-in:', error);
-  //   }
-  // };
 
   return (
     <AdminSignInContainer>
@@ -54,8 +55,8 @@ const AdminSignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <SubmitButton to="../Admin/Dashboard" onClick={handleSignIn}>Sign In</SubmitButton>
-        {/* <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton> */}
+        {/* <SubmitButton to="../Admin/Dashboard" onClick={handleSignIn}>Sign In</SubmitButton> */}
+        <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton>
       </FormContainer>
     </AdminSignInContainer>
   );

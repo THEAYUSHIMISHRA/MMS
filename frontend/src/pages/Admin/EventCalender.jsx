@@ -5,13 +5,13 @@ import axios from 'axios';
 import {
   EventCalendarContainer,
   Content,
-  CalendarContainer,
+  // CalendarContainer,
   Events,
   Event,
   AddEventForm,
   EventInput,
   AddEventButton,
-  ErrorText,
+  // ErrorText,
 } from '../../styles/EventCalendarStyles';
 
 const EventCalendar = () => {
@@ -23,10 +23,18 @@ const EventCalendar = () => {
   const fetchEvents = async () => {
     try {
       const response = await axios.get('http://localhost:4000/api/v1/events/getall');
-      setEvents(response.data.events || []);
+      
+      //console.log("Fetched events:", response.data);
+
+      if (!response.data.success || !response.data.events) {
+        console.error("No events found.");
+        return;
+      }
+
+      setEvents(response.data.events);
     } catch (error) {
       console.error('Error fetching events:', error);
-      setError('Error fetching events');
+      //setError('Error fetching events');
     }
   };
 
@@ -43,13 +51,21 @@ const EventCalendar = () => {
       });
       setEvents([...events, response.data.event]);
       setNewEvent('');
+      setError(null);
     } catch (error) {
       console.error('Error adding event:', error);
-      if (error.response && error.response.data && error.response.data.error) {
-        setError(error.response.data.error);
-      } else {
-        setError('Error adding event');
-      }
+      setError(error.response?.data?.error || 'Error adding event');
+    }
+  };
+
+  const deleteEvent = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4000/api/v1/events/${id}`);
+  
+      setEvents(events.filter((event) => event._id !== id));
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      setError(error.response?.data?.error || "Error deleting event");
     }
   };
 
@@ -57,15 +73,15 @@ const EventCalendar = () => {
     <EventCalendarContainer>
       <Sidebar />
       <Content>
-        <h1>Events & Calendar</h1>
-        <div>Current Time: {new Date().toLocaleString()}</div>
-        <CalendarContainer>
-          {/* Display Calendar Here */}
-          {/* For example: <Calendar /> */}
-          Calendar
-        </CalendarContainer>
+        <h1 align="center">Events & Calendar</h1>
+        <div><h3>Current Time: {new Date().toLocaleString()}</h3></div>
+        {/* <CalendarContainer>
+          {/* Display Calendar Here */
+          /* For example: <Calendar /> */
+          // /* Calendar */ </CalendarContainer> */
+        }
+        <h2>Add Event</h2>
         <AddEventForm onSubmit={addEvent}>
-          <h2>Add New Event</h2>
           <EventInput
             type="text"
             value={newEvent}
@@ -74,12 +90,18 @@ const EventCalendar = () => {
           />
           <AddEventButton type="submit">Add Event</AddEventButton>
         </AddEventForm>
-        {error && <ErrorText>{error}</ErrorText>}
+        {/* {error && <ErrorText>{error}</ErrorText>} */}
         <Events>
-          <h2>Events</h2>
-          {events.map((event, index) => (
-            <Event key={index}>{event}</Event>
-          ))}
+          <h2>Events List:</h2>
+          { events.length > 0 ? (
+            events.map((event) => (
+            <Event key={event._id}>{event.event}
+            <br />
+            <button onClick={() => deleteEvent(event._id)}>Delete Event</button>
+            </Event>
+          ))) : (
+          <p>No events found</p>
+        ) }
         </Events>
       </Content>
     </EventCalendarContainer>

@@ -16,7 +16,7 @@ const AdminRegister = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:4000/api/v1/register/admin', { email, name, phno, password });
+      const response = await axios.post('http://localhost:4000/api/v1/register/admin', { email, name, phno, password }, { headers: { "Content-Type": "application/json" } } );
       if (response.status === 200) {
         // Render the AdminSignIn component after successful registration
         setShowSignIn(true);

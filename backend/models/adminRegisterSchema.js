@@ -18,8 +18,12 @@ const adminRegisterSchema = new mongoose.Schema({
   phno: {
     type: Number,
     required: true,
-    minlength: 10,
-    maxlength: 10,
+    validate: {
+      validator: function (v) {
+        return /^\d{10}$/.test(v);
+      },
+      message: "Phone number must be 10 digits",
+    },
   },
   password: {
     type: String,
