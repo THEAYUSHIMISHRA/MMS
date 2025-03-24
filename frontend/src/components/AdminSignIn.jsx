@@ -7,34 +7,38 @@ import axios from 'axios';
 const AdminSignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     // const email = "swadhasri@gmail.com";
     // const password = "swagger123";
 
-    // if (email === "swadhasri@gmail.com" && password === "swagger123") {
-    //   navigate('/admin/dashboard');
-    // } else {
-    //   alert('Invalid credentials');
-    // }
-
-    try {
-      const response = await axios.post('http://localhost:4000/api/v1/users/admin/signin', { email, password });
-      
-      if (response.data.success) {
-        // Sign-in successful, redirect to admin dashboard
-        localStorage.setItem("adminEmail", response.data.admin.email);
-        window.location.href = "/admin/dashboard";
-        console.log("Success");
-      } else {
-        // Handle sign-in errors
-        console.error('Sign-in failed');
-      }
-    } catch (error) {
-      console.error('Error during sign-in:', error);
+    if (email === "swadhasri@gmail.com" && password === "swagger123") {
+      navigate('/admin/dashboard');
+    } else {
+      alert('Invalid credentials');
     }
+    //alert("Sign-in button clicked! 🚀");
+    // try {
+    //   console.log("Sending request to backend..."); 
+    //   const response = await axios.post('http://localhost:4000/api/v1/users/admin/signin', { email, password });
+      
+    //   console.log("API Response:", response.data);
+      
+    //   if (response.data.success) {
+    //     // Sign-in successful, redirect to admin dashboard
+    //     console.log("Admin Email from LocalStorage:", adminEmail);
+    //     localStorage.setItem("adminEmail", response.data.admin.email);
+    //     navigate('/admin/dashboard');
+    //     console.log("Success");
+    //   } else {
+    //     // Handle sign-in errors
+    //     console.error('Sign-in failed');
+    //   }
+    // } catch (error) {
+    //   console.error('Error during sign-in:', error);
+    // }
   };
 
   return (

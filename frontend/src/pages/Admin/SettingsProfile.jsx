@@ -25,7 +25,7 @@ const SettingsProfile = () => {
     }
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/v1/users/admin/profile?email=${adminEmail}');
+        const res = await axios.get(`http://localhost:4000/api/v1/users/admin/profile?email=${adminEmail}`);
         console.log("Profile Data from API:", res.data);
         setProfile(res.data.admin);
       } catch (error) {
@@ -55,8 +55,8 @@ const SettingsProfile = () => {
           <ProfileLabel>Phone:</ProfileLabel>
           <ProfileInfo>{profile?.phno}</ProfileInfo>
 
-          <ProfileLabel>Password:</ProfileLabel>
-          <ProfileInfo>{profile.password}</ProfileInfo>
+          {/* <ProfileLabel>Password:</ProfileLabel>
+          <ProfileInfo>{profile.password}</ProfileInfo> */}
 
           {/* <ProfileLabel>Qualification:</ProfileLabel>
           <ProfileInfo>{profile.qualification}</ProfileInfo> */}

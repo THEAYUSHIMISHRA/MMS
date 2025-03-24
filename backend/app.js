@@ -15,6 +15,8 @@ import attendanceRouter from "./router/attendanceRouter.js";
 import usersRouter from "./router/usersRouter.js";
 import adminRegisterRouter from "./router/adminRegisterRouter.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+//import uploadRoutes from "./router/uploadRouter.js";
+
 // console.log("MONGO_URI:", process.env.MONGO_URI);
 const app = express();
 config();
@@ -43,6 +45,8 @@ app.use("/api/v1/exam", examRouter);
 app.use("/api/v1/attendance", attendanceRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/register", adminRegisterRouter);
+//app.use("/api/v1/uploadcsv", uploadRoutes);
+
 //app.use("/api/v1/admin", AdminSignInRouter);
 
 // Global Error Handler

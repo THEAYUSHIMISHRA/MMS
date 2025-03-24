@@ -7,7 +7,7 @@ export const AnnouncementContainer = styled.div`
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    padding-left: 0;
+    padding-left: 0px;
   }
 `;
 

@@ -15,7 +15,7 @@ export const Content = styled.div`
 `;
 
 export const PerformanceContent = styled.div`
-  padding: 20px;
+  padding-left: 300px;
 `;
 
 export const PerformanceHeader = styled.h2`

@@ -9,6 +9,8 @@ import TeacherSignIn from '../src/components/TeacherSignIn';
 import AdminRegister from '../src/components/AdminRegister';
 import AboutUs from '../src/components/AboutUs';
 import Coordinator from '../src/components/Coordinator';
+import StudentUpload from "./pages/Admin/StudentUpload";
+import TeacherUpload from "./pages/Admin/TeacherUpload";
 
 import AdminDashboard from '../src/pages/Admin/Dashboard';
 import StudentDashboard from '../src/pages/Students/Dashboard';
@@ -31,7 +33,8 @@ import StudentAssignments from '../src/pages/Students/Assignments';
 import ExamSection from '../src/pages/Students/Exams';
 import PerformanceSection from '../src/pages/Students/Performance';
 import AttendanceSection from '../src/pages/Students/Attendance';
-import LibrarySection from '../src/pages/Students/Library';
+import LibrarySection from './pages/Students/Library';
+import CheckEventSection from './pages/Students/Events';
 import AnnouncementSection from '../src/pages/Students/Announcement';
 import ProfileSection from '../src/pages/Students/Profile';
 
@@ -45,6 +48,7 @@ import CheckAnnouncementSection from '../src/pages/Teachers/Announcement';
 import AssignmentSection from '../src/pages/Teachers/Assignments';
 import CheckAttendanceSection from '../src/pages/Teachers/Attendance';
 import CheckExamSection from '../src/pages/Teachers/Exams';
+//import TeacherUpload from "./pages/Admin/TeacherUpload.jsx";
 
 const App = () => {
   return (
@@ -64,7 +68,7 @@ const App = () => {
         {/* Informational sections */}
 
         <Route exact path="/aboutus" element={<AboutUs />} />
-
+        {/* <Route exact path="/csv-uploader" element={<CsvUploader />} /> */}
         <Route exact path="/coordinator" element={<Coordinator />} />
 
         {/* All the dashboard routes */}
@@ -81,6 +85,8 @@ const App = () => {
         <Route exact path="/admin/attendance" element={<Attendance />} />
         <Route exact path="/admin/performance" element={<Performance />} />
         <Route exact path="/admin/teachers" element={<Teachers />} />
+        <Route exact path="/admin/suploads" element={<StudentUpload />} />
+        <Route exact path="/admin/tuploads" element={<TeacherUpload />} />
         <Route exact path="/admin/students" element={<Students />} />
         <Route exact path="/admin/assignments" element={<Assignments />} />
         <Route exact path="/admin/library" element={<Library />} />
@@ -95,6 +101,7 @@ const App = () => {
         <Route exact path="/student/performance" element={<PerformanceSection />} />
         <Route exact path="/student/attendance" element={<AttendanceSection />} />
         <Route exact path="/student/library" element={<LibrarySection />} />
+        <Route exact path="/student/events" element={<CheckEventSection />} />
         <Route exact path="/student/communication" element={<AnnouncementSection />} />
         <Route exact path="/student/settings" element={<ProfileSection />} />
 

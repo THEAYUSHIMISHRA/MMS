@@ -13,29 +13,29 @@ const TeacherDashboard = () => {
           <SectionTitle>Overview</SectionTitle>
           <CardContainer>
             <Card>
+              <CardTitle>Total Teams</CardTitle>
+              <CardContent>0</CardContent>
+            </Card>
+            <Card>
               <CardTitle>Total Students</CardTitle>
-              <CardContent>500</CardContent>
+              <CardContent>0</CardContent>
             </Card>
             <Card>
-              <CardTitle>Total Teachers</CardTitle>
-              <CardContent>50</CardContent>
-            </Card>
-            <Card>
-              <CardTitle>Total Classes</CardTitle>
-              <CardContent>50</CardContent>
+              <CardTitle>Messages</CardTitle>
+              <CardContent>0</CardContent>
             </Card>
           </CardContainer>
         </Section>
 
         <Section>
-          <SectionTitle>Recent Activity</SectionTitle>
+          <SectionTitle>Announcements</SectionTitle>
           {/* Add a list of recent activity items */}
         </Section>
 
-        <Section>
-          <SectionTitle>Upcoming Events</SectionTitle>
+        {/* <Section>
+          <SectionTitle>Upcoming Events</SectionTitle> */}
           {/* Add a calendar or list of upcoming events */}
-        </Section>
+        {/* </Section> */}
 
         {/* Add more sections for other parts of the admin dashboard */}
       </Content>

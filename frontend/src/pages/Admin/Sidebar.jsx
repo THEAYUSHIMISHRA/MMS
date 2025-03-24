@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsQuestionSquare } from 'react-icons/bs';
+import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsQuestionSquare, BsFile } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
   position: fixed;
@@ -48,14 +48,21 @@ const StyledLink = styled(Link)`
   margin-left: 10px;
 `;
 
-const SidebarIcon = styled.div`
-  margin-right: 10px;
-`;
+// const SidebarIcon = styled.div`
+//   margin-right: 10px;
+// `;
 
 const Logo = styled.img`
   width: 150px;
   height: auto;
 `;
+
+const SidebarIcon = styled.div`
+  margin-right: 10px;
+  font-size: 20px;
+  color: ${({ isActive }) => (isActive ? '#f39c12' : 'white')}; 
+`;
+
 
 const ToggleButton = styled.div`
   position: absolute;
@@ -136,8 +143,24 @@ const Sidebar = () => {
           <StyledLink to="/admin/events">Events & Calendar</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
+          <SidebarIcon><BsFile /></SidebarIcon>
+          <StyledLink to="/admin/suploads">Student Upload</StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
+          <SidebarIcon><BsFile /></SidebarIcon>
+          <StyledLink to="/admin/tuploads">Teacher Upload</StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
           <SidebarIcon><BsGear /></SidebarIcon>
           <StyledLink to="/admin/settings">Settings & Profile</StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
+          <SidebarIcon isOpen={isOpen}>
+            <BsGear />
+              </SidebarIcon>
+                <StyledLink to="/" isOpen={isOpen}>
+                  Logout
+                </StyledLink>
         </SidebarNavItem>
       </SidebarNav>
       {/* <ToggleButton onClick={toggleSidebar}>

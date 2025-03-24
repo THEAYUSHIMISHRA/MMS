@@ -16,9 +16,12 @@ const teacherSchema = new mongoose.Schema({
   },
   phno: {
     type: Number,
+    unique: true,
     required: true,
-    minlength: 10,
-    maxlength: 10,
+    validate: {
+      validator: (v) => /^\d{10}$/.test(v), // Ensure exactly 10 digits
+      message: "Phone number must be 10 digits",
+    },
   },
   subject: {
     type: String,

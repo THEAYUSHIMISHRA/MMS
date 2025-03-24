@@ -17,8 +17,14 @@ export const adminSignIn = async (req, res, next) => {
     const existingAdmin = await Admin.findOne({ email });
     const isPasswordValid = existingAdmin.password === password;
 
-    if (!existingAdmin || !isPasswordValid) {
-      return res.status(401).json({ success: false, message: "Invalid Email or Password" });
+    //console.log("Admin Found:", existingAdmin);
+
+    if (!existingAdmin) {
+      return res.status(401).json({ success: false, message: "Invalid Email" });
+    }
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ success: false, message: "Invalid Password" });
     }
 
     return res.status(200).json({
@@ -38,7 +44,7 @@ export const adminSignIn = async (req, res, next) => {
 export const getAdminProfile = async (req, res, next) => {
   try {
 
-    console.log("Request Body:", req.body); // Debugging
+    //console.log("Request Body:", req.body); // Debugging
     console.log("Request Query:", req.query); // Debugging
 
     const { email } = req.query;

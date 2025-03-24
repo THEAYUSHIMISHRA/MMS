@@ -15,11 +15,11 @@ import {
 const ProfileSection = () => {
   // Sample student profile data
   const studentProfile = {
-    name: 'John Doe',
-    age: 18,
-    cardID: '12th',
-    school: 'Example High School',
-    email: 'john.doe@example.com'
+    name: 'Himani Dobriyal',
+    age: 21,
+    cardID: 'BTBTI22141',
+    rollNo: 2216830,
+    email: 'himanibobriyal8@gmail.com'
   };
 
   return (
@@ -43,8 +43,8 @@ const ProfileSection = () => {
             <Value>{studentProfile.cardID}</Value>
           </ProfileDetail>
           <ProfileDetail>
-            <Label>School:</Label>
-            <Value>{studentProfile.school}</Value>
+            <Label>Roll No:</Label>
+            <Value>{studentProfile.rollNo}</Value>
           </ProfileDetail>
           <ProfileDetail>
             <Label>Email:</Label>

@@ -23,14 +23,19 @@ const studentSchema = new mongoose.Schema({
   },
   cardID: {
     type: String,
-    required: true
-  },
-  phoneNumber: {
-    type: Number,
     required: true,
     unique: true,
-    minlength: 10,
-    maxlength: 10,
+  },
+  phoneNumber: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: function (v) {
+        return /^[0-9]{10}$/.test(v); // Ensures exactly 10 digits
+      },
+      message: "Phone number must be exactly 10 digits",
+    },
   },
   password: {
     type: String,
@@ -41,6 +46,3 @@ const studentSchema = new mongoose.Schema({
 
 
 export const Student = mongoose.model('Student', studentSchema);
-
-
-

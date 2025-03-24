@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const EventCalendarContainer = styled.div`
   display: flex;
-  padding-left: 240px;
+  padding-left: 260px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -12,9 +12,9 @@ export const EventCalendarContainer = styled.div`
 
 export const Content = styled.div`
   flex: 1;
-  padding: 120px;
+  padding: 0px;
   @media (max-width: 768px) {
-  padding: 10px;
+  padding-left: 255px;
 }
 `;
 

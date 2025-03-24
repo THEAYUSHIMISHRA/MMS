@@ -7,19 +7,19 @@ const SidebarContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
+  width: ${({ isOpen }) => (isOpen ? '250px' : '40px')};
   width: 250px;
   height: 100%;
   background-color: #2c3e50; /* Dark blue background */
   color: white;
   overflow-y: auto; /* Enable vertical scrolling */
-  padding-top: 60px;
+  padding-top: 10px;
   transition: width 0.3s ease; /* Smooth width transition */
   z-index: 100; /* Ensure sidebar stays above content */
 `;
 
 const SidebarHeader = styled.div`
-  padding: 20px;
+  padding: 10px;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -49,11 +49,11 @@ const StyledLink = styled(Link)`
 `;
 
 const SidebarIcon = styled.div`
-  margin-right: 10px;
+  margin-right: 1px;
 `;
 
 const Logo = styled.img`
-  width: 50px;
+  width: 125px;
   height: auto;
 `;
 
@@ -86,9 +86,9 @@ const Sidebar = () => {
   };
    
   return (
-    <SidebarContainer style={{ width: isOpen ? '250px' : '80px' }}>
+    <SidebarContainer style={{ width: isOpen ? '250px' : '40px' }}>
         <SidebarHeader>
-        <Logo src={"../assets/bg1.png"} alt="Logo" />
+        <Logo src={"/logo1.png"} alt="Logo" />
       </SidebarHeader>
       <SidebarHeader>Teacher</SidebarHeader>
       <SidebarNav>
@@ -96,7 +96,7 @@ const Sidebar = () => {
           <SidebarIcon><BsGraphUp /></SidebarIcon>
           <StyledLink to="/teacher/dashboard">Dashboard</StyledLink>
         </SidebarNavItem>
-        <SidebarNavItem>
+        {/* <SidebarNavItem>
           <SidebarIcon><BsPeople /></SidebarIcon>
           <StyledLink to="/teacher/classes">Classes</StyledLink>
         </SidebarNavItem>
@@ -107,15 +107,15 @@ const Sidebar = () => {
         <SidebarNavItem>
           <SidebarIcon><BsPerson /></SidebarIcon>
           <StyledLink to="/teacher/teachers">Teachers</StyledLink>
-        </SidebarNavItem>
+        </SidebarNavItem> */}
         <SidebarNavItem>
           <SidebarIcon><BsFileText /></SidebarIcon>
           <StyledLink to="/teacher/assignments">Assignments</StyledLink>
         </SidebarNavItem>
-        <SidebarNavItem>
+        {/* <SidebarNavItem>
           <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/teacher/exams">Exams</StyledLink>
-        </SidebarNavItem>
+        </SidebarNavItem> */}
         <SidebarNavItem>
           <SidebarIcon><BsGraphDown /></SidebarIcon>
           <StyledLink to="/teacher/performance">Performance</StyledLink>
@@ -136,11 +136,18 @@ const Sidebar = () => {
           <SidebarIcon><BsGear /></SidebarIcon>
           <StyledLink to="/teacher/settings">Settings & Profile</StyledLink>
         </SidebarNavItem>
-        
+        <SidebarNavItem>
+          <SidebarIcon isOpen={isOpen}>
+            <BsGear />
+              </SidebarIcon>
+                <StyledLink to="/" isOpen={isOpen}>
+                  Logout
+                </StyledLink>
+         </SidebarNavItem>
       </SidebarNav>
-      <ToggleButton onClick={toggleSidebar}>
+      {/* <ToggleButton onClick={toggleSidebar}>
         <ToggleIcon isOpen={isOpen}>▲</ToggleIcon>
-      </ToggleButton>
+      </ToggleButton> */}
     </SidebarContainer>
   );
 };

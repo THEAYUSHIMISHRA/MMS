@@ -3,12 +3,12 @@ import { handleValidationError } from "../middlewares/errorHandler.js";
 
 export const createStudent = async (req, res, next) => {
   console.log(req.body);
-  const { name, rollNo, cardID } = req.body;
+  const { name, rollNo, cardID, email, branch, phoneNumber, password } = req.body;
   try {
-   if (!name || !rollNo || !cardID ) {
+   if (!name || !rollNo || !cardID || !email || !branch || !phoneNumber || !password ) {
     return next("Please Fill Full Form!", 400);
   }
-  await Student.create({ name, rollNo, cardID });
+  await Student.create({ name, rollNo, cardID, email, branch, phoneNumber, password});
   res.status(200).json({
     success: true,
     message: "Student Created!",
