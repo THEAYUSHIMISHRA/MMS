@@ -15,12 +15,12 @@ const teacherSchema = new mongoose.Schema({
     maxlength: 30,
   },
   phno: {
-    type: Number,
+    type: String,
     unique: true,
     required: true,
     validate: {
-      validator: (v) => /^\d{10}$/.test(v), // Ensure exactly 10 digits
-      message: "Phone number must be 10 digits",
+      validator: (v) => /^[1-9]\d{9}$/.test(v), // Must be exactly 10 digits and start with 1-9
+      message: "Phone number must be 10 digits and cannot start with 0",
     },
   },
   subject: {
@@ -35,5 +35,5 @@ const teacherSchema = new mongoose.Schema({
 });
 
 
-export const Teacher = mongoose.model('Teacher', teacherSchema);
+export const Teacher = mongoose.model("Teacher", teacherSchema);
 

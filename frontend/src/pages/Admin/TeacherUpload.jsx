@@ -20,6 +20,8 @@ const TeacherUpload = () => {
       return;
     }
 
+    console.log("Uploading file:", file);
+
     const formData = new FormData();
     formData.append("file", file);
 
@@ -27,9 +29,13 @@ const TeacherUpload = () => {
       const res = await axios.post("http://localhost:4000/api/v1/teachers/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
+      console.log("Response:", res.data);
+
       toast.success(res.data.message);
       fetchTeachers(); // Refresh teacher list
     } catch (error) {
+      console.error("Upload Error:", error);
       toast.error(error.response?.data?.message || "File upload failed");
     }
   };

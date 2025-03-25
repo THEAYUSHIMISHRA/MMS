@@ -6,6 +6,7 @@ export const getAllTeachers = async (req, res) => {
         const teachers = await Teacher.find();
         res.status(200).json({ success: true, teachers });
     } catch (error) {
+        console.error("Error fetching teachers:", error);
         res.status(500).json({ success: false, message: "Failed to fetch teachers", error });
     }
 };

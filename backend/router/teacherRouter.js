@@ -8,13 +8,22 @@ import { getAllTeachers, createTeacher } from "../controllers/teacherController.
 
 const router = express.Router();
 
+const uploadFolder = "uploads/";
+if (!fs.existsSync(uploadFolder)) {
+    fs.mkdirSync(uploadFolder, { recursive: true });
+}
 // Multer Configuration (Only Accept CSV)
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "uploads/");
+        cb(null, uploadFolder);
+
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + file.originalname);
+        const filePath = path.join(uploadFolder, file.originalname);
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath); // Delete existing file
+        }
+        cb(null, file.originalname);
     }
 });
 
@@ -30,18 +39,18 @@ const upload = multer({
 
 // 🚀 Upload CSV & Add Teachers to DB
 router.post("/upload", upload.single("file"), async (req, res) => {
-    if (!req.file) 
+    if (!req.file) {
         return res.status(400).json({ message: "No file uploaded" });
-
+}
     const filePath = req.file.path;
     const fileContent = fs.readFileSync(filePath, "utf8");
-
+    
     Papa.parse(fileContent, {
         header: true,
         skipEmptyLines: true,
         complete: async (results) => {
             console.log("Parsed CSV Data:", results.data);
-
+            
             if (results.data.length === 0) {
                 return res.status(400).json({ message: "CSV file is empty or invalid" });
             }
@@ -51,46 +60,44 @@ router.post("/upload", upload.single("file"), async (req, res) => {
                 const errors = [];
 
                 for (const row of results.data) {
-                    const { name, email, phno, subject, password } = row;
+                    const {email, name, phno, subject, password } = row;
 
-                    if (!name || !email || !phno || !subject || !password) {
-                        errors.push(`Missing required fields in row: ${JSON.stringify(row)}`);
+                    if (!email || !name || !phno || !subject || !password) {
+                        errors.push(`Missing data: ${JSON.stringify(row)}`);
                         continue;
                     }
-                    const phoneNumber = String(phno).trim();
-                    // Check if teacher already exists
-                    const existingTeacher = await Teacher.findOne({
-                        $or: [{ email }]
-                    });
 
+                    const existingTeacher = await Teacher.findOne({ email });
                     if (existingTeacher) {
-                        errors.push(`Teacher already exists: Email: ${email}`);
+                        errors.push(`Duplicate teacher: ${email}`);
                         continue;
                     }
 
-                    teachersToInsert.push({ name, email, phno, subject, password });
+                    teachersToInsert.push({ email, name, phno, subject, password });
                 }
 
                 if (teachersToInsert.length > 0) {
                     await Teacher.insertMany(teachersToInsert);
+                    console.log("Inserted Teachers:", teachersToInsert);
                 }
 
-                fs.unlinkSync(filePath); // Remove file after processing
-
-                return res.status(200).json({
-                    message: "Teachers uploaded successfully",
-                    errors
-                });
-
+                //fs.unlinkSync(filePath); // Remove file after processing
+                res.status(200).json({ message: "Teachers uploaded successfully", uploadedTeachers: teachersToInsert, errors });
             } catch (error) {
-                console.error("Error saving teachers:", error);
-                return res.status(500).json({ message: "Error saving teachers", error });
+                res.status(500).json({ message: "Error saving teachers", error });
             }
         }
     });
 });
 
 // 🏫 Fetch All Teachers
-router.get('/getall', getAllTeachers);
+router.get("/getall", async (req, res) => {
+    try {
+        const teachers = await Teacher.find();
+        res.status(200).json({ teachers });
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch teachers", error });
+    }
+});
 
 export default router;
