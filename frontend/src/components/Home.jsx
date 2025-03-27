@@ -25,7 +25,7 @@ const Home = () => {
         <NavigationLinks>
           <NavLink as={Link} to="/AboutUs">About Us</NavLink>
           <NavLink as={Link} to="http://www.banasthali.org/banasthali/wcms/en/home/">Banasthali</NavLink>
-          <NavLink as={Link} to="/Coordinator">Coordinator's Message</NavLink>
+          <NavLink as={Link} to="/Coordinator">Message</NavLink>
           {/* <NavLink href="#">About Us</NavLink>
           <NavLink href="#">Banasthali</NavLink>
           <NavLink href="#">Coordinator's Message</NavLink> */}
