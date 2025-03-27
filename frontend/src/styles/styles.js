@@ -1,7 +1,14 @@
-// styles.js
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 
+/* 🔥 Neon Glow Animation */
+const glow = keyframes`
+  0% { filter: drop-shadow(0px 0px 5px rgba(0, 255, 255, 0.5)); }
+  50% { filter: drop-shadow(0px 0px 15px rgba(0, 255, 255, 1)); }
+  100% { filter: drop-shadow(0px 0px 5px rgba(0, 255, 255, 0.5)); }
+`;
+
+/* 🔥 Navbar with a Glassmorphism Effect */
 export const Navbar = styled.nav`
   position: fixed;
   top: 0;
@@ -10,11 +17,14 @@ export const Navbar = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  background-color: #6BD4E7;
-  color: black;
-  font-family: Arial, sans-serif;
-  z-index: 1000;
+  padding: 15px 30px;
+  background: rgba(14, 60, 195, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 4px 10px rgba(208, 147, 16, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-family: "Times New Roman", serif;
+  z-index: 1500;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -22,157 +32,104 @@ export const Navbar = styled.nav`
   }
 `;
 
+/* 🔥 Interactive Logo */
 export const Logo = styled.img`
-  width: 100px;
+  width: 80px;
   height: auto;
+  transition: transform 0.5s ease-in-out;
 
-  @media screen and (max-width: 768px) {
-    margin-bottom: 10px;
+  &:hover {
+    transform: scale(1.1) rotate(2deg);
+    animation: ${glow} 1.5s infinite alternate;
   }
 `;
 
+/* 🔥 Mentor-Mentee Title */
+export const MentorMenteeTitle = styled.h1`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffcc00;
+  text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8);
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+  flex-grow: 1;
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+`;
+
+/* 🔥 Navigation Links */
 export const NavigationLinks = styled.div`
   display: flex;
   align-items: center;
+  gap: 20px;
+  margin-left: auto;
 
   @media screen and (max-width: 768px) {
-    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
   }
 `;
 
-export const NavLink = styled.a`
-  margin-right: 20px;
-  color: black;
+/* 🔥 NavLink - Neon Glow */
+export const NavLink = styled(Link)`
+  margin-right: 19px;
+  color: white;
   text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 25px;
+  font-weight: bolder;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    text-decoration: underline;
+    color: rgb(55, 242, 242);
+    text-shadow: 0px 0px 10px rgba(55, 242, 242, 0.8);
   }
 
   @media screen and (max-width: 768px) {
-    margin: 0 10px;
     font-size: 16px;
   }
 `;
 
+/* 🔥 Buttons with Depth & Shadow */
 export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: 35px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(233, 32, 152, 0.6);
+  transition: all 0.3s ease-in-out;
+  
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0px 0px 20px white;
+    background-color: rgba(158, 147, 154, 0.2);
+  }
 
   @media screen and (max-width: 768px) {
-    margin-top: 10px;
-    margin-right: 0;
+    margin-right: 10px;
   }
 `;
 
+/* 🔥 Gradient Button */
 export const LoginButton = styled.button`
-  background-color: orange;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
   color: white;
   border: none;
-  padding: 10px 20px;
-  margin-right: 10px;
+  padding: 12px 25px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-
-  @media screen and (max-width: 768px) {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-`;
-
-export const GuestButton = styled.button`
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  border: 2px solid orange;
-  border-radius: 5px;
-  background-color: transparent;
-  transition: background-color 0.3s ease;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: orange;
-  }
-
-  @media screen and (max-width: 768px) {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-`;
-
-export const HomeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background: linear-gradient(45deg, #6BD4E7, #6FC3DF);
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  padding-top: 80px;
-
-  @media screen and (max-width: 768px) {
-    padding-top: 60px;
-  }
-`;
-
-export const SchoolInfo = styled.div`
-  margin-top: 20px;
-`;
-
-export const SchoolImage = styled.img`
-  width: 80%;
-  max-height: 80vh;
-  object-fit: cover;
-  margin-top: 20px;
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-export const Title = styled.h1`
-  font-size: 36px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-
-  @media screen and (max-width: 768px) {
-    font-size: 28px;
-  }
-`;
-
-export const LoremTextContainer = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  font-size: 18px;
-  color: white;
-  text-align: justify;
-  padding: 0 20px;
-
-  @media screen and (max-width: 768px) {
-    font-size: 16px;
-  }
-`;
-
-export const AdminRegisterLink = styled(Link)`
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  text-decoration: none;
-  margin-top: 10px;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
+    background: #ffcc00;
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
+    transform: scale(1.05);
   }
 `;

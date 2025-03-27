@@ -52,6 +52,8 @@ import CheckExamSection from '../src/pages/Teachers/Exams';
 import MessagingPage from '../src/pages/Students/MessagingPage';
 import TeacherMessagingPage from '../src/pages/Teachers/TeacherMessagingPage';
 import Request from './pages/Teachers/Request.jsx';
+import TeacherProfile from "./pages/Teachers/TeacherProfile";
+import TeacherDetails from "./pages/Teachers/TeacherDetails";
 //import TeacherUpload from "./pages/Admin/TeacherUpload.jsx";
 // ✅ Import SendRequest Page
 import SendRequest from './pages/Students/SendRequest.jsx';
@@ -66,7 +68,9 @@ import JoinTeam from "./pages/Students/JoinTeam.jsx";
 import contexts from "./components/ContextApi.jsx";
 
 const App = () => {
+  const [teachers, setTeachers] = useState([]);
   let [ContextDetails,setContextDetails]=useState({})
+
   return (
     <contexts.Provider value={{ContextDetails,setContextDetails}}>
     <Router>
@@ -139,6 +143,7 @@ const App = () => {
         <Route exact path="/teacher/communication" element={<CheckAnnouncementSection />} />
         <Route exact path="/teacher/events" element={<EventSection />} />
         <Route exact path="/teacher/settings" element={<TeacherProfileSection />} />
+
         <Route path="/Teacher/messaging" element={<TeacherMessagingPage />} />
         <Route path="/teacher/requests" element={<Request />} />
         {/* ✅ Team Features */}
@@ -147,6 +152,18 @@ const App = () => {
         <Route path="/teams/join/:teamId" element={<JoinTeamPage />} />
         <Route path="/teams/details/:teamId" element={<TeamDetails />} />
         <Route path="/teams/TPerformance/:teamId" element={<TPerformance />} />
+
+      {/* Teacher Profile System */}
+      <Route 
+          exact 
+          path="/teacher-profile" 
+          element={<TeacherProfile teachers={teachers} setTeachers={setTeachers} />} 
+        />
+        <Route 
+          exact 
+          path="/teacher-details" 
+          element={<TeacherDetails teachers={teachers} setTeachers={setTeachers} />} 
+        />
       </Routes>
     </Router></contexts.Provider>
   );

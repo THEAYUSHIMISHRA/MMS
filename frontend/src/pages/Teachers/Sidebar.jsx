@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'; 
-import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsQuestionSquare } from 'react-icons/bs';
+import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsPower } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: ${({ isOpen }) => (isOpen ? '250px' : '40px')};
   width: 250px;
   height: 100%;
   background-color: #2c3e50; /* Dark blue background */
   color: white;
-  overflow-y: auto; /* Enable vertical scrolling */
-  padding-top: 10px;
-  transition: width 0.3s ease; /* Smooth width transition */
-  z-index: 100; /* Ensure sidebar stays above content */
+  display: flex;
+  flex-direction: column; /* Ensures Logout stays at the bottom */
+  justify-content: space-between;
+  overflow-y: auto;
+  padding-top: 60px;
+  transition: width 0.3s ease;
+  z-index: 100;
 `;
 
 const SidebarHeader = styled.div`
-  padding: 10px;
+  padding: 20px;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -28,6 +30,7 @@ const SidebarHeader = styled.div`
 const SidebarNav = styled.ul`
   list-style: none;
   padding: 0;
+  flex-grow: 1; /* Pushes logout to the bottom */
 `;
 
 const SidebarNavItem = styled.li`
@@ -35,10 +38,10 @@ const SidebarNavItem = styled.li`
   align-items: center;
   padding: 12px 20px;
   font-size: 18px;
-  border-bottom: 1px solid #34495e; /* Darker border */
+  border-bottom: 1px solid #34495e;
   transition: background-color 0.3s ease;
   &:hover {
-    background-color: #34495e; /* Darker background on hover */
+    background-color: #34495e;
   }
 `;
 
@@ -49,33 +52,24 @@ const StyledLink = styled(Link)`
 `;
 
 const SidebarIcon = styled.div`
-  margin-right: 1px;
+  margin-right: 10px;
 `;
 
-const Logo = styled.img`
-  width: 125px;
-  height: auto;
-`;
-
-const ToggleButton = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 0;
-  width: 30px;
-  height: 30px;
-  background-color: #34495e; /* Darker background */
-  border-radius: 50%;
+const LogoutButton = styled.button`
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 18px;
+  background-color: #e74c3c; /* Red color for logout */
+  color: white;
+  border: none;
   cursor: pointer;
+  text-align: left;
   display: flex;
   align-items: center;
-  justify-content: center;
-`;
-
-const ToggleIcon = styled.span`
-  color: white;
-  font-size: 20px;
-  transform: ${({ isOpen }) => (isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
-  transition: transform 0.3s ease;
+  border-top: 1px solid #c0392b;
+  &:hover {
+    background-color: #c0392b;
+  }
 `;
 
 const Sidebar = () => {
@@ -84,86 +78,71 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-   
+
   return (
-    <SidebarContainer style={{ width: isOpen ? '250px' : '40px' }}>
-        <SidebarHeader>
-        <Logo src={"/logo1.png"} alt="Logo" />
-      </SidebarHeader>
-      <SidebarHeader>Teacher</SidebarHeader>
-      <SidebarNav>
-        <SidebarNavItem>
-          <SidebarIcon><BsGraphUp /></SidebarIcon>
-          <StyledLink to="/teacher/dashboard">Dashboard</StyledLink>
-        </SidebarNavItem>
-        {/* <SidebarNavItem>
-          <SidebarIcon><BsPeople /></SidebarIcon>
-          <StyledLink to="/teacher/classes">Classes</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon><BsPeople /></SidebarIcon>
-          <StyledLink to="/teacher/students">Students</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon><BsPerson /></SidebarIcon>
-          <StyledLink to="/teacher/teachers">Teachers</StyledLink>
-        </SidebarNavItem> */}
-        {/* <SidebarNavItem>
-          <SidebarIcon><BsFileText /></SidebarIcon>
-          <StyledLink to="/teacher/assignments">Assignments</StyledLink>
-        </SidebarNavItem> */}
-        {/* <SidebarNavItem>
-          <SidebarIcon><BsBook /></SidebarIcon>
-          <StyledLink to="/teacher/exams">Exams</StyledLink>
-        </SidebarNavItem> */}
-         <SidebarNavItem>
-          {/* <SidebarIcon><BsGraphDown /></SidebarIcon>
-          <StyledLink to="/teacher/performance">Performance</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem> */}
-        <SidebarNavItem>
-          <SidebarIcon>
-            <BsChatDots />
-          </SidebarIcon>
-          <StyledLink to="/teacher/messaging" $isOpen={isOpen}>
-            Messaging
-          </StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon>
-            <BsChatDots />
-          </SidebarIcon>
-          <StyledLink to="/teacher/requests" $isOpen={isOpen}>
-            Requests
-          </StyledLink>
-        </SidebarNavItem>
-          <SidebarIcon><BsCalendar /></SidebarIcon>
-          <StyledLink to="/teacher/attendance">Attendance</StyledLink>
-        </SidebarNavItem> 
-        <SidebarNavItem>
-          <SidebarIcon><BsChatDots /></SidebarIcon>
-          <StyledLink to="/teacher/communication">Announcement</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon><BsCalendarEvent /></SidebarIcon>
-          <StyledLink to="/teacher/events">Events & Calendar</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon><BsGear /></SidebarIcon>
-          <StyledLink to="/teacher/settings">Settings & Profile</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon isOpen={isOpen}>
-            <BsGear />
-              </SidebarIcon>
-                <StyledLink to="/" isOpen={isOpen}>
-                  Logout
-                </StyledLink>
-         </SidebarNavItem>
-      </SidebarNav>
-      {/* <ToggleButton onClick={toggleSidebar}>
-        <ToggleIcon isOpen={isOpen}>▲</ToggleIcon>
-      </ToggleButton> */}
+    <SidebarContainer>
+      <div>
+        <SidebarHeader>Teacher</SidebarHeader>
+        <SidebarNav>
+          <SidebarNavItem>
+            <SidebarIcon><BsGraphUp /></SidebarIcon>
+            <StyledLink to="/teacher/dashboard">Dashboard</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsPeople /></SidebarIcon>
+            <StyledLink to="/teacher/classes">Classes</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsPeople /></SidebarIcon>
+            <StyledLink to="/teacher/students">Students</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsPerson /></SidebarIcon>
+            <StyledLink to="/teacher/teachers">Teachers</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsFileText /></SidebarIcon>
+            <StyledLink to="/teacher/assignments">Assignments</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsBook /></SidebarIcon>
+            <StyledLink to="/teacher/exams">Exams</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsGraphDown /></SidebarIcon>
+            <StyledLink to="/teacher/performance">Performance</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsCalendar /></SidebarIcon>
+            <StyledLink to="/teacher/attendance">Attendance</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsChatDots /></SidebarIcon>
+            <StyledLink to="/teacher/communication">Announcement</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsCalendarEvent /></SidebarIcon>
+            <StyledLink to="/teacher/events">Events & Calendar</StyledLink>
+          </SidebarNavItem>
+
+          {/* ✅ Teacher Profile option added before Settings */}
+          <SidebarNavItem>
+            <SidebarIcon><BsPerson /></SidebarIcon>
+            <StyledLink to="/teacher-profile">Teacher Profile</StyledLink>
+          </SidebarNavItem>
+
+          <SidebarNavItem>
+            <SidebarIcon><BsGear /></SidebarIcon>
+            <StyledLink to="/teacher/settings">Settings & Profile</StyledLink>
+          </SidebarNavItem>
+        </SidebarNav>
+      </div>
+
+      {/* ✅ Logout option at the bottom */}
+      <LogoutButton onClick={() => alert("Logging out...")}>
+        <SidebarIcon><BsPower /></SidebarIcon>
+        Logout
+      </LogoutButton>
     </SidebarContainer>
   );
 };

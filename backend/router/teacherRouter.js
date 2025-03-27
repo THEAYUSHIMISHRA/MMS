@@ -222,7 +222,7 @@ router.post('/t-login', teacherSignIn);
 router.get("/profile", getTeacherProfile);
 
 // 📩 Teacher Login - Email Sending Functionality
-router.post("/teacher-login", async (req, res) => {
+router.post("/t-login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
