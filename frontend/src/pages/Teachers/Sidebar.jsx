@@ -116,14 +116,30 @@ const Sidebar = () => {
           <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/teacher/exams">Exams</StyledLink>
         </SidebarNavItem> */}
-        {/* <SidebarNavItem>
-          <SidebarIcon><BsGraphDown /></SidebarIcon>
+         <SidebarNavItem>
+          {/* <SidebarIcon><BsGraphDown /></SidebarIcon>
           <StyledLink to="/teacher/performance">Performance</StyledLink>
         </SidebarNavItem>
+        <SidebarNavItem> */}
         <SidebarNavItem>
+          <SidebarIcon>
+            <BsChatDots />
+          </SidebarIcon>
+          <StyledLink to="/teacher/messaging" $isOpen={isOpen}>
+            Messaging
+          </StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
+          <SidebarIcon>
+            <BsChatDots />
+          </SidebarIcon>
+          <StyledLink to="/teacher/requests" $isOpen={isOpen}>
+            Requests
+          </StyledLink>
+        </SidebarNavItem>
           <SidebarIcon><BsCalendar /></SidebarIcon>
           <StyledLink to="/teacher/attendance">Attendance</StyledLink>
-        </SidebarNavItem> */}
+        </SidebarNavItem> 
         <SidebarNavItem>
           <SidebarIcon><BsChatDots /></SidebarIcon>
           <StyledLink to="/teacher/communication">Announcement</StyledLink>

@@ -17,6 +17,9 @@ const Home = () => {
   const handleLoginClick = () => {
     navigate('/choose-user');
   };
+  const handleTeamRegisterClick = () => {
+    navigate('/teams/register'); // ✅ Correct path
+  };
 
   return (
     <>
@@ -33,6 +36,21 @@ const Home = () => {
         <ButtonsContainer>
           <LoginButton onClick={handleLoginClick}>Sign In</LoginButton>
           <GuestButton onClick={handleLoginClick}>Guest Mode</GuestButton>
+          <button 
+            onClick={handleTeamRegisterClick} 
+            style={{
+              backgroundColor: "#4CAF50",
+              color: "white",
+              padding: "10px 15px",
+              marginLeft: "10px",
+              border: "none",
+              cursor: "pointer",
+              borderRadius: "5px",
+              fontSize: "16px"
+            }}
+          >
+            Team Register
+          </button> 
         </ButtonsContainer>
       </Navbar>
       <HomeContainer>

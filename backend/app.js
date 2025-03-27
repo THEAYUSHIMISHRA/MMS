@@ -3,6 +3,8 @@ import { config } from "dotenv";
 import cors from "cors";
 import { dbConnection } from "./database/dbConnection.js";
 //import AdminSignInRouter from "./router/adminSignInRouter.js";
+import messagingRoutes from "./routes/messagingRoutes.js";
+import requestRoutes from "./routes/requestRoutes.js"; // ✅ Added for handling requests
 import studentRouter from "./router/studentRouter.js";
 import teacherRouter from "./router/teacherRouter.js";
 import assignmentRouter from "./router/assignmentRouter.js";
@@ -14,6 +16,7 @@ import examRouter from "./router/examRouter.js";
 import attendanceRouter from "./router/attendanceRouter.js";
 import usersRouter from "./router/usersRouter.js";
 import adminRegisterRouter from "./router/adminRegisterRouter.js";
+import sendEmailRoutes from "./routes/sendEmailRoutes.js"; // ✅ Import sendEmailRoutes
 import { errorHandler } from "./middlewares/errorHandler.js";
 //import uploadRoutes from "./router/uploadRouter.js";
 
@@ -45,6 +48,9 @@ app.use("/api/v1/exam", examRouter);
 app.use("/api/v1/attendance", attendanceRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/register", adminRegisterRouter);
+app.use("/api/v1/messages", messagingRoutes);
+app.use("/api/v1/requests", requestRoutes);
+app.use("/api/v1/send-email", sendEmailRoutes); // ✅ Added send-email route
 //app.use("/api/v1/uploadcsv", uploadRoutes);
 
 //app.use("/api/v1/admin", AdminSignInRouter);

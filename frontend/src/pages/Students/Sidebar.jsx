@@ -141,6 +141,16 @@ const Sidebar = () => {
             Performance
           </StyledLink>
         </SidebarNavItem> */}
+            
+            <SidebarNavItem>
+          <SidebarIcon isOpen={isOpen}>
+            <BsChatDots />
+          </SidebarIcon>
+          <StyledLink to="/student/MessagingPage" isOpen={isOpen}>
+          Messaging
+          </StyledLink>
+        </SidebarNavItem>
+    
         <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsCalendar />
@@ -163,6 +173,14 @@ const Sidebar = () => {
           </SidebarIcon>
           <StyledLink to="/student/communication" isOpen={isOpen}>
             Announcement
+          </StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
+          <SidebarIcon isOpen={isOpen}>
+            <BsMicrosoftTeams />
+          </SidebarIcon>
+          <StyledLink to="/student/Team" isOpen={isOpen}>
+            Team
           </StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
