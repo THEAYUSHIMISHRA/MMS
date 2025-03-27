@@ -18,7 +18,7 @@ const StudentSignIn = () => {
 
       try {
         // Send POST request to backend service
-        const response = await fetch('http://localhost:4000/api/v1/students/student-login', {
+        const response = await fetch('http://localhost:4000/api/v1/students/s-login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

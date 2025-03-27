@@ -103,14 +103,9 @@
 
 import { handleValidationError } from "../middlewares/errorHandler.js";
 import { Admin } from "../models/adminRegisterSchema.js";
-<<<<<<< HEAD
 import { Student } from "../models/studentSchema.js";
 import { Teacher } from "../models/teacherSchema.js";
-=======
-import { Student } from "../models/usersSchema.js";
-import { Teacher } from "../models/usersSchema.js";
 import { sendAdminEmail } from "../services/emailservice.js";  // Import the email service
->>>>>>> d1fcedbb54c8f20344e5a2f3c9b2c28d1547a40b
 
 // ✅ Admin Sign-In with Email Notification
 export const adminSignIn = async (req, res, next) => {
@@ -191,8 +186,6 @@ export const studentSignIn = async (req, res, next) => {
     if (!email || !password) {
       return res.status(400).json({ success: false, message: "Please provide email and password" });
     }
-
-<<<<<<< HEAD
     // Check if student exists in the database
     const existingStudent = await Student.findOne({ email });
 
@@ -206,8 +199,6 @@ export const studentSignIn = async (req, res, next) => {
     }
 
     // Your sign-in logic for student goes here
-=======
->>>>>>> d1fcedbb54c8f20344e5a2f3c9b2c28d1547a40b
     res.status(200).json({
       success: true,
       message: "Student signed in successfully",
@@ -233,8 +224,6 @@ export const teacherSignIn = async (req, res, next) => {
     if (!email || !password) {
       return res.status(400).json({ success: false, message: "Please provide email and password" });
     }
-
-<<<<<<< HEAD
     const existingTeacher = await Teacher.findOne({ email });
 
     if (!existingTeacher) {
@@ -246,8 +235,6 @@ export const teacherSignIn = async (req, res, next) => {
     }
 
     // Your sign-in logic for teacher goes here
-=======
->>>>>>> d1fcedbb54c8f20344e5a2f3c9b2c28d1547a40b
     res.status(200).json({
       success: true,
       message: "Teacher signed in successfully",

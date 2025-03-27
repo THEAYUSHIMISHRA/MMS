@@ -68,13 +68,6 @@ export const getAllTeachers = async (req, res, next) => {
             success: true,
             teachers,
         });
-    } catch (err) {
-        next(err)
-    }
-};
-
-
-<<<<<<< HEAD
         if (!name || !email || !phno || !subject || !password) {
             return res.status(400).json({ success: false, message: "All fields are required" });
         }
@@ -114,6 +107,3 @@ export const getTeacherProfile = async (req, res, next) => {
       next(error);
     }
   };
-  
-=======
->>>>>>> d1fcedbb54c8f20344e5a2f3c9b2c28d1547a40b

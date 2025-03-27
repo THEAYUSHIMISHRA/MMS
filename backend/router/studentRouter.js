@@ -139,13 +139,8 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import Papa from "papaparse";
-<<<<<<< HEAD
 import { getAllStudents, createStudent, getStudentCount } from "../controllers/studentController.js";
-import { sendEmail } from "../services/emailservice.js";
-=======
-import { getAllStudents, createStudent } from "../controllers/studentController.js";
 import { sendStudentEmail } from "../services/emailservice.js";
->>>>>>> d1fcedbb54c8f20344e5a2f3c9b2c28d1547a40b
 import { Student } from "../models/studentSchema.js";
 import { studentSignIn } from "../controllers/usersController.js";
 
@@ -218,8 +213,6 @@ router.post("/upload", upload.single("file"), async (req, res) => {
                 if (studentsToInsert.length > 0) {
                     await Student.insertMany(studentsToInsert);
                 }
-
-<<<<<<< HEAD
                 const students = results.data.map(student => ({
                     name: student.name,
                     rollNo: Number(student.rollNo), // Ensure it's a number
@@ -234,14 +227,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
 
                 //await Student.insertMany(results.data);
                 //fs.unlinkSync(filePath); // Remove file after processing
-                res.status(200).json({ message: "Students uploaded successfully" });
-=======
-                fs.unlinkSync(filePath); // Remove file after processing
-                res.status(200).json({
-                    message: "Students uploaded successfully",
-                    errors: errors.length ? errors : "No errors"
-                });
->>>>>>> d1fcedbb54c8f20344e5a2f3c9b2c28d1547a40b
+                res.status(200).json({ message: "Students uploaded successfully", errors: errors.length ? errors : "No errors" });
             } catch (error) {
                 res.status(500).json({ message: "Error saving students", error });
             }
@@ -252,10 +238,9 @@ router.post("/upload", upload.single("file"), async (req, res) => {
 // 🏫 Fetch All Students
 router.get('/getall', getAllStudents);
 
-<<<<<<< HEAD
-router.post("/student-login", studentSignIn);
+router.post("/s-login", studentSignIn);
 router.get('/count', getStudentCount);
-=======
+
 // 📩 Student Login - Email Sending Functionality
 router.post("/student-login", async (req, res) => {
     const { email, password } = req.body;
@@ -272,6 +257,5 @@ router.post("/student-login", async (req, res) => {
         res.status(500).json({ status: 500, message: "Failed to send email" });
     }
 });
->>>>>>> d1fcedbb54c8f20344e5a2f3c9b2c28d1547a40b
 
 export default router;

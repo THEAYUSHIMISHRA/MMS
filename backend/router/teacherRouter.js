@@ -110,13 +110,9 @@ import path from "path";
 import fs from "fs";
 import Papa from "papaparse";
 import { Teacher } from "../models/teacherSchema.js";
-<<<<<<< HEAD
+import { getAllTeachers, createTeacher, getTeacherProfile  } from "../controllers/teacherController.js";
 import { teacherSignIn } from "../controllers/usersController.js";
-import { getAllTeachers, createTeacher, getTeacherProfile } from "../controllers/teacherController.js";
-=======
-import { getAllTeachers, createTeacher } from "../controllers/teacherController.js";
 import { sendTeacherEmail } from "../services/emailservice.js";
->>>>>>> d1fcedbb54c8f20344e5a2f3c9b2c28d1547a40b
 
 const router = express.Router();
 
@@ -218,16 +214,13 @@ router.get("/getall", async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
 // Teacher Login
-router.post('/teacher-login', teacherSignIn);
+router.post('/t-login', teacherSignIn);
 
 
 // Fetch Profile
 router.get("/profile", getTeacherProfile);
 
-export default router;
-=======
 // 📩 Teacher Login - Email Sending Functionality
 router.post("/teacher-login", async (req, res) => {
     const { email, password } = req.body;
@@ -246,4 +239,3 @@ router.post("/teacher-login", async (req, res) => {
 });
 
 export default router;
->>>>>>> d1fcedbb54c8f20344e5a2f3c9b2c28d1547a40b
