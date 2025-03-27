@@ -1,71 +1,69 @@
-// EventCalendar.js
-import React, { useState, useEffect } from 'react';
-import Sidebar from './Sidebar';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Sidebar from "./Sidebar";
+//import { getAllEvents, addEvent, deleteEvent } from "../../components/eventService";
+import EventList from "../../components/EventList";
 import {
   EventCalendarContainer,
   Content,
-  // CalendarContainer,
-  Events,
-  Event,
   AddEventForm,
   EventInput,
   AddEventButton,
-  // ErrorText,
-} from '../../styles/EventCalendarStyles';
+} from "../../styles/EventCalendarStyles";
 
-const EventCalendar = () => {
+const AdminEvents = () => {
   const [events, setEvents] = useState([]);
-  const [newEvent, setNewEvent] = useState('');
-  const [error, setError] = useState(null);
-
-  // Function to fetch events from the backend
-  const fetchEvents = async () => {
-    try {
-      const response = await axios.get('http://localhost:4000/api/v1/events/getall');
-      
-      //console.log("Fetched events:", response.data);
-
-      if (!response.data.success || !response.data.events) {
-        console.error("No events found.");
-        return;
-      }
-
-      setEvents(response.data.events);
-    } catch (error) {
-      console.error('Error fetching events:', error);
-      //setError('Error fetching events');
-    }
-  };
+  const [newEvent, setNewEvent] = useState("");
 
   useEffect(() => {
-    fetchEvents();
+    async function fetchData() {
+      try {
+        const response = await axios.get('http://localhost:4000/api/v1/events/getall');
+        console.log("Fetched Events:", response.data);
+        if (response.data.success) {
+          setEvents(response.data.events);
+        } else {
+          console.error("Failed to fetch events:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    }
+    fetchData();
   }, []);
 
-  // Function to add a new event
-  const addEvent = async (e) => {
+  const handleAddEvent = async (e) => {
     e.preventDefault();
+    if (!newEvent.trim()) return;
+
     try {
-      const response = await axios.post('http://localhost:4000/api/v1/events', {
+      const response = await axios.post('http://localhost:4000/api/v1/events/', { 
         event: newEvent,
-      });
-      setEvents([...events, response.data.event]);
-      setNewEvent('');
-      setError(null);
+      date: new Date().toISOString() 
+    });
+
+      if (response.data.success) {
+        setEvents([...events, response.data.event]);
+        setNewEvent("");
+      } else {
+        console.error("Failed to add event:", response.data.message);
+      }
     } catch (error) {
-      console.error('Error adding event:', error);
-      setError(error.response?.data?.error || 'Error adding event');
+      console.error("Error adding event:", error);
     }
   };
 
-  const deleteEvent = async (id) => {
+  const handleDeleteEvent = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/api/v1/events/${id}`);
-  
-      setEvents(events.filter((event) => event._id !== id));
+      const response = await axios.delete(`http://localhost:4000/api/v1/events/${id}`);
+      
+      if (response.data.success) {
+        setEvents(events.filter((event) => event._id !== id));
+      } else {
+        console.error("Failed to delete event:", response.data.message);
+      }
     } catch (error) {
       console.error("Error deleting event:", error);
-      setError(error.response?.data?.error || "Error deleting event");
     }
   };
 
@@ -73,39 +71,15 @@ const EventCalendar = () => {
     <EventCalendarContainer>
       <Sidebar />
       <Content>
-        <h1 align="center">Events & Calendar</h1>
-        <div><h3>Current Time: {new Date().toLocaleString()}</h3></div>
-        {/* <CalendarContainer>
-          {/* Display Calendar Here */
-          /* For example: <Calendar /> */
-          // /* Calendar */ </CalendarContainer> */
-        }
-        <h2>Add Event</h2>
-        <AddEventForm onSubmit={addEvent}>
-          <EventInput
-            type="text"
-            value={newEvent}
-            onChange={(e) => setNewEvent(e.target.value)}
-            placeholder="Enter Event"
-          />
+        <h1>Events</h1>
+        <AddEventForm onSubmit={handleAddEvent}>
+          <EventInput type="text" value={newEvent} onChange={(e) => setNewEvent(e.target.value)} placeholder="Enter Event Title" />
           <AddEventButton type="submit">Add Event</AddEventButton>
         </AddEventForm>
-        {/* {error && <ErrorText>{error}</ErrorText>} */}
-        <Events>
-          <h2>Events List:</h2>
-          { events.length > 0 ? (
-            events.map((event) => (
-            <Event key={event._id}>{event.event}
-            <br />
-            <button onClick={() => deleteEvent(event._id)}>Delete Event</button>
-            </Event>
-          ))) : (
-          <p>No events found</p>
-        ) }
-        </Events>
+        <EventList events={events} onDelete={handleDeleteEvent} allowEdit={true} />
       </Content>
     </EventCalendarContainer>
   );
 };
 
-export default EventCalendar;
+export default AdminEvents;

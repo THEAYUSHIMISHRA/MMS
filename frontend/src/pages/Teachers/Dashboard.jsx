@@ -4,12 +4,14 @@ import axios from 'axios';
 import Sidebar from './Sidebar';
 import { TeacherDashboardContainer, Content, Section, SectionTitle, CardContainer, Card, CardTitle, CardContent } 
 from '../../styles/DashboardStyles';
+import Announcement from './Announcement';
 
 const TeacherDashboard = () => {
 
   const [announcementCount, setAnnouncementCount] = useState(0);
   const [studentCount, setStudentCount] = useState(0);
   const [eventCount, setEventCount] = useState(0);
+  const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
 
@@ -33,6 +35,16 @@ const TeacherDashboard = () => {
     }
   };
 
+  //Fetch announcements
+  const fetchAnnouncements = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/announcements/getall');
+      setAnnouncements(response.data.announcements || []);
+    } catch (error) {
+      console.error('Error fetching announcements:', error);
+    }
+  };
+
   // Fetch events count
   const fetchEventCount = async () => {
     try {
@@ -43,6 +55,7 @@ const TeacherDashboard = () => {
     }
   };
     fetchAnnouncementCount();
+    fetchAnnouncements();
     fetchEventCount();
     fetchStudentCount();
   }, []);
@@ -69,8 +82,8 @@ const TeacherDashboard = () => {
         </Section>
 
         <Section>
-          <SectionTitle>Announcements</SectionTitle>
-          {/* Add a list of recent activity items */}
+          <SectionTitle></SectionTitle>
+          <Announcement announcements={announcements} />
         </Section>
 
         {/* <Section>
