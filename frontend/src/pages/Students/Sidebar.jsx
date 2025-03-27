@@ -32,6 +32,11 @@ const SidebarHeader = styled.div`
   padding: 10px;
 `;
 
+const SidebarTitle = styled.h3`
+  color: white; /* Change text color to white */
+  margin-top: 10px;
+`;
+
 const SidebarNav = styled.ul`
   list-style: none;
   padding: 0;
@@ -101,7 +106,7 @@ const Sidebar = () => {
     <SidebarContainer isOpen={isOpen}>
       <SidebarHeader>
         <Logo src="/logo1.png" alt="Logo" isOpen={isOpen} />
-        {isOpen && <h3>Student</h3>}
+        {isOpen && <SidebarTitle>Student</SidebarTitle>}
       </SidebarHeader>
       <SidebarNav>
         <SidebarNavItem>

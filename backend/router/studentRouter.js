@@ -3,9 +3,10 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import Papa from "papaparse";
-import { getAllStudents, createStudent } from "../controllers/studentController.js";
+import { getAllStudents, createStudent, getStudentCount } from "../controllers/studentController.js";
 import { sendEmail } from "../services/emailservice.js";
 import { Student } from "../models/studentSchema.js";
+import { studentSignIn } from "../controllers/usersController.js";
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ const storage = multer.diskStorage({
         cb(null, "uploads/");
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + file.originalname);
+        cb(null, file.originalname);
     }
 });
 
@@ -96,7 +97,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
                 console.log("Saving students:", students);
 
                 //await Student.insertMany(results.data);
-                fs.unlinkSync(filePath); // Remove file after processing
+                //fs.unlinkSync(filePath); // Remove file after processing
                 res.status(200).json({ message: "Students uploaded successfully" });
             } catch (error) {
                 res.status(500).json({ message: "Error saving students", error });
@@ -108,24 +109,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
 // 🏫 Fetch All Students
 router.get('/getall', getAllStudents);
 
-// // 🆕 Add a Single Student
-// router.post('/', createStudent);
-
-// 📩 Student Login - Email Sending
-router.post("/student-login", async (req, res) => {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-        return res.status(401).json({ status: 401, message: "Email and Password are required" });
-    }
-
-    try {
-        await sendEmail(email);
-        res.status(201).json({ status: 201, message: "Email sent successfully" });
-    } catch (error) {
-        console.error("Error sending email:", error);
-        res.status(500).json({ status: 500, message: "Failed to send email" });
-    }
-});
+router.post("/student-login", studentSignIn);
+router.get('/count', getStudentCount);
 
 export default router;

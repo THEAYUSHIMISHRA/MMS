@@ -108,22 +108,22 @@ const Sidebar = () => {
           <SidebarIcon><BsPerson /></SidebarIcon>
           <StyledLink to="/teacher/teachers">Teachers</StyledLink>
         </SidebarNavItem> */}
-        <SidebarNavItem>
+        {/* <SidebarNavItem>
           <SidebarIcon><BsFileText /></SidebarIcon>
           <StyledLink to="/teacher/assignments">Assignments</StyledLink>
-        </SidebarNavItem>
+        </SidebarNavItem> */}
         {/* <SidebarNavItem>
           <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/teacher/exams">Exams</StyledLink>
         </SidebarNavItem> */}
-        <SidebarNavItem>
+        {/* <SidebarNavItem>
           <SidebarIcon><BsGraphDown /></SidebarIcon>
           <StyledLink to="/teacher/performance">Performance</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsCalendar /></SidebarIcon>
           <StyledLink to="/teacher/attendance">Attendance</StyledLink>
-        </SidebarNavItem>
+        </SidebarNavItem> */}
         <SidebarNavItem>
           <SidebarIcon><BsChatDots /></SidebarIcon>
           <StyledLink to="/teacher/communication">Announcement</StyledLink>

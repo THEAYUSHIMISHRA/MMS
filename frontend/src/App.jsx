@@ -36,7 +36,8 @@ import AttendanceSection from '../src/pages/Students/Attendance';
 import LibrarySection from './pages/Students/Library';
 import CheckEventSection from './pages/Students/Events';
 import AnnouncementSection from '../src/pages/Students/Announcement';
-import ProfileSection from '../src/pages/Students/Profile';
+import StudentProfile from '../src/pages/Students/Profile';
+//import StudentSignIn from "./components/StudentSignIn";
 
 import ClassSection from '../src/pages/Teachers/Classes';
 import StudentSection from '../src/pages/Teachers/Students';
@@ -103,7 +104,9 @@ const App = () => {
         <Route exact path="/student/library" element={<LibrarySection />} />
         <Route exact path="/student/events" element={<CheckEventSection />} />
         <Route exact path="/student/communication" element={<AnnouncementSection />} />
-        <Route exact path="/student/settings" element={<ProfileSection />} />
+        {/* <Route exact path="/student/settings" element={<ProfileSection />} /> */}
+        {/* <Route path="/student/login" element={<StudentSignIn />} /> */}
+        <Route path="/student/settings" element={<StudentProfile />} />
 
         {/* Teachers sections here */}
         <Route exact path="/teacher/classes" element={<ClassSection />} />

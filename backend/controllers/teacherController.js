@@ -35,3 +35,24 @@ export const createTeacher = async (req, res) => {
         res.status(500).json({ success: false, message: "Error adding teacher", error });
     }
 };
+
+export const getTeacherProfile = async (req, res, next) => {
+    try {
+      const { email } = req.query; // Get email from query parameters
+  
+      if (!email) {
+        return res.status(400).json({ success: false, message: "Email is required" });
+      }
+  
+      const teacher = await Teacher.findOne({ email }).select("-password"); // Exclude password
+  
+      if (!teacher) {
+        return res.status(404).json({ success: false, message: "Teacher not found" });
+      }
+  
+      res.status(200).json({ success: true, teacher });
+    } catch (error) {
+      next(error);
+    }
+  };
+  

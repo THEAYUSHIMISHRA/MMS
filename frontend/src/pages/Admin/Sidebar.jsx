@@ -106,14 +106,14 @@ const Sidebar = () => {
           <SidebarIcon><BsPeople /></SidebarIcon>
           <StyledLink to="/admin/classes">Classes</StyledLink>
         </SidebarNavItem> */}
-        <SidebarNavItem>
+        {/* <SidebarNavItem>
           <SidebarIcon><BsPeople /></SidebarIcon>
           <StyledLink to="/admin/students">Students</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsPerson /></SidebarIcon>
           <StyledLink to="/admin/teachers">Teachers</StyledLink>
-        </SidebarNavItem>
+        </SidebarNavItem> */}
         {/* <SidebarNavItem>
           <SidebarIcon><BsFileText /></SidebarIcon>
           <StyledLink to="/admin/assignments">Assignments</StyledLink>

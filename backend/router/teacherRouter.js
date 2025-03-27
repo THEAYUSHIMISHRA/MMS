@@ -4,7 +4,8 @@ import path from "path";
 import fs from "fs";
 import Papa from "papaparse";
 import { Teacher } from "../models/teacherSchema.js";
-import { getAllTeachers, createTeacher } from "../controllers/teacherController.js";
+import { teacherSignIn } from "../controllers/usersController.js";
+import { getAllTeachers, createTeacher, getTeacherProfile } from "../controllers/teacherController.js";
 
 const router = express.Router();
 
@@ -99,5 +100,12 @@ router.get("/getall", async (req, res) => {
         res.status(500).json({ message: "Failed to fetch teachers", error });
     }
 });
+
+// Teacher Login
+router.post('/teacher-login', teacherSignIn);
+
+
+// Fetch Profile
+router.get("/profile", getTeacherProfile);
 
 export default router;

@@ -16,8 +16,6 @@ const StudentSignIn = () => {
       return;
     }
 
-    // Example hardcoded credentials validation (replace with actual validation)
-    if (email === 'himanidobriyal8@gmail.com' && password === 'password') {
       try {
         // Send POST request to backend service
         const response = await fetch('http://localhost:4000/api/v1/students/student-login', {
@@ -30,6 +28,7 @@ const StudentSignIn = () => {
 
         const data = await response.json();
         if (response.ok) {
+          localStorage.setItem("student", JSON.stringify(data.student));
           // Successful email sent, redirect to dashboard
           alert(data.message || 'Logged in successfully!');
           navigate('/student/dashboard');
@@ -40,9 +39,6 @@ const StudentSignIn = () => {
         // Handle any error during the request
         alert('Error occurred: ' + error.message);
       }
-    } else {
-      alert('Invalid credentials');
-    }
   };
 
   return (

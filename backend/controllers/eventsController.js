@@ -61,3 +61,15 @@ export const deleteEvent = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getEventsCount = async (req, res, next) => {
+  try {
+    const count = await Events.countDocuments();
+    res.status(200).json({
+      success: true,
+      count,
+    });
+  } catch (err) {
+    next(err);
+  }
+};

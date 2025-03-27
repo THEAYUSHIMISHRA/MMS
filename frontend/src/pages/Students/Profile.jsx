@@ -1,5 +1,5 @@
-// ProfileSection.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import {
   ProfileContainer,
@@ -10,17 +10,21 @@ import {
   ProfileDetail,
   Label,
   Value,
-} from '../../styles/SettingsProfileStyles'; // Import styled components from ProfileSectionStyles.js
+} from '../../styles/SettingsProfileStyles';
 
-const ProfileSection = () => {
-  // Sample student profile data
-  const studentProfile = {
-    name: 'Himani Dobriyal',
-    age: 21,
-    cardID: 'BTBTI22141',
-    rollNo: 2216830,
-    email: 'himanibobriyal8@gmail.com'
-  };
+const StudentProfile = () => {
+  const [student, setStudent] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedStudent = localStorage.getItem("student");
+    if (!storedStudent) {
+      alert("Please log in first");
+      navigate("/student/login");
+    } else {
+      setStudent(JSON.parse(storedStudent));
+    }
+  }, []);
 
   return (
     <ProfileContainer>
@@ -29,31 +33,39 @@ const ProfileSection = () => {
       </SidebarContainer>
       <Content>
         <ProfileHeader>Profile</ProfileHeader>
-        <ProfileInfo>
-          <ProfileDetail>
-            <Label>Name:</Label>
-            <Value>{studentProfile.name}</Value>
-          </ProfileDetail>
-          <ProfileDetail>
-            <Label>Age:</Label>
-            <Value>{studentProfile.age}</Value>
-          </ProfileDetail>
-          <ProfileDetail>
-            <Label>cardID:</Label>
-            <Value>{studentProfile.cardID}</Value>
-          </ProfileDetail>
-          <ProfileDetail>
-            <Label>Roll No:</Label>
-            <Value>{studentProfile.rollNo}</Value>
-          </ProfileDetail>
-          <ProfileDetail>
-            <Label>Email:</Label>
-            <Value>{studentProfile.email}</Value>
-          </ProfileDetail>
-        </ProfileInfo>
+        {student ? (
+          <ProfileInfo>
+            <ProfileDetail>
+              <Label>Name:</Label>
+              <Value>{student?.name || "N/A"}</Value>
+            </ProfileDetail>
+            <ProfileDetail>
+              <Label>Branch:</Label>
+              <Value>{student?.branch || "N/A"}</Value>
+            </ProfileDetail>
+            <ProfileDetail>
+              <Label>Card ID:</Label>
+              <Value>{student?.cardID || "N/A"}</Value>
+            </ProfileDetail>
+            <ProfileDetail>
+              <Label>Phone Number:</Label>
+              <Value>{student?.phoneNumber || "N/A"}</Value>
+            </ProfileDetail>
+            <ProfileDetail>
+              <Label>Roll No:</Label>
+              <Value>{student?.rollNo || "N/A"}</Value>
+            </ProfileDetail>
+            <ProfileDetail>
+              <Label>Email:</Label>
+              <Value>{student?.email || "N/A"}</Value>
+            </ProfileDetail>
+          </ProfileInfo>
+        ) : (
+          <h2>Loading details...</h2>
+        )}
       </Content>
     </ProfileContainer>
   );
 };
 
-export default ProfileSection;
+export default StudentProfile;
