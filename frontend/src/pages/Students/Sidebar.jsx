@@ -109,14 +109,6 @@ const Sidebar = () => {
         {isOpen && <SidebarTitle>Student</SidebarTitle>}
       </SidebarHeader>
       <SidebarNav>
-        <SidebarNavItem>
-          <SidebarIcon isOpen={isOpen}>
-            <BsGraphUp />
-          </SidebarIcon>
-          <StyledLink to="/student/dashboard" isOpen={isOpen}>
-            Dashboard
-          </StyledLink>
-        </SidebarNavItem>
         {/* <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsFileText />
@@ -141,7 +133,17 @@ const Sidebar = () => {
             Performance
           </StyledLink>
         </SidebarNavItem> */}
-        {/* <SidebarNavItem>
+        {/* <SidebarNavItem>            
+            <SidebarNavItem>
+          <SidebarIcon isOpen={isOpen}>
+            <BsChatDots />
+          </SidebarIcon>
+          <StyledLink to="/student/MessagingPage" isOpen={isOpen}>
+          Messaging
+          </StyledLink>
+        </SidebarNavItem>
+    
+        <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsCalendar />
           </SidebarIcon>
@@ -163,6 +165,14 @@ const Sidebar = () => {
           </SidebarIcon>
           <StyledLink to="/student/communication" isOpen={isOpen}>
             Announcement
+          </StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
+          <SidebarIcon isOpen={isOpen}>
+            <BsMicrosoftTeams />
+          </SidebarIcon>
+          <StyledLink to="/student/Team" isOpen={isOpen}>
+            Team
           </StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>

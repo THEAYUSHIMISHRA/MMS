@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState } from "react";
 //import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../src/components/Home.jsx';
@@ -49,10 +49,26 @@ import CheckAnnouncementSection from '../src/pages/Teachers/Announcement';
 import AssignmentSection from '../src/pages/Teachers/Assignments';
 import CheckAttendanceSection from '../src/pages/Teachers/Attendance';
 import CheckExamSection from '../src/pages/Teachers/Exams';
+import MessagingPage from '../src/pages/Students/MessagingPage';
+import TeacherMessagingPage from '../src/pages/Teachers/TeacherMessagingPage';
+import Request from './pages/Teachers/Request.jsx';
 //import TeacherUpload from "./pages/Admin/TeacherUpload.jsx";
+// ✅ Import SendRequest Page
+import SendRequest from './pages/Students/SendRequest.jsx';
+// ✅ Import Team Pages
+import TeamRegister from "./pages/Teams/TeamRegister";
+import TeamDashboard from "./pages/Teams/TeamDashboard";
+import JoinTeamPage from "./pages/Teams/JoinTeamPage";
+import TeamDetails from "./pages/Teams/TeamDetails";
+import TPerformance from "./pages/Teams/TPerformance";
+import TeamLeaderLogin from "./components/TeamLeaderLogin.jsx";
+import JoinTeam from "./pages/Students/JoinTeam.jsx";
+import contexts from "./components/ContextApi.jsx";
 
 const App = () => {
+  let [ContextDetails,setContextDetails]=useState({})
   return (
+    <contexts.Provider value={{ContextDetails,setContextDetails}}>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -65,7 +81,7 @@ const App = () => {
         <Route exact path="/student-signIn" element={<StudentSignIn />} />
         <Route exact path="/teacher-signIn" element={<TeacherSignIn />} />
         <Route exact path="/admin/register" element={<AdminRegister />} />
-
+        <Route exact path="/Team-signIn" element={<TeamLeaderLogin />} />
         {/* Informational sections */}
 
         <Route exact path="/aboutus" element={<AboutUs />} />
@@ -98,6 +114,7 @@ const App = () => {
         {/* Students sections here  */}
 
         <Route exact path="/student/assignments" element={<StudentAssignments />} />
+        <Route exact path="/student/Team" element={<JoinTeam />} />
         <Route exact path="/student/exams" element={<ExamSection />} />
         <Route exact path="/student/performance" element={<PerformanceSection />} />
         <Route exact path="/student/attendance" element={<AttendanceSection />} />
@@ -107,8 +124,11 @@ const App = () => {
         {/* <Route exact path="/student/settings" element={<ProfileSection />} /> */}
         {/* <Route path="/student/login" element={<StudentSignIn />} /> */}
         <Route path="/student/settings" element={<StudentProfile />} />
-
+        <Route path="/student/MessagingPage" element={<MessagingPage />} />
+        {/* ✅ Student Request Page */}
+        <Route path="/student/send-request" element={<SendRequest />} />
         {/* Teachers sections here */}
+
         <Route exact path="/teacher/classes" element={<ClassSection />} />
         <Route exact path="/teacher/students" element={<StudentSection />} />
         <Route exact path="/teacher/teachers" element={<TeacherSection />} />
@@ -119,9 +139,16 @@ const App = () => {
         <Route exact path="/teacher/communication" element={<CheckAnnouncementSection />} />
         <Route exact path="/teacher/events" element={<EventSection />} />
         <Route exact path="/teacher/settings" element={<TeacherProfileSection />} />
-
+        <Route path="/Teacher/messaging" element={<TeacherMessagingPage />} />
+        <Route path="/teacher/requests" element={<Request />} />
+        {/* ✅ Team Features */}
+        <Route path="/teams/register" element={<TeamRegister />} />
+        <Route path="/teams/team/:teamId" element={<TeamDashboard />} />
+        <Route path="/teams/join/:teamId" element={<JoinTeamPage />} />
+        <Route path="/teams/details/:teamId" element={<TeamDetails />} />
+        <Route path="/teams/TPerformance/:teamId" element={<TPerformance />} />
       </Routes>
-    </Router>
+    </Router></contexts.Provider>
   );
 };
 
