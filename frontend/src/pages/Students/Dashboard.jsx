@@ -14,8 +14,13 @@ const StudentDashboard = () => {
   const [studentCount, setStudentCount] = useState(0);
   const [announcementCount, setAnnouncementCount] = useState(0);
   const [eventCount, setEventCount] = useState(0);
+  const [file, setFile] = useState(null);
   
-  useEffect(() => {
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  
 
   const fetchStudentCount = async () => {
     try {
@@ -26,6 +31,29 @@ const StudentDashboard = () => {
     }
   };
 
+  const handleUpload = async () => {
+    if (!file) {
+      alert("Please select a file to upload.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await axios.post("http://localhost:4000/api/v1/students/upfile", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      alert(response.data.message);
+      setFile(null);
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      alert("Failed to upload file.");
+    }
+  };
+  useEffect(() => {
+    
   // Fetch announcements count
   const fetchAnnouncementCount = async () => {
     try {
@@ -79,6 +107,12 @@ const StudentDashboard = () => {
             <Card>
               <CardTitle>Events</CardTitle>
               <CardContent>{eventCount}</CardContent>
+            </Card>
+            <Card>
+              <CardTitle>Upload Files</CardTitle>
+              
+              <input type="file" accept=".pdf,.ppt,.pptx" onChange={handleFileChange} />
+          <button onClick={handleUpload}>Upload</button>
             </Card>
           </CardContainer>
         </Section>

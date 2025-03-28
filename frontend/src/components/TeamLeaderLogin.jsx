@@ -28,7 +28,7 @@ export default function TeamLeaderLogin() {
 
       if (response.ok) {
         alert('Logged in successfully!');
-		console.log(response)
+    console.log(response)
         StudentLogin.current.innerHTML = "Sign In";
         navigate('/teams/team/'+Ids);  // Navigate to the team dashboard
       } else {

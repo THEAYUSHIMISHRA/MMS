@@ -1,11 +1,13 @@
 
 import express from 'express';
-import sendEmail from './emailService';  // Import the email sending function
+import sendEmail from './emailService'; 
+import Team from '../models/Team'; // Import the email sending function
+import mongoose from 'mongoose';
 
 const router = express.Router();
 
 // Example login route
-router.post('/login', (req, res) => {
+router.post('/login', async(req, res) => {
     const { email, password } = req.body;
 
     // Validate credentials (you can replace this with your actual validation logic)
