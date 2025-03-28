@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'; 
-import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsPower } from 'react-icons/bs';
+import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsPower, BsFillArrowLeftSquareFill } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
   position: fixed;
@@ -20,8 +20,13 @@ const SidebarContainer = styled.div`
   z-index: 100;
 `;
 
+const SidebarTitle = styled.h3`
+  color: white; /* Change text color to white */
+  margin-top: 10px;
+`;
+
 const SidebarHeader = styled.div`
-  padding: 20px;
+  padding: 0px;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -55,6 +60,12 @@ const SidebarIcon = styled.div`
   margin-right: 10px;
 `;
 
+const Logo = styled.img`
+  width: ${({ isOpen }) => (isOpen ? '100px' : '50px')};
+  height: auto;
+  transition: width 0.3s ease;
+`;
+
 const LogoutButton = styled.button`
   width: 100%;
   padding: 12px 20px;
@@ -82,13 +93,16 @@ const Sidebar = () => {
   return (
     <SidebarContainer>
       <div>
-        <SidebarHeader>Teacher</SidebarHeader>
+        <SidebarHeader>
+          <Logo src="/logo1.png" alt="logo" isOpen={isOpen}/> 
+            {isOpen && <SidebarTitle>Teacher</SidebarTitle>}
+            </SidebarHeader>
         <SidebarNav>
           <SidebarNavItem>
             <SidebarIcon><BsGraphUp /></SidebarIcon>
             <StyledLink to="/teacher/dashboard">Dashboard</StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
+          {/* <SidebarNavItem>
             <SidebarIcon><BsPeople /></SidebarIcon>
             <StyledLink to="/teacher/classes">Classes</StyledLink>
           </SidebarNavItem>
@@ -115,7 +129,7 @@ const Sidebar = () => {
           <SidebarNavItem>
             <SidebarIcon><BsCalendar /></SidebarIcon>
             <StyledLink to="/teacher/attendance">Attendance</StyledLink>
-          </SidebarNavItem>
+          </SidebarNavItem> */}
           <SidebarNavItem>
             <SidebarIcon><BsChatDots /></SidebarIcon>
             <StyledLink to="/teacher/communication">Announcement</StyledLink>
@@ -135,14 +149,18 @@ const Sidebar = () => {
             <SidebarIcon><BsGear /></SidebarIcon>
             <StyledLink to="/teacher/settings">Settings & Profile</StyledLink>
           </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsFillArrowLeftSquareFill /></SidebarIcon>
+            <StyledLink to="/">Logout</StyledLink>
+          </SidebarNavItem>
         </SidebarNav>
       </div>
 
       {/* ✅ Logout option at the bottom */}
-      <LogoutButton onClick={() => alert("Logging out...")}>
+      {/* <LogoutButton onClick={() => alert("Logging out...")}>
         <SidebarIcon><BsPower /></SidebarIcon>
         Logout
-      </LogoutButton>
+      </LogoutButton> */}
     </SidebarContainer>
   );
 };
