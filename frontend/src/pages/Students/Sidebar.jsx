@@ -134,7 +134,7 @@ const Sidebar = () => {
             Performance
           </StyledLink>
         </SidebarNavItem> */}
-        {/* <SidebarNavItem>            
+                    
             <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsChatDots />
@@ -144,14 +144,14 @@ const Sidebar = () => {
           </StyledLink>
         </SidebarNavItem>
     
-        <SidebarNavItem>
-          <SidebarIcon isOpen={isOpen}>
-            <BsCalendar />
-          </SidebarIcon>
-          <StyledLink to="/student/attendance" isOpen={isOpen}>
-            Attendance
-          </StyledLink>
-        </SidebarNavItem> */}
+        {/* // <SidebarNavItem>
+        //   <SidebarIcon isOpen={isOpen}>
+        //     <BsCalendar />
+        //   </SidebarIcon>
+        //   <StyledLink to="/student/attendance" isOpen={isOpen}>
+        //     Attendance
+        //   </StyledLink>
+        // </SidebarNavItem> */} 
         <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsBook />

@@ -70,6 +70,7 @@ const MessagingPage = () => {
     axios.post("http://localhost:4000/api/v1/messages/send", { requestId, sender: studentId, message }).then(() => {
       setMessage("");
       fetchMessages();
+      alert("request sent successfully!!");
     });
   };
 

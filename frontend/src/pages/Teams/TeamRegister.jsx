@@ -88,6 +88,7 @@ const styles = {
     fontWeight: "bold",
     textTransform: "uppercase",
     letterSpacing: "1px",
+    color: "white",
     
   },
   subheading: {
@@ -95,6 +96,7 @@ const styles = {
     marginTop: "20px",
     marginBottom: "10px",
     textDecoration: "underline",
+    color: "white",
   },
   form: {
     display: "flex",
@@ -111,6 +113,7 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "5px",
   },
+ 
   input: {
     padding: "10px",
     borderRadius: "5px",
