@@ -13,8 +13,9 @@ import bvgate from "../assets/bvgate.jpg";
 import department from "../assets/department.webp"; 
 import soa from "../assets/soa.jpg"; 
 import auto1 from "../assets/auto1.jpg"; 
-import cms from "../assets/cms.jpg"; 
-const images = [bvgate, department, auto1, cms, soa];
+import cms from "../assets/cms.jpg";
+import apaji from "../assets/apaji.jpg";
+const images = [bvgate, department, auto1, cms, soa, apaji];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -42,6 +43,10 @@ const Home = () => {
     navigate('/choose-user');
   };
 
+  const handleTeamRegisteerClick = () => {
+    navigate('/teams/register');
+  };
+
   return (
     <>
       <Navbar>
@@ -53,11 +58,24 @@ const Home = () => {
         <NavigationLinks>
           <NavLink to="/AboutUs">About Us</NavLink>
           <NavLink to="http://www.banasthali.org/banasthali/wcms/en/home/" target="_blank">Banasthali</NavLink>
-          <NavLink to="/Coordinator">Coordinator's Message</NavLink>
+          <NavLink to="/Coordinator">Message</NavLink>
           <NavLink to="/teacher-details">Mentors</NavLink>
         </NavigationLinks>
 
         <ButtonsContainer>
+          <button onClick={handleTeamRegisteerClick}
+          style={{
+            backgroundColor: "4CAF50",
+            color:"white",
+            padding:"10px 15px",
+            marginLeft:"10px",
+            border:"none",
+            cursor:"pointer",
+            borderRadius:"5px",
+            fontSize:"16px",
+          }}>
+            Team Register
+            </button>
           <LoginButton onClick={handleLoginClick}>Sign In</LoginButton>
         </ButtonsContainer>
       </Navbar>
@@ -108,9 +126,9 @@ const ImageSlider = styled.div`
 
 // 💡 New Mentor-Mentee Title Style inside Navbar
 const MentorMenteeTitle = styled.h1`
-  font-size: 1.5rem;
+  font-size: 40px;
   font-weight: bold;
-  color: #ffcc00;
+  color:rgb(255, 255, 255);
   text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8);
   margin: 0 20px;
   font-family: 'Poppins', sans-serif;

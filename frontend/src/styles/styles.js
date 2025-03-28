@@ -99,7 +99,7 @@ export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: 35px;
-  padding: 10px;
+  padding: 0px;
   border-radius: 8px;
   box-shadow: 0px 0px 15px rgba(233, 32, 152, 0.6);
   transition: all 0.3s ease-in-out;

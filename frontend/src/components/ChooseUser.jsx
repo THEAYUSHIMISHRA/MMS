@@ -18,7 +18,11 @@ const ChooseUser = () => {
         <Title>Teacher</Title>
         <Button to="/teacher-signIn">Login as Teacher</Button>
       </UserSection>
-    </ChooseUserContainer>
+    <UserSection>
+    <Title>Team</Title>
+    <Button to="/team-signIn">Login for Team</Button>
+  </UserSection>
+  </ChooseUserContainer>
   );
 };
 

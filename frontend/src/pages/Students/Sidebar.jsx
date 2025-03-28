@@ -9,6 +9,7 @@ import {
   BsBook,
   BsChatDots,
   BsGear,
+  BsTrophy,
 } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
@@ -169,7 +170,7 @@ const Sidebar = () => {
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
-            <BsMicrosoftTeams />
+            <BsTrophy />
           </SidebarIcon>
           <StyledLink to="/student/Team" isOpen={isOpen}>
             Team
