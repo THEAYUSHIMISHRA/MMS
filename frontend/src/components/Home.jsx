@@ -43,7 +43,7 @@ const Home = () => {
     navigate('/choose-user');
   };
 
-  const handleTeamRegisteerClick = () => {
+  const handleTeamRegisterClick = () => {
     navigate('/teams/register');
   };
 
@@ -61,9 +61,24 @@ const Home = () => {
           <NavLink to="/Coordinator">Message</NavLink>
           <NavLink to="/teacher-details">Mentors</NavLink>
         </NavigationLinks>
-
+        {/* <button 
+            onClick={handleTeamRegisterClick} 
+            style={{
+              backgroundColor: "#4CAF50",
+              color: "white",
+              padding: "10px 15px",
+              marginLeft: "10px",
+              border: "none",
+              cursor: "pointer",
+              borderRadius: "5px",
+              fontSize: "16px"
+            }}
+          >
+            Team Register
+          </button>  */}
+          
         <ButtonsContainer>
-          <button onClick={handleTeamRegisteerClick}
+          <button onClick={handleTeamRegisterClick}
           style={{
             backgroundColor: "4CAF50",
             color:"white",
@@ -126,7 +141,7 @@ const ImageSlider = styled.div`
 
 // 💡 New Mentor-Mentee Title Style inside Navbar
 const MentorMenteeTitle = styled.h1`
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
   color:rgb(255, 255, 255);
   text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8);

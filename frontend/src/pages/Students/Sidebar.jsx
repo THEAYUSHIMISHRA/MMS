@@ -110,22 +110,22 @@ const Sidebar = () => {
         {isOpen && <SidebarTitle>Student</SidebarTitle>}
       </SidebarHeader>
       <SidebarNav>
-        {/* <SidebarNavItem>
+        <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsFileText />
           </SidebarIcon>
-          <StyledLink to="/student/assignments" isOpen={isOpen}>
-            Assignments
+          <StyledLink to="/student/dashboard" isOpen={isOpen}>
+            Dashboard
           </StyledLink>
         </SidebarNavItem>
-        <SidebarNavItem>
+        {/* <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsFileText />
           </SidebarIcon>
           <StyledLink to="/student/exams" isOpen={isOpen}>
             Exams
           </StyledLink>
-        </SidebarNavItem> */}
+        </SidebarNavItem>  */}
         {/* <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsGraphDown />

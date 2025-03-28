@@ -27,6 +27,7 @@ const AdminSignIn = () => {
     if (data.success) {
       localStorage.setItem("admin", JSON.stringify(data.admin));
       navigate("/admin/dashboard"); // Redirect to dashboard page
+
     } else {
       alert(data.message || "Unauthorized access");
     } 
