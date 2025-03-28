@@ -14,10 +14,6 @@ const AdminSignIn = () => {
     // const email = "swadhasri@gmail.com";
     // const password = "swagger123";
 
-<<<<<<< HEAD
-    if (email === "swadhasri@gmail.com" && password === "swagger123") {
-      navigate('/admin/dashboard');
-=======
     try {
       const response = await fetch("http://localhost:4000/api/v1/users/admin/signin", {
         method: "POST",
@@ -31,7 +27,7 @@ const AdminSignIn = () => {
     if (data.success) {
       localStorage.setItem("admin", JSON.stringify(data.admin));
       navigate("/admin/dashboard"); // Redirect to dashboard page
->>>>>>> 2d04822d390d44cb2cd50a56ab81e03413637466
+
     } else {
       alert(data.message || "Unauthorized access");
     } 

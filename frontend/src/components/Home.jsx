@@ -41,9 +41,6 @@ const Home = () => {
   const handleLoginClick = () => {
     navigate('/choose-user');
   };
-  const handleTeamRegisterClick = () => {
-    navigate('/teams/register'); // ✅ Correct path
-  };
 
   return (
     <>
@@ -74,6 +71,7 @@ const Home = () => {
           >
             Team Register
           </button> 
+          
         <ButtonsContainer>
           <LoginButton onClick={handleLoginClick}>Sign In</LoginButton>
         </ButtonsContainer>
