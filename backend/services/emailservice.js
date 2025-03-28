@@ -37,15 +37,15 @@ import nodemailer from "nodemailer";
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: process.env.EMAIL_USER,     // Your email address
-        pass: process.env.EMAIL_PASS      // Your email password or app password
+        user: process.env.EMAIL,     // Your email address
+        pass: process.env.EMAIL_PASSWORD      // Your email password or app password
     }
 });
 
 // 📩 Send Email (Reusable Function)
 const sendEmail = async (to, subject, text) => {
     const mailOptions = {
-        from: process.env.EMAIL_USER,
+        from: process.env.EMAIL,
         to,
         subject,
         text

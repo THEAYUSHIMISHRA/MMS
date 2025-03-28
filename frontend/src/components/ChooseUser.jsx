@@ -15,6 +15,10 @@ const ChooseUser = () => {
         <Button to="/student-signIn">Login as Student</Button>
       </UserSection>
       <UserSection>
+        <Title>Team Leader</Title>
+        <Button to="/Team-signIn">Login as Team Leader</Button>
+      </UserSection>
+      <UserSection>
         <Title>Teacher</Title>
         <Button to="/teacher-signIn">Login as Teacher</Button>
       </UserSection>

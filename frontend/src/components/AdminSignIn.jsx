@@ -14,7 +14,7 @@ const AdminSignIn = () => {
     // const email = "swadhasri@gmail.com";
     // const password = "swagger123";
 
-    if (email === "swadhasri@gmail.com" && password === "swagger123") {
+    if (email === "swadhasri@gmail.com" && password === "swagger123" || email === "ishakaliraman8@gmail.com" && password === "isha123456") {
       navigate('/admin/dashboard');
     } else {
       alert('Invalid credentials');
