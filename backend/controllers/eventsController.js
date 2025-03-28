@@ -1,12 +1,12 @@
-import {  Events } from "../models/eventsSchema.js";
+import { Events } from "../models/eventsSchema.js";
 //import { handleValidationError } from "../middlewares/errorHandler.js";
 
 export const createEvents = async (req, res, next) => {
   console.log(req.body);
-  const { event } = req.body;
   
   
   try {
+    const { event } = req.body;
 
     if (!event ) {
       return res.status(400).json({ success: false, message: "Please fill the forms" });
@@ -71,5 +71,26 @@ export const getEventsCount = async (req, res, next) => {
     });
   } catch (err) {
     next(err);
+  }
+};
+
+export const editEvent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { event } = req.body;
+
+    if (!event) {
+      return res.status(400).json({ success: false, message: "Event text is required" });
+    }
+
+    const updatedEvent = await Event.findByIdAndUpdate(id, { event }, { new: true });
+
+    if (!updatedEvent) {
+      return res.status(404).json({ success: false, message: "Event not found" });
+    }
+    
+    res.status(200).json(updatedEvent);
+  } catch (err) {
+    res.status(500).json({ message: "Server Error" });
   }
 };

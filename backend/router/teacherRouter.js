@@ -110,7 +110,7 @@ import path from "path";
 import fs from "fs";
 import Papa from "papaparse";
 import { Teacher } from "../models/teacherSchema.js";
-import { getAllTeachers, createTeacher, getTeacherProfile  } from "../controllers/teacherController.js";
+import { getAllTeachers, createTeacher, getTeacherProfile, getTeacherCount  } from "../controllers/teacherController.js";
 import { teacherSignIn } from "../controllers/usersController.js";
 import { sendTeacherEmail } from "../services/emailservice.js";
 
@@ -216,13 +216,13 @@ router.get("/getall", async (req, res) => {
 
 // Teacher Login
 router.post('/t-login', teacherSignIn);
-
+router.get('/count', getTeacherCount);
 
 // Fetch Profile
 router.get("/profile", getTeacherProfile);
 
 // 📩 Teacher Login - Email Sending Functionality
-router.post("/teacher-login", async (req, res) => {
+router.post("/t-login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {

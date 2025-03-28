@@ -107,3 +107,13 @@ export const getTeacherProfile = async (req, res, next) => {
       next(error);
     }
   };
+
+  export const getTeacherCount = async (req, res, next) => {
+    try {
+      const count = await Teacher.countDocuments(); 
+      res.status(200).json({ success: true, count });
+    } catch (err) {
+      next(err);
+    }
+  };
+  

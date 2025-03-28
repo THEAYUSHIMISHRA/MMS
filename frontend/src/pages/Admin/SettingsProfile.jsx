@@ -15,14 +15,32 @@ import {
 
 const SettingsProfile = () => {
   const [profile, setProfile] = useState(null);
-  const adminEmail = localStorage.getItem("adminEmail"); // Retrieve email from localStorage
-
+  //const adminEmail = localStorage.getItem("adminEmail"); // Retrieve email from localStorage
+  const storedAdmin = JSON.parse(localStorage.getItem("admin"));
+  const adminEmail = storedAdmin?.email || ""; // Retrieve email from localStorage
+  const handleLogin = async () => {
+    const response = await fetch("/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+  
+    const data = await response.json();
+    if (data.admin) {
+      //localStorage.setItem("admin", JSON.stringify(data.admin));
+      navigate("/admin/profile"); // Redirect to profile page
+    } else {
+      alert("Unauthorized access");
+    }
+  };
+  
   useEffect(() => {
 
     if (!adminEmail) {
       console.error("No email found in localStorage.");
       return;
     }
+    
     const fetchProfile = async () => {
       try {
         const res = await axios.get(`http://localhost:4000/api/v1/users/admin/profile?email=${adminEmail}`);

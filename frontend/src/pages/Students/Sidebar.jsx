@@ -109,14 +109,6 @@ const Sidebar = () => {
         {isOpen && <SidebarTitle>Student</SidebarTitle>}
       </SidebarHeader>
       <SidebarNav>
-        <SidebarNavItem>
-          <SidebarIcon isOpen={isOpen}>
-            <BsGraphUp />
-          </SidebarIcon>
-          <StyledLink to="/student/dashboard" isOpen={isOpen}>
-            Dashboard
-          </StyledLink>
-        </SidebarNavItem>
         {/* <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsFileText />
@@ -141,7 +133,7 @@ const Sidebar = () => {
             Performance
           </StyledLink>
         </SidebarNavItem> */}
-            
+        {/* <SidebarNavItem>            
             <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsChatDots />
@@ -158,7 +150,7 @@ const Sidebar = () => {
           <StyledLink to="/student/attendance" isOpen={isOpen}>
             Attendance
           </StyledLink>
-        </SidebarNavItem>
+        </SidebarNavItem> */}
         <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsBook />
@@ -191,14 +183,14 @@ const Sidebar = () => {
             Profile
           </StyledLink>
         </SidebarNavItem>
-        {/* <SidebarNavItem>
+        <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsGear />
           </SidebarIcon>
           <StyledLink to="/" isOpen={isOpen}>
             Logout
           </StyledLink>
-        </SidebarNavItem> */}
+        </SidebarNavItem>
       </SidebarNav>
       {/* <ToggleButton onClick={toggleSidebar}>
         <ToggleIcon isOpen={isOpen}>▲</ToggleIcon>

@@ -23,12 +23,46 @@ const AdminDashboard = () => {
   //const [events, setEvents] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
   //const [studentPerformance, setStudentPerformance] = useState([]);
+  const [teacherCount, setTeacherCount] = useState(0);
+  const [studentCount, setStudentCount] = useState(0);
+  const [announcementCount, setAnnouncementCount] = useState(0);
+
 
   useEffect(() => {
     fetchEvents();
     fetchAnnouncements();
     fetchStudentPerformance();
+    fetchTeacherCount();
+    fetchStudentCount();
+    fetchAnnouncementCount();
   }, []);
+
+  const fetchTeacherCount = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/teachers/count');
+      setTeacherCount(response.data.count);
+    } catch (error) {
+      console.error('Error fetching teacher count:', error);
+    }
+  };
+  
+  const fetchStudentCount = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/students/count');
+      setStudentCount(response.data.count);
+    } catch (error) {
+      console.error('Error fetching student count:', error);
+    }
+  };
+  
+  const fetchAnnouncementCount = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/announcements/count');
+      setAnnouncementCount(response.data.count);
+    } catch (error) {
+      console.error('Error fetching announcement count:', error);
+    }
+  };
 
   const fetchEvents = async () => {
     try {
@@ -66,16 +100,16 @@ const AdminDashboard = () => {
             <SectionTitle>Overview</SectionTitle>
             <CardContainer>
               <Card>
-                <CardTitle>Total Mentees</CardTitle>
-                <CardContent>00</CardContent>
+                <CardTitle>Teachers</CardTitle>
+                <CardContent>{teacherCount}</CardContent>
               </Card>
               <Card>
-                <CardTitle>Total Mentors</CardTitle>
-                <CardContent>00</CardContent>
+                <CardTitle>Students</CardTitle>
+                <CardContent>{studentCount}</CardContent>
               </Card>
               <Card>
-                <CardTitle>Total Teams</CardTitle>
-                <CardContent>00</CardContent>
+                <CardTitle>Announcements</CardTitle>
+                <CardContent>{announcementCount}</CardContent>
               </Card>
             </CardContainer>
           </Section>
