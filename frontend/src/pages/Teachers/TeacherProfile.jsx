@@ -54,12 +54,29 @@ const TeacherProfile = ({ teachers = [], setTeachers }) => {
             ...styles.addButton,
             ...(isClicked ? styles.addButtonClicked : {}),
           }}
+          onMouseOver={(e) => (e.target.style.background = styles.addButtonHover.background)}
+          onMouseOut={(e) => (e.target.style.background = styles.addButton.background)}
         >
           Add Teacher
         </button>
       </form>
 
-      <button style={styles.viewButton} onClick={() => navigate("/teacher-details")}>
+      <button
+        style={styles.viewButton}
+        onMouseOver={(e) => {
+          e.target.style.background = styles.viewButtonHover.background;
+          e.target.style.color = styles.viewButtonHover.color;
+          e.target.style.transform = styles.viewButtonHover.transform;
+          e.target.style.boxShadow = styles.viewButtonHover.boxShadow;
+        }}
+        onMouseOut={(e) => {
+          e.target.style.background = styles.viewButton.background;
+          e.target.style.color = styles.viewButton.color;
+          e.target.style.transform = "none";
+          e.target.style.boxShadow = "none";
+        }}
+        onClick={() => navigate("/teacher-details")}
+      >
         View Teacher Details
       </button>
     </div>
@@ -71,16 +88,16 @@ const styles = {
     textAlign: "center",
     maxWidth: "500px",
     margin: "50px auto",
-    padding: "20px",
-    background: "linear-gradient(135deg, #0a1f44, #1e3a8a)", // Dark Blue Gradient
+    padding: "25px",
+    background: "linear-gradient(135deg, #0a1f44, #1e3a8a)", // Dark Blue
     color: "white",
-    borderRadius: "8px",
+    borderRadius: "10px",
     boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
   },
   title: {
-    fontSize: "22px",
+    fontSize: "30px",
     marginBottom: "15px",
-    color: "#62b6ff", // Sky Blue
+    color: "white", 
   },
   form: {
     display: "flex",
@@ -95,37 +112,42 @@ const styles = {
   },
   label: {
     marginBottom: "5px",
-    fontSize: "16px",
+    fontSize: "18px",
     fontWeight: "bold",
-    color: "#62b6ff",
+    color: "#white",
   },
   input: {
     padding: "12px",
-    fontSize: "16px",
+    fontSize: "18px",
     border: "1px solid #62b6ff",
     borderRadius: "5px",
-    background: "#1e3a8a",
-    color: "white",
+    background: "white", // White background for formality
+    color: "#0a1f44", // Dark blue text
     transition: "0.3s",
-    marginBottom: "10px",
-    width: "100%",
+    width: "100%", // Full width
     boxSizing: "border-box",
   },
   addButton: {
     background: "#62b6ff",
     color: "#0a1f44",
-    padding: "12px",
+    padding: "10px",
     fontSize: "16px",
     border: "none",
     cursor: "pointer",
     borderRadius: "5px",
-    marginTop: "15px",
-    transition: "0.3s",
-    width: "100%",
+    marginTop: "10px",
+    transition: "background 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease",
+    width: "100%",  // Ensure the button width matches input fields
+    boxSizing: "border-box", // Prevents any unwanted margin overflow
+    display: "block", // Ensures it behaves like inputs
+    marginLeft: "-0.5px",
   },
   addButtonClicked: {
     transform: "scale(0.95)",
     boxShadow: "0px 0px 12px rgba(98, 182, 255, 0.8)",
+  },
+  addButtonHover: {
+    background: "#80c1ff", // Lighter blue on hover
   },
   viewButton: {
     background: "transparent",
@@ -137,6 +159,14 @@ const styles = {
     borderRadius: "5px",
     marginTop: "15px",
     transition: "0.3s",
+    width: "40%", // Same width as input fields
+    boxSizing: "border-box",
+  },
+  viewButtonHover: {
+    background: "#62b6ff", // Blue background on hover
+    color: "#0a1f44", // Dark blue text
+    transform: "scale(1.05)", // Slightly larger
+    boxShadow: "0px 0px 12px rgba(98, 182, 255, 0.8)",
   },
 };
 
