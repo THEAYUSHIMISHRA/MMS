@@ -37,17 +37,37 @@ const TeacherProfile = ({ teachers = [], setTeachers }) => {
             <label htmlFor={key} style={styles.label}>
               {key.charAt(0).toUpperCase() + key.slice(1)}:
             </label>
-            <input
-              type="text"
-              id={key}
-              name={key}
-              value={teacher[key]}
-              onChange={handleChange}
-              style={styles.input}
-              placeholder={`Enter ${key}`}
-            />
+            
+            {/* Dropdown for department selection */}
+            {key === "department" ? (
+              <select
+                id={key}
+                name={key}
+                value={teacher[key]}
+                onChange={handleChange}
+                style={styles.input} 
+              >
+                <option value="">Select Department</option>
+                <option value="School of Automation">School of Automation</option>
+                <option value="APAJI">APAJI</option>
+                {/* <option value="Computer Science">Urja Mandir</option>
+                <option value="Electrical Engineering">Electrical Engineering</option> */}
+              </select>
+            ) : (
+              <input
+                type="text"
+                id={key}
+                name={key}
+                value={teacher[key]}
+                onChange={handleChange}
+                style={styles.input}
+                placeholder={`Enter ${key}`}
+              />
+            )}
           </div>
         ))}
+        
+        {/* Shifted Add Teacher Button Slightly Left */}
         <button
           type="submit"
           style={{
@@ -89,7 +109,7 @@ const styles = {
     maxWidth: "500px",
     margin: "50px auto",
     padding: "25px",
-    background: "linear-gradient(135deg, #0a1f44, #1e3a8a)", // Dark Blue
+    background: "linear-gradient(135deg, #0a1f44, #1e3a8a)", 
     color: "white",
     borderRadius: "10px",
     boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
@@ -97,7 +117,7 @@ const styles = {
   title: {
     fontSize: "30px",
     marginBottom: "15px",
-    color: "white", 
+    color: "white",
   },
   form: {
     display: "flex",
@@ -114,17 +134,17 @@ const styles = {
     marginBottom: "5px",
     fontSize: "18px",
     fontWeight: "bold",
-    color: "#white",
+    color: "white",
   },
   input: {
     padding: "12px",
     fontSize: "18px",
     border: "1px solid #62b6ff",
     borderRadius: "5px",
-    background: "white", // White background for formality
-    color: "#0a1f44", // Dark blue text
+    background: "white",
+    color: "#0a1f44",
     transition: "0.3s",
-    width: "100%", // Full width
+    width: "100%", 
     boxSizing: "border-box",
   },
   addButton: {
@@ -137,17 +157,17 @@ const styles = {
     borderRadius: "5px",
     marginTop: "10px",
     transition: "background 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease",
-    width: "100%",  // Ensure the button width matches input fields
-    boxSizing: "border-box", // Prevents any unwanted margin overflow
-    display: "block", // Ensures it behaves like inputs
-    marginLeft: "-0.5px",
+    width: "100%",
+    boxSizing: "border-box",
+    display: "block",
+    marginLeft: "-0.5px", // Shift button slightly to the left
   },
   addButtonClicked: {
     transform: "scale(0.95)",
     boxShadow: "0px 0px 12px rgba(98, 182, 255, 0.8)",
   },
   addButtonHover: {
-    background: "#80c1ff", // Lighter blue on hover
+    background: "#80c1ff",
   },
   viewButton: {
     background: "transparent",
@@ -159,13 +179,13 @@ const styles = {
     borderRadius: "5px",
     marginTop: "15px",
     transition: "0.3s",
-    width: "40%", // Same width as input fields
+    width: "40%",
     boxSizing: "border-box",
   },
   viewButtonHover: {
-    background: "#62b6ff", // Blue background on hover
-    color: "#0a1f44", // Dark blue text
-    transform: "scale(1.05)", // Slightly larger
+    background: "#62b6ff",
+    color: "#0a1f44",
+    transform: "scale(1.05)",
     boxShadow: "0px 0px 12px rgba(98, 182, 255, 0.8)",
   },
 };
