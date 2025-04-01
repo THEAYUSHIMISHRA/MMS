@@ -21,7 +21,7 @@ import {
 const AdminDashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
   //const [events, setEvents] = useState([]);
-  const [announcements, setAnnouncements] = useState([]);
+  //const [announcements, setAnnouncements] = useState([]);
   //const [studentPerformance, setStudentPerformance] = useState([]);
   const [teacherCount, setTeacherCount] = useState(0);
   const [studentCount, setStudentCount] = useState(0);
@@ -29,9 +29,9 @@ const AdminDashboard = () => {
 
 
   useEffect(() => {
-    fetchEvents();
-    fetchAnnouncements();
-    fetchStudentPerformance();
+    //fetchEvents();
+    //fetchAnnouncements();
+    //fetchStudentPerformance();
     fetchTeacherCount();
     fetchStudentCount();
     fetchAnnouncementCount();
@@ -64,32 +64,32 @@ const AdminDashboard = () => {
     }
   };
 
-  const fetchEvents = async () => {
-    try {
-      const response = await axios.get('http://localhost:4000/api/v1/events/getall');
-      setEvents(response.data.events || []);
-    } catch (error) {
-      console.error('Error fetching events:', error);
-    }
-  };
+  // const fetchEvents = async () => {
+  //   try {
+  //     const response = await axios.get('http://localhost:4000/api/v1/events/getall');
+  //     setEvents(response.data.events || []);
+  //   } catch (error) {
+  //     console.error('Error fetching events:', error);
+  //   }
+  // };
 
-  const fetchAnnouncements = async () => {
-    try {
-      const response = await axios.get('http://localhost:4000/api/v1/announcements/getall');
-      setAnnouncements(response.data.announcements || []);
-    } catch (error) {
-      console.error('Error fetching announcements:', error);
-    }
-  };
+  // const fetchAnnouncements = async () => {
+  //   try {
+  //     const response = await axios.get('http://localhost:4000/api/v1/announcements/getall');
+  //     setAnnouncements(response.data.announcements || []);
+  //   } catch (error) {
+  //     console.error('Error fetching announcements:', error);
+  //   }
+  // };
 
-  const fetchStudentPerformance = async () => {
-    try {
-      const response = await axios.get('http://localhost:4000/api/v1/performance/getall');
-      setStudentPerformance(response.data.performance || []);
-    } catch (error) {
-      console.error('Error fetching student performance:', error);
-    }
-  };
+  // const fetchStudentPerformance = async () => {
+  //   try {
+  //     const response = await axios.get('http://localhost:4000/api/v1/performance/getall');
+  //     setStudentPerformance(response.data.performance || []);
+  //   } catch (error) {
+  //     console.error('Error fetching student performance:', error);
+  //   }
+  // };
 
   return (
     <AdminDashboardContainer>
@@ -119,10 +119,10 @@ const AdminDashboard = () => {
           </Section> */}
         </TopContent>
 
-        <BottomContent>
+        {/* <BottomContent>
           {/* <Performance studentPerformance={studentPerformance} /> */}
-          <Announcement announcements={announcements} />
-        </BottomContent>
+          {/* <Announcement announcements={announcements} /> */}
+        {/* </BottomContent> */}
       </Content>
     </AdminDashboardContainer>
   );

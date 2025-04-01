@@ -21,6 +21,7 @@ import {
 const Announcement = () => {
   // State for managing announcement
   const [announcement, setAnnouncement] = useState('');
+  const [files, setFiles] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
 
   // Function to fetch announcements
@@ -28,6 +29,7 @@ const Announcement = () => {
     try {
       const response = await axios.get('http://localhost:4000/api/v1/announcements/getall');
       setAnnouncements(response.data.announcements);
+      console.log("Fetched Announcements:", response.data.announcements);
     } catch (error) {
       console.error('Error fetching announcements:', error);
     }
@@ -38,19 +40,52 @@ const Announcement = () => {
     fetchAnnouncements();
   }, []);
 
+  const handleFileChange = (e) => {
+    setFiles([...e.target.files]);
+  };
+
+  const handleDownload = (file) => {
+    try {
+      // conver base64 to downloadable file
+      const link = document.createElement('a');
+      link.href = file.data; // Already a Base64 data URL
+      link.download = file.filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      toast.error('Error downloading file');
+      console.error('Download error:', error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation
+  if (!announcement && files.length === 0) {
+    toast.error('Please enter announcement or upload files');
+    return;
+  }
+
+    const formData = new FormData();
+    formData.append("announcement", announcement);
+    
+    files.forEach((file) => {
+      formData.append("files", file);
+    });
+
     try {
-      const response = await axios.post('http://localhost:4000/api/v1/announcements', {
-        announcement: announcement, // Ensure that the key matches the backend model
+      await axios.post('http://localhost:4000/api/v1/announcements/', formData,{
+        headers: { "Content-Type": "multipart/form-data" }, // Ensure that the key matches the backend model
       });
+
       console.log('Announcement sent:', response.data);
-      // Display success toast message
       toast.success('Announcement sent successfully');
-      // Clear the form
       setAnnouncement('');
-      // Fetch announcements again to update the list
+      setFiles([]);
       fetchAnnouncements();
+
     } catch (error) {
       console.error('Error sending announcement:', error);
       // Display error toast message
@@ -88,6 +123,10 @@ const Announcement = () => {
               cols={50}
             />
           </FormGroup>
+          <FormGroup>
+            <Label htmlFor="files">Upload Files:</Label>
+            <input type="file" id="files" multiple onChange={handleFileChange} />
+          </FormGroup>
           <Button type="submit">Send Announcement</Button>
           <Button type="button" onClick={() => setAnnouncement('')}>Clear Announcement</Button>
         </AnnouncementForm>
@@ -98,6 +137,15 @@ const Announcement = () => {
           {announcements.map((announcement) => (
             <AnnouncementItem key={announcement._id}>
               <AnnouncementContent>{announcement.announcement}</AnnouncementContent>
+
+              {announcement.files.map((file, index) => (
+                <div key={index}>
+                  <Button onClick={() => handleDownload(file)}>
+                    {file.filename} ({file.contentType})
+                  </Button>
+                </div>
+              ))}
+              
               {/* <div>
                 <button onClick={() => handleDelete(announcement._id)}>Delete</button>
               </div> */}

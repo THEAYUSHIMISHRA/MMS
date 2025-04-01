@@ -1,18 +1,41 @@
-import {Announcement} from "../models/announcementSchema.js";
-import { handleValidationError } from "../middlewares/errorHandler.js";
+import { Announcement } from "../models/announcementSchema.js";
+import multer from "multer";
+
+const storage = multer.memoryStorage();
+export const upload = multer({ storage });
 
 export const createAnnouncement = async (req, res, next) => {
-  console.log(req.body);
-  const { announcement } = req.body;
   try {
-      if (!announcement ) {
-        return res.status(400).json({ success: false, message: "Please fill the forms" });
-  }
-  await Announcement.create({ announcement});
-  res.status(200).json({
-    success: true,
-    message: "Announcement Created!",
-  });
+    const { announcement } = req.body;
+    const uploadedFiles = req.files;
+
+    // Validate either announcement or files must exist
+    if (!announcement && (!uploadedFiles || uploadedFiles.length === 0)) {
+      return res.status(400).json({
+        success: false,
+        message: "Either announcement text or at least one file is required"
+      });
+    }
+
+    // Process files
+    const files = uploadedFiles?.map(file => ({
+      data: `data:${file.mimetype};base64,${file.buffer.toString('base64')}`, // Convert buffer to Base64
+      contentType: file.mimetype,
+      filename: file.originalname
+    })) || [];
+
+    // Create announcement
+    const newAnnouncement = await Announcement.create({ 
+      announcement: announcement || "", 
+      files
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Announcement Created!",
+      announcement: newAnnouncement
+    });
+
   } catch (err) {
     next(err);
   }

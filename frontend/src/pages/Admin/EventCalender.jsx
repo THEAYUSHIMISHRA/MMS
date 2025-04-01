@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+
 import axios from "axios";
 import Sidebar from "./Sidebar";
-//import { getAllEvents, addEvent, deleteEvent } from "../../components/eventService";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import EventList from "../../components/EventList";
 import {
   EventCalendarContainer,
@@ -14,6 +16,7 @@ import {
 const AdminEvents = () => {
   const [events, setEvents] = useState([]);
   const [newEvent, setNewEvent] = useState("");
+  const [eventDate, setEventDate] = useState(new Date());
 
   useEffect(() => {
     async function fetchData() {
@@ -39,12 +42,13 @@ const AdminEvents = () => {
     try {
       const response = await axios.post('http://localhost:4000/api/v1/events/', { 
         event: newEvent,
-      date: new Date().toISOString() 
+      date: eventDate,
     });
 
       if (response.data.success) {
         setEvents([...events, response.data.event]);
         setNewEvent("");
+        setEventDate(new Date());
       } else {
         console.error("Failed to add event:", response.data.message);
       }
@@ -74,6 +78,7 @@ const AdminEvents = () => {
         <h1>Events</h1>
         <AddEventForm onSubmit={handleAddEvent}>
           <EventInput type="text" value={newEvent} onChange={(e) => setNewEvent(e.target.value)} placeholder="Enter Event Title" />
+          <DatePicker selected={eventDate} onChange={(date) => setEventDate(date)} dateFormat="yyyy-MM-dd" />
           <AddEventButton type="submit">Add Event</AddEventButton>
         </AddEventForm>
         <EventList events={events} onDelete={handleDeleteEvent} allowEdit={true} />
