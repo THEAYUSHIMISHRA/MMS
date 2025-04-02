@@ -54,7 +54,14 @@ const TeacherDetails = ({ teachers, setTeachers }) => {
               </h3>
               <p style={styles.detail}><strong>Department:</strong> {teacher.department}</p>
               <p style={styles.detail}><strong>Specialization:</strong> {teacher.specialization}</p>
-              <p style={styles.email}><strong>Email:</strong> {teacher.email}</p>
+              <p 
+  style={{
+    ...styles.email,
+    ...(hoveredCard === index ? styles.emailHover : {}),
+  }}
+>
+  <strong>Email:</strong> {teacher.email}
+</p>
             </div>
           ))
         ) : (
@@ -69,11 +76,11 @@ const styles = {
   pageContainer: {
     padding: "20px",
     textAlign: "center",
-    background: "linear-gradient(135deg, #1a1a1a, #2c2c2c)", // Dark gradient background
+    background: "linear-gradient(135deg, rgb(41, 106, 176), #2c2c2c)", // Keeping your original background
     minHeight: "100vh",
   },
   heading: {
-    fontSize: "2rem",
+    fontSize: "2.5rem",
     fontWeight: "bold",
     marginBottom: "20px",
     fontFamily: "Poppins, sans-serif",
@@ -85,18 +92,18 @@ const styles = {
     marginBottom: "20px",
   },
   searchBar: {
-    width: "60%", // Increased width
-    height: "50px", // Increased height
+    width: "60%",
+    height: "50px",
     fontSize: "1.2rem",
     padding: "10px",
     borderRadius: "25px",
     border: "2px solid #ffaa00",
     outline: "none",
     textAlign: "center",
-    background: "#222",
     color: "white",
     transition: "0.3s",
     boxShadow: "0px 0px 8px rgba(255, 204, 0, 0.5)",
+    caretColor: "black", // Cursor (caret) color is black
   },
   container: {
     display: "grid",
@@ -105,47 +112,52 @@ const styles = {
     padding: "20px",
   },
   card: {
-    background: "linear-gradient(135deg, #222, #333)",
-    padding: "15px",
-    borderRadius: "10px",
-    color: "white",
-    border: "2px solid transparent",
+    background: "#ffffff", // White card
+    padding: "20px",
+    borderRadius: "12px",
+    color: "#222", // Black text
+    border: "2px solid #ccc", // Light border for definition
     transition: "0.3s",
     textAlign: "left",
-    boxShadow: "0px 0px 5px rgba(255, 255, 255, 0.1)",
-    transform: "scale(1)", // Default scale
+    boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow
+    transform: "scale(1)",
   },
   cardHover: {
-    background: "linear-gradient(135deg, #ffcc00, #ffaa00)",
-    color: "#222",
-    boxShadow: "0px 0px 20px rgba(255, 204, 0, 0.8)", // Glow effect
+    background: "linear-gradient(135deg, rgb(235, 197, 45), rgb(239, 177, 53))",
+    color: "white", // White text on hover
+    boxShadow: "0px 0px 20px rgba(255, 204, 0, 0.8)",
     border: "2px solid rgba(255, 204, 0, 0.8)",
-    transform: "scale(1.05)", // Slight zoom effect on hover
+    transform: "scale(1.05)",
   },
   name: {
     fontSize: "1.5rem",
     fontWeight: "bold",
     marginBottom: "10px",
     fontFamily: "Poppins, sans-serif",
-    color: "white", // Default color
+    color: "#222", // Black text
     transition: "color 0.3s ease",
   },
   detail: {
     fontSize: "1rem",
     fontFamily: "Montserrat, sans-serif",
     opacity: "0.9",
+    color: "#333", // Dark gray text
   },
   email: {
     fontSize: "0.9rem",
     fontFamily: "Montserrat, sans-serif",
     opacity: "0.8",
     fontStyle: "italic",
+    color: "#444", // Slightly darker for visibility
+    transition: "color 0.3s ease",
+  },
+  emailHover: {
+    color: "darkblue", // Email turns sky blue on hover
   },
   noData: {
-    color: "#bbb",
+    color: "white",
     fontSize: "1.2rem",
     textAlign: "center",
   },
 };
-
 export default TeacherDetails;

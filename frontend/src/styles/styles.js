@@ -117,7 +117,7 @@ export const ButtonsContainer = styled.div`
 
 /* 🔥 Gradient Button */
 export const LoginButton = styled.button`
-  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  background: linear-gradient(90deg,rgb(74, 182, 225), #feb47b);
   color: white;
   border: none;
   padding: 12px 25px;
