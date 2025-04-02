@@ -48,8 +48,8 @@ export const Logo = styled.img`
 export const MentorMenteeTitle = styled.h1`
   font-size: 1.5rem;
   font-weight: bold;
-  color: #ffcc00;
-  text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8);
+  color: rgb(24, 60, 95);
+  text-shadow: 0px 0px 10px white;
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   flex-grow: 1;
@@ -101,7 +101,7 @@ export const ButtonsContainer = styled.div`
   margin-right: 35px;
   padding: 0px;
   border-radius: 8px;
-  box-shadow: 0px 0px 15px rgba(233, 32, 152, 0.6);
+  box-shadow: 0px 0px 15px white;
   transition: all 0.3s ease-in-out;
   
   &:hover {
