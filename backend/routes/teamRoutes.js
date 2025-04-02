@@ -168,7 +168,7 @@ console.log(teamId,email,studentId);
 router.get("/join-team/:teamId/:studentId/:email", async (req, res) => {
   const { teamId ,email, studentId} = req.params;
   
-console.log(teamId)
+  console.log(teamId)
   try {
     const team = await Team.findById(teamId);
     if (!team) return res.status(404).json({ message: "Team not found" });
@@ -222,7 +222,7 @@ console.log(teamId)
 
 router.get("/Teamlogin", async (req, res) => {
   const { Ids, password } = req.query;  // Use query parameters for GET requests
-console.log(Ids, password,req.query)
+  console.log(Ids, password,req.query)
   try {
       // Convert Ids to ObjectId
       const objectId = new mongoose.Types.ObjectId(Ids);
@@ -313,7 +313,7 @@ router.get("/all-teams", async (req, res) => {
 
 router.get("/get-matching-teams/:email/:studentId", async (req, res) => {
   const { email, studentId } = req.params;
-console.log(email)
+  console.log(email)
   if (!email || !studentId) {
       return res.status(400).json({ message: "Email and Student ID are required" });
   }
@@ -343,9 +343,5 @@ console.log(email)
       res.status(500).json({ message: "Error fetching teams", error: error.message });
   }
 });
-
-
-
-
 
 export default router;

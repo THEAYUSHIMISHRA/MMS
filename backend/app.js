@@ -135,7 +135,6 @@ app.use((err, req, res, next) => {
     errorHandler(err, req, res, next);
 });
 
-// Database connection
 dbConnection();
 
 export default app;
