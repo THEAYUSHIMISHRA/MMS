@@ -9,7 +9,8 @@ const EventList = ({ events, onDelete, onEdit, allowEdit }) => {
       {events.length > 0 ? (
         events.map((event, index) => (
           <Event key={index}>
-            <strong>{event.event}</strong>
+            <strong>{event.event}</strong> <br />
+            <span>{new Date(event.date).toLocaleDateString()}</span>
             {allowEdit && (
               <>
                 {/* <FaEdit onClick={() => onEdit(index)} style={{ marginLeft: "10px", cursor: "pointer" }} /> */}

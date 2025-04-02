@@ -1,4 +1,4 @@
-import React , { useState } from "react";
+import React, { useState } from "react";
 //import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../src/components/Home.jsx';
@@ -11,7 +11,8 @@ import AboutUs from '../src/components/AboutUs';
 import Coordinator from '../src/components/Coordinator';
 import StudentUpload from "./pages/Admin/StudentUpload";
 import TeacherUpload from "./pages/Admin/TeacherUpload";
-
+import ForgotPassword from '../src/components/forgotpassword';
+import verifyotp from '../src/components/verifyotp';
 import AdminDashboard from '../src/pages/Admin/Dashboard';
 import StudentDashboard from '../src/pages/Students/Dashboard';
 import Sidebar from '../src/pages/Students/Sidebar';
@@ -69,103 +70,107 @@ import contexts from "./components/ContextApi.jsx";
 
 const App = () => {
   const [teachers, setTeachers] = useState([]);
-  let [ContextDetails,setContextDetails]=useState({})
+  let [ContextDetails, setContextDetails] = useState({})
 
   return (
-    <contexts.Provider value={{ContextDetails,setContextDetails}}>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
+    <contexts.Provider value={{ ContextDetails, setContextDetails }}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/choose-user" element={<ChooseUser />} />
+          <Route path="/choose-user" element={<ChooseUser />} />
 
-        {/* All the sign-in pages/routes */}
+          {/* All the sign-in pages/routes */}
 
-        <Route exact path="/admin-signIn" element={<AdminSignIn />} />
-        <Route exact path="/student-signIn" element={<StudentSignIn />} />
-        <Route exact path="/teacher-signIn" element={<TeacherSignIn />} />
-        <Route exact path="/admin/register" element={<AdminRegister />} />
-        <Route exact path="/Team-signIn" element={<TeamLeaderLogin />} />
-        {/* Informational sections */}
+          <Route exact path="/admin-signIn" element={<AdminSignIn />} />
+          <Route exact path="/student-signIn" element={<StudentSignIn />} />
+          <Route exact path="/teacher-signIn" element={<TeacherSignIn />} />
+          <Route exact path="/teacher-signIn/forgotpassword" element={<ForgotPassword />} />
+          <Route exact path="/student-signIn/forgotpassword" element={<ForgotPassword />} />
+          <Route exact path="/admin/register" element={<AdminRegister />} />
+          <Route exact path="/Team-signIn" element={<TeamLeaderLogin />} />
+          {/* Informational sections */}
 
-        <Route exact path="/aboutus" element={<AboutUs />} />
-        {/* <Route exact path="/csv-uploader" element={<CsvUploader />} /> */}
-        <Route exact path="/coordinator" element={<Coordinator />} />
+          <Route exact path="/aboutus" element={<AboutUs />} />
+          {/* <Route exact path="/csv-uploader" element={<CsvUploader />} /> */}
+          <Route exact path="/coordinator" element={<Coordinator />} />
+          {/* <Route exact path="/forgotpassword" element={<ForgotPassword />} /> */}
+          <Route exact path="/verify-otp" element={<verifyotp />} />
 
-        {/* All the dashboard routes */}
+          {/* All the dashboard routes */}
 
-        <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route exact path="/teacher/dashboard" element={<TeacherDashboard />} />
-        <Route exact path="/student/dashboard" element={<StudentDashboard />} />
-        <Route exact path="/student/Sidebar" element={<Sidebar />} />
+          <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route exact path="/teacher/dashboard" element={<TeacherDashboard />} />
+          <Route exact path="/student/dashboard" element={<StudentDashboard />} />
+          <Route exact path="/student/Sidebar" element={<Sidebar />} />
 
-        {/* Admin section here */}
+          {/* Admin section here */}
 
-        <Route exact path="/admin/classes" element={<Classes />} />
-        <Route exact path="/admin/exams" element={<Exam />} />
-        <Route exact path="/admin/attendance" element={<Attendance />} />
-        <Route exact path="/admin/performance" element={<Performance />} />
-        <Route exact path="/admin/teachers" element={<Teachers />} />
-        <Route exact path="/admin/suploads" element={<StudentUpload />} />
-        <Route exact path="/admin/tuploads" element={<TeacherUpload />} />
-        <Route exact path="/admin/students" element={<Students />} />
-        <Route exact path="/admin/assignments" element={<Assignments />} />
-        <Route exact path="/admin/library" element={<Library />} />
-        <Route exact path="/admin/communication" element={<Announcement />} />
-        <Route exact path="/admin/events" element={<EventCalender />} />
-        <Route exact path="/admin/settings" element={<SettingsProfile />} />
+          <Route exact path="/admin/classes" element={<Classes />} />
+          <Route exact path="/admin/exams" element={<Exam />} />
+          <Route exact path="/admin/attendance" element={<Attendance />} />
+          <Route exact path="/admin/performance" element={<Performance />} />
+          <Route exact path="/admin/teachers" element={<Teachers />} />
+          <Route exact path="/admin/suploads" element={<StudentUpload />} />
+          <Route exact path="/admin/tuploads" element={<TeacherUpload />} />
+          <Route exact path="/admin/students" element={<Students />} />
+          <Route exact path="/admin/assignments" element={<Assignments />} />
+          <Route exact path="/admin/library" element={<Library />} />
+          <Route exact path="/admin/communication" element={<Announcement />} />
+          <Route exact path="/admin/events" element={<EventCalender />} />
+          <Route exact path="/admin/settings" element={<SettingsProfile />} />
 
-        {/* Students sections here  */}
+          {/* Students sections here  */}
 
-        <Route exact path="/student/assignments" element={<StudentAssignments />} />
-        <Route exact path="/student/Team" element={<JoinTeam />} />
-        <Route exact path="/student/exams" element={<ExamSection />} />
-        <Route exact path="/student/performance" element={<PerformanceSection />} />
-        <Route exact path="/student/attendance" element={<AttendanceSection />} />
-        <Route exact path="/student/library" element={<LibrarySection />} />
-        <Route exact path="/student/events" element={<CheckEventSection />} />
-        <Route exact path="/student/communication" element={<AnnouncementSection />} />
-        {/* <Route exact path="/student/settings" element={<ProfileSection />} /> */}
-        {/* <Route path="/student/login" element={<StudentSignIn />} /> */}
-        <Route path="/student/settings" element={<StudentProfile />} />
-        <Route path="/student/MessagingPage" element={<MessagingPage />} />
-        {/* ✅ Student Request Page */}
-        <Route path="/student/send-request" element={<SendRequest />} />
-        {/* Teachers sections here */}
+          <Route exact path="/student/assignments" element={<StudentAssignments />} />
+          <Route exact path="/student/Team" element={<JoinTeam />} />
+          <Route exact path="/student/exams" element={<ExamSection />} />
+          <Route exact path="/student/performance" element={<PerformanceSection />} />
+          <Route exact path="/student/attendance" element={<AttendanceSection />} />
+          <Route exact path="/student/library" element={<LibrarySection />} />
+          <Route exact path="/student/events" element={<CheckEventSection />} />
+          <Route exact path="/student/communication" element={<AnnouncementSection />} />
+          {/* <Route exact path="/student/settings" element={<ProfileSection />} /> */}
+          {/* <Route path="/student/login" element={<StudentSignIn />} /> */}
+          <Route path="/student/settings" element={<StudentProfile />} />
+          <Route path="/student/MessagingPage" element={<MessagingPage />} />
+          {/* ✅ Student Request Page */}
+          <Route path="/student/send-request" element={<SendRequest />} />
+          {/* Teachers sections here */}
 
-        <Route exact path="/teacher/classes" element={<ClassSection />} />
-        <Route exact path="/teacher/students" element={<StudentSection />} />
-        <Route exact path="/teacher/teachers" element={<TeacherSection />} />
-        <Route exact path="/teacher/assignments" element={<AssignmentSection />} />
-        <Route exact path="/teacher/exams" element={<CheckExamSection />} />
-        <Route exact path="/teacher/performance" element={<CheckPerformanceSection />} />
-        <Route exact path="/teacher/attendance" element={<CheckAttendanceSection />} />
-        <Route exact path="/teacher/communication" element={<CheckAnnouncementSection />} />
-        <Route exact path="/teacher/events" element={<EventSection />} />
-        <Route exact path="/teacher/settings" element={<TeacherProfileSection />} />
+          <Route exact path="/teacher/classes" element={<ClassSection />} />
+          <Route exact path="/teacher/students" element={<StudentSection />} />
+          <Route exact path="/teacher/teachers" element={<TeacherSection />} />
+          <Route exact path="/teacher/assignments" element={<AssignmentSection />} />
+          <Route exact path="/teacher/exams" element={<CheckExamSection />} />
+          <Route exact path="/teacher/performance" element={<CheckPerformanceSection />} />
+          <Route exact path="/teacher/attendance" element={<CheckAttendanceSection />} />
+          <Route exact path="/teacher/communication" element={<CheckAnnouncementSection />} />
+          <Route exact path="/teacher/events" element={<EventSection />} />
+          <Route exact path="/teacher/settings" element={<TeacherProfileSection />} />
 
-        <Route path="/Teacher/messaging" element={<TeacherMessagingPage />} />
-        <Route path="/teacher/requests" element={<Request />} />
-        {/* ✅ Team Features */}
-        <Route path="/teams/register" element={<TeamRegister />} />
-        <Route path="/teams/team/:teamId" element={<TeamDashboard />} />
-        <Route path="/teams/join/:teamId" element={<JoinTeamPage />} />
-        <Route path="/teams/details/:teamId" element={<TeamDetails />} />
-        <Route path="/teams/TPerformance/:teamId" element={<TPerformance />} />
+          <Route path="/Teacher/messaging" element={<TeacherMessagingPage />} />
+          <Route path="/teacher/requests" element={<Request />} />
+          {/* ✅ Team Features */}
+          <Route path="/teams/register" element={<TeamRegister />} />
+          <Route path="/teams/team/:teamId" element={<TeamDashboard />} />
+          <Route path="/teams/join/:teamId" element={<JoinTeamPage />} />
+          <Route path="/teams/details/:teamId" element={<TeamDetails />} />
+          <Route path="/teams/TPerformance/:teamId" element={<TPerformance />} />
 
-      {/* Teacher Profile System */}
-      <Route 
-          exact 
-          path="/teacher-profile" 
-          element={<TeacherProfile teachers={teachers} setTeachers={setTeachers} />} 
-        />
-        <Route 
-          exact 
-          path="/teacher-details" 
-          element={<TeacherDetails teachers={teachers} setTeachers={setTeachers} />} 
-        />
-      </Routes>
-    </Router></contexts.Provider>
+          {/* Teacher Profile System */}
+          <Route
+            exact
+            path="/teacher-profile"
+            element={<TeacherProfile teachers={teachers} setTeachers={setTeachers} />}
+          />
+          <Route
+            exact
+            path="/teacher-details"
+            element={<TeacherDetails teachers={teachers} setTeachers={setTeachers} />}
+          />
+        </Routes>
+      </Router></contexts.Provider>
   );
 };
 

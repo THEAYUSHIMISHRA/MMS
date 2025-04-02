@@ -10,7 +10,7 @@ const TeacherProfile = ({ teachers = [], setTeachers }) => {
     specialization: "",
   });
 
-  const [isClicked, setIsClicked] = useState(false); // Button click state
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleChange = (e) => {
     setTeacher({ ...teacher, [e.target.name]: e.target.value });
@@ -22,9 +22,8 @@ const TeacherProfile = ({ teachers = [], setTeachers }) => {
       setTeachers([...teachers, teacher]);
       setTeacher({ name: "", department: "", email: "", specialization: "" });
 
-      // **Click Effect**
       setIsClicked(true);
-      setTimeout(() => setIsClicked(false), 200); // Reset after 200ms
+      setTimeout(() => setIsClicked(false), 200);
     }
   };
 
@@ -38,29 +37,66 @@ const TeacherProfile = ({ teachers = [], setTeachers }) => {
             <label htmlFor={key} style={styles.label}>
               {key.charAt(0).toUpperCase() + key.slice(1)}:
             </label>
-            <input
-              type="text"
-              id={key}
-              name={key}
-              value={teacher[key]}
-              onChange={handleChange}
-              style={styles.input}
-              placeholder={`Enter ${key}`}
-            />
+            
+            {/* Dropdown for department selection */}
+            {key === "department" ? (
+              <select
+                id={key}
+                name={key}
+                value={teacher[key]}
+                onChange={handleChange}
+                style={styles.input} 
+              >
+                <option value="">Select Department</option>
+                <option value="School of Automation">School of Automation</option>
+                <option value="APAJI">APAJI</option>
+                {/* <option value="Computer Science">Urja Mandir</option>
+                <option value="Electrical Engineering">Electrical Engineering</option> */}
+              </select>
+            ) : (
+              <input
+                type="text"
+                id={key}
+                name={key}
+                value={teacher[key]}
+                onChange={handleChange}
+                style={styles.input}
+                placeholder={`Enter ${key}`}
+              />
+            )}
           </div>
         ))}
+        
+        {/* Shifted Add Teacher Button Slightly Left */}
         <button
           type="submit"
           style={{
             ...styles.addButton,
             ...(isClicked ? styles.addButtonClicked : {}),
           }}
+          onMouseOver={(e) => (e.target.style.background = styles.addButtonHover.background)}
+          onMouseOut={(e) => (e.target.style.background = styles.addButton.background)}
         >
           Add Teacher
         </button>
       </form>
 
-      <button style={styles.viewButton} onClick={() => navigate("/teacher-details")}>
+      <button
+        style={styles.viewButton}
+        onMouseOver={(e) => {
+          e.target.style.background = styles.viewButtonHover.background;
+          e.target.style.color = styles.viewButtonHover.color;
+          e.target.style.transform = styles.viewButtonHover.transform;
+          e.target.style.boxShadow = styles.viewButtonHover.boxShadow;
+        }}
+        onMouseOut={(e) => {
+          e.target.style.background = styles.viewButton.background;
+          e.target.style.color = styles.viewButton.color;
+          e.target.style.transform = "none";
+          e.target.style.boxShadow = "none";
+        }}
+        onClick={() => navigate("/teacher-details")}
+      >
         View Teacher Details
       </button>
     </div>
@@ -70,77 +106,87 @@ const TeacherProfile = ({ teachers = [], setTeachers }) => {
 const styles = {
   container: {
     textAlign: "center",
-    maxWidth: "600px", // Increased width
-    margin: "80px auto", // Added more space from the top
-    padding: "30px", // Increased padding inside the container
-    background: "linear-gradient(135deg, #1e1e1e, #3a3a3a)",
+    maxWidth: "500px",
+    margin: "50px auto",
+    padding: "25px",
+    background: "linear-gradient(135deg, #0a1f44, #1e3a8a)", 
     color: "white",
-    borderRadius: "12px", // Slightly rounded corners for better aesthetics
-    boxShadow: "0px 6px 20px rgba(255, 255, 255, 0.2)", // Enhanced shadow for depth
+    borderRadius: "10px",
+    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
   },
   title: {
-    fontSize: "24px",
-    marginBottom: "20px",
-    color: "#f39c12",
-    textTransform: "uppercase",
+    fontSize: "30px",
+    marginBottom: "15px",
+    color: "white",
   },
   form: {
     display: "flex",
     flexDirection: "column",
-    gap: "20px", // Increased gap between input fields
-    padding: "10px 20px", // Added padding inside the form
+    gap: "15px",
+    padding: "10px",
   },
   inputContainer: {
     display: "flex",
     flexDirection: "column",
     textAlign: "left",
-    padding: "5px 10px", // Added padding inside the container
   },
   label: {
     marginBottom: "5px",
-    fontSize: "16px",
+    fontSize: "18px",
     fontWeight: "bold",
-    color: "#f39c12",
+    color: "white",
   },
   input: {
-    padding: "12px", // Increased padding
-    fontSize: "16px",
-    border: "1px solid #f39c12",
+    padding: "12px",
+    fontSize: "18px",
+    border: "1px solid #62b6ff",
     borderRadius: "5px",
-    background: "#444",
-    color: "white",
+    background: "white",
+    color: "#0a1f44",
     transition: "0.3s",
-    marginBottom: "10px", // Added more margin for spacing
-    width: "100%", // Ensure full width alignment
-    boxSizing: "border-box", // Prevents overflow issues
+    width: "100%", 
+    boxSizing: "border-box",
   },
   addButton: {
-    background: "#f39c12",
-    color: "white",
-    padding: "12px",
+    background: "#62b6ff",
+    color: "#0a1f44",
+    padding: "10px",
     fontSize: "16px",
     border: "none",
     cursor: "pointer",
     borderRadius: "5px",
-    marginTop: "15px",
-    transition: "transform 0.1s ease, box-shadow 0.2s ease",
-    width: "100%", // Button width matches input fields
-    boxSizing: "border-box", // Prevents overflow issues
+    marginTop: "10px",
+    transition: "background 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease",
+    width: "100%",
+    boxSizing: "border-box",
+    display: "block",
+    marginLeft: "-0.5px", // Shift button slightly to the left
   },
   addButtonClicked: {
-    transform: "scale(0.95)", // Shrinks slightly when clicked
-    boxShadow: "0px 0px 15px rgba(255, 204, 0, 0.8)", // Adds glow
+    transform: "scale(0.95)",
+    boxShadow: "0px 0px 12px rgba(98, 182, 255, 0.8)",
+  },
+  addButtonHover: {
+    background: "#80c1ff",
   },
   viewButton: {
     background: "transparent",
-    color: "#f39c12",
+    color: "#62b6ff",
     padding: "12px",
     fontSize: "16px",
-    border: "2px solid #f39c12",
+    border: "2px solid #62b6ff",
     cursor: "pointer",
     borderRadius: "5px",
     marginTop: "15px",
     transition: "0.3s",
+    width: "40%",
+    boxSizing: "border-box",
+  },
+  viewButtonHover: {
+    background: "#62b6ff",
+    color: "#0a1f44",
+    transform: "scale(1.05)",
+    boxShadow: "0px 0px 12px rgba(98, 182, 255, 0.8)",
   },
 };
 

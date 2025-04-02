@@ -1,6 +1,5 @@
 import express from "express";
 import { sendRequest, getStudentRequest, getTeacherRequests, updateRequestStatus, sendMessage, getMessages } from "../controllers/requestController.js";
-console.log("first")
 const router = express.Router();
 
 // ✅ Student sends a mentorship request

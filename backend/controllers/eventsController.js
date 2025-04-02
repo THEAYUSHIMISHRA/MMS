@@ -1,18 +1,17 @@
 import { Events } from "../models/eventsSchema.js";
-//import { handleValidationError } from "../middlewares/errorHandler.js";
 
 export const createEvents = async (req, res, next) => {
   console.log(req.body);
   
   
   try {
-    const { event } = req.body;
+    const { event, date } = req.body;
 
-    if (!event ) {
-      return res.status(400).json({ success: false, message: "Please fill the forms" });
+    if (!event || !date) {
+      return res.status(400).json({ success: false, message: "Date and event is required" });
     }
 
-    const newEvent = await Events.create({ event });
+    const newEvent = await Events.create({ event, date });
 
     return res.status(200).json({
       success: true,
