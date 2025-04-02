@@ -87,6 +87,8 @@ import attendanceRouter from "./router/attendanceRouter.js";
 import usersRouter from "./router/usersRouter.js";
 import adminRegisterRouter from "./router/adminRegisterRouter.js";
 import sendEmailRoutes from "./routes/sendEmailRoutes.js";
+import forgotpassRoutes from "./routes/forgotpasswordroutes.js"
+
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 // ✅ Import the new OTP-based password reset routes
@@ -122,6 +124,7 @@ app.use("/api/v1/register", adminRegisterRouter);
 app.use("/api/v1/messages", messagingRoutes);
 app.use("/api/v1/requests", requestRoutes);
 app.use("/api/v1/send-email", sendEmailRoutes);
+app.use("/api/vi/forgotpass", forgotpassRoutes);
 
 // ✅ Add the new route for OTP-based forgot password
 app.use("/api/v1/auth", authRoutes);

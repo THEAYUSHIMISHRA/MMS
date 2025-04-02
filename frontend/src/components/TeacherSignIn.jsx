@@ -207,7 +207,7 @@ const TeacherSignIn = () => {
 
   // Navigate to forgot password page
   const handleForgotPassword = () => {
-    navigate('/teacher/forgotpassword'); // Correct navigation
+    navigate('/teacher-signIn/forgotpassword'); // Correct navigation
   };
 
   return (
