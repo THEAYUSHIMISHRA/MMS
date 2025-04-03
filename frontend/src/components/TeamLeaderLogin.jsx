@@ -21,16 +21,15 @@ export default function TeamLeaderLogin() {
       StudentLogin.current.innerHTML = "Loading...";
 
       // Use GET with query parameters
-      const response = await fetch(`http://localhost:4000/api/team/Teamlogin?Ids=${Ids}&password=${password}`
-      );
+      const response = await fetch(`http://localhost:4000/api/team/Teamlogin?Ids=${Ids}&password=${password}`);
 
       const data = await response.json();
 
       if (response.ok) {
         alert('Logged in successfully!');
-    console.log(response)
+        console.log(response);
         StudentLogin.current.innerHTML = "Sign In";
-        navigate('/teams/team/'+Ids);  // Navigate to the team dashboard
+        navigate('/teams/team/' + Ids); // Navigate to the team dashboard
       } else {
         StudentLogin.current.innerHTML = "Sign In";
         alert(data.error || 'Failed to log in');
@@ -44,7 +43,7 @@ export default function TeamLeaderLogin() {
 
   return (
     <StudentSignInContainer>
-      <h2>Team Leader Sign In</h2>
+      <h2 style={{ color: 'white' }}>TEAM LEADER SIGN IN</h2>
       <FormContainer onSubmit={handleSignIn}>
         <InputField
           type="text"
