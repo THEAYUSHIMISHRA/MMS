@@ -165,7 +165,15 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TeacherSignInContainer, FormContainer, InputField, SubmitButton, Heading } from '../styles/TeacherSignInStyles';
+import logo from '../assets/logo1.png'; // Import logo
+import {
+  TeacherSignInContainer,
+  FormContainer,
+  InputField,
+  SubmitButton,
+  Heading,
+  Logo, // Import logo styling
+} from '../styles/TeacherSignInStyles';
 const TeacherSignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -211,13 +219,14 @@ const TeacherSignIn = () => {
 
   return (
     <TeacherSignInContainer>
-  <Heading>Teacher Sign In</Heading> {/* Updated heading */}
-  <FormContainer onSubmit={handleSignIn}>
-    <InputField type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-    <InputField type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-    <SubmitButton as="button" type="submit">Sign In</SubmitButton>
-  </FormContainer>
-</TeacherSignInContainer>
+      <Logo src={logo} alt="Logo" /> {/* Logo added above heading */}
+      <Heading>Teacher Sign In</Heading>
+      <FormContainer onSubmit={handleSignIn}>
+        <InputField type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <InputField type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <SubmitButton as="button" type="submit">Sign In</SubmitButton>
+      </FormContainer>
+    </TeacherSignInContainer>
   );
 };
 

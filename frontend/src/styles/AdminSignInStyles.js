@@ -9,7 +9,12 @@ export const AdminSignInContainer = styled.div`
   background: rgb(29, 70, 111); /* Techy Background */
   min-height: 100vh;
 `;
-
+export const Logo1 = styled.img`
+  width: 100px; /* Small logo */
+  height: auto;
+  margin-bottom: 95px; /* Reduced space below the logo */
+  margin-top: -90px; /* Moves the logo higher */
+`;
 export const Heading = styled.h2`
   color: white;
   font-size: 28px;

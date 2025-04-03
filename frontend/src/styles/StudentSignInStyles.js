@@ -10,7 +10,12 @@ export const StudentSignInContainer = styled.div`
   min-height: 100vh; /* Full height */
   padding: 20px;
 `;
-
+export const Logo2 = styled.img`
+  width: 100px; /* Small logo */
+  height: auto;
+  margin-bottom: 115px; /* Reduced space below the logo */
+  margin-top: -100px; /* Moves the logo higher */
+`;
 export const Heading = styled.h2`
   color: white; /* White text */
   font-size: 32px; /* Larger heading */

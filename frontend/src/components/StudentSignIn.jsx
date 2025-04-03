@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { StudentSignInContainer, FormContainer, InputField, SubmitButton, Heading } from '../styles/StudentSignInStyles';
+import logo2 from '../assets/logo1.png';
+import { StudentSignInContainer, FormContainer, InputField, SubmitButton, Heading, Logo2 } from '../styles/StudentSignInStyles';
+
 import { useNavigate } from 'react-router-dom';
 
 const StudentSignIn = () => {
@@ -43,6 +45,7 @@ const StudentSignIn = () => {
 
   return (
     <StudentSignInContainer>
+    <Logo2 src={logo2} alt="Logo" /> {/* Logo added above heading */}
       <Heading>Student Sign In</Heading>
       <FormContainer onSubmit={handleSignIn}>
         <InputField

@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AdminSignInContainer, FormContainer, InputField, SubmitButton, Heading } from '../styles/AdminSignInStyles';
+import logo1 from '../assets/logo1.png'; // Import the actual image
+import { AdminSignInContainer, FormContainer, InputField, SubmitButton, Heading, Logo1 } from '../styles/AdminSignInStyles'; // Import styled component (Logo1)
+
 import axios from 'axios';
+
+
 
 const AdminSignIn = () => {
   const [email, setEmail] = useState('');
@@ -34,7 +38,8 @@ const AdminSignIn = () => {
 
   return (
     <AdminSignInContainer>
-      <Heading>Admin Sign In</Heading>
+       <Logo1 src={logo1} alt="Logo" /> {/* Adjusted logo positioning */}
+       <Heading>Admin Sign In</Heading>
       <FormContainer>
         <InputField
           type="email"
