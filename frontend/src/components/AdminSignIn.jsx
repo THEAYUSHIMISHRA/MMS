@@ -39,7 +39,7 @@ const AdminSignIn = () => {
   return (
     <AdminSignInContainer>
        <Logo1 src={logo1} alt="Logo" /> {/* Adjusted logo positioning */}
-       <Heading>Admin Sign In</Heading>
+       <Heading>ADMIN SIGN IN</Heading>
       <FormContainer>
         <InputField
           type="email"

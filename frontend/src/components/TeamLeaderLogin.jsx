@@ -51,7 +51,7 @@ export default function TeamLeaderLogin() {
         style={{ 
           width: '100px', /* Small logo */
           height: 'auto',
-          marginBottom: '95px', /* Reduced space below the logo */
+          marginBottom: '70px', /* Reduced space below the logo */
           marginTop: '-90px' /* Moves the logo higher */
         }} 
       />

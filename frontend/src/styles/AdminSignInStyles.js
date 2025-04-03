@@ -50,7 +50,7 @@ export const SubmitButton = styled(Link)`
   margin-top: 20px;
   border: none;
   border-radius: 8px;
-  background-color: rgb(29, 70, 111); /* Same as Background */
+  background-color: #4CAF50; /* Same as Background */
   color: white;
   font-size: 18px;
   text-decoration: none;
@@ -60,7 +60,7 @@ export const SubmitButton = styled(Link)`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: rgb(39, 90, 140); /* Slightly lighter blue on hover */
+    background-color:#4CAF50; /* Slightly lighter blue on hover */
   }
 
   @media screen and (max-width: 768px) {

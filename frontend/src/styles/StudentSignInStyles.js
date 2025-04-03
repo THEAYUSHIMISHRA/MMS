@@ -18,7 +18,7 @@ export const Logo2 = styled.img`
 `;
 export const Heading = styled.h2`
   color: white; /* White text */
-  font-size: 32px; /* Larger heading */
+  font-size: 26px; /* Larger heading */
   font-weight: bold;
   margin-bottom: 20px;
   margin-top: -60px; /* Moves heading closer to the top */
@@ -62,7 +62,7 @@ export const SubmitButton = styled(Link)`
   margin-top: 15px;
   border: none;
   border-radius: 5px;
-  background-color: rgb(29, 70, 111); /* Matching theme */
+  background-color: #4CAF50; /* Matching theme */
   color: white;
   font-size: 18px;
   text-decoration: none;
@@ -71,9 +71,9 @@ export const SubmitButton = styled(Link)`
   transition: 0.3s ease;
   font-weight: bold;
 
-  &:hover {
-    background-color: rgb(24, 60, 100);
-  }
+  // &:hover {
+  //   background-color: #4CAF50;
+  // }
 
   @media screen and (max-width: 768px) {
     font-size: 16px;
