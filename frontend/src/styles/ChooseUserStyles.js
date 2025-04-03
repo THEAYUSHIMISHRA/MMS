@@ -7,7 +7,7 @@ export const ChooseUserContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg,rgb(229, 76, 11),rgb(27, 18, 134),rgb(235, 238, 15)); /* Vibrant gradient */
+  background-color:rgb(29, 70, 111);
   background-size: 300% 300%;
   animation: gradientAnimation 6s ease infinite;
 
@@ -27,10 +27,10 @@ export const UserSection = styled.div`
   text-align: center; 
   padding: 30px; /* Increased padding for better spacing */
   backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.3); 
-  border: 5px solid rgba(90, 89, 101, 0.8);
+  background: rgba(255, 255, 255, 0.95); 
+  border: 5px solid rgba(3, 1, 20, 0.8);
   border-radius: 15px;
-  box-shadow: 0px 6px 20px rgba(171, 30, 5, 0.6);
+  box-shadow: 0px 6px 20px rgba(18, 229, 229, 0.6);
   width: 90%;
   max-width: 400px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
@@ -56,17 +56,13 @@ export const Title = styled.h2`
   font-size: 26px;
   font-weight: bold;
   margin-bottom: 10px; /* Reduce default margin */
-  color: #fff;
-  text-shadow: 5px 5px 5px rgba(81, 215, 18, 0.5);
+  color: Black;
+  text-shadow: 5px 5px 5px rgba(21, 29, 17, 0.5);
   letter-spacing: 1px;
   text-align: center; /* Ensure text is centered */
 
   @media screen and (max-width: 768px) {
-    font-size: 22px;
-  }
-
-  &:hover {
-    color: rgba(247, 243, 22, 0.94);
+    font-size: 30px;
   }
 `;
 
@@ -86,7 +82,7 @@ export const Button = styled(Link)`
 
   &:hover {
     background: linear-gradient(90deg, #00C9A7, #4CAF50);
-    box-shadow: 0px 6px 15px rgba(224, 28, 181, 0.6);
+    box-shadow: 0px 6px 15px rgba(14, 99, 177, 0.6);
     transform: scale(1.05);
   }
 

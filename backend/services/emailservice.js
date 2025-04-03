@@ -1,34 +1,75 @@
 import { createTransport } from "nodemailer";
 
-//  Email Transporter Configuration
+// Email Transporter Configuration
 const transporter = createTransport({
     service: "gmail",
     port: 587,
-    secure: false,                  // TLS
+    secure: false, // TLS
     auth: {
         user: "mentor.mentee.banasthali@gmail.com",  // Your Gmail account
         pass: "qsmk fceh oeof czjf"            // App-specific password
     }
 });
 
-// HTML Template Generator
+// 🔹 Enhanced Email Template
 const getEmailTemplate = (title, message, role, link) => `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background-color: #f9f9f9;">
-        <h2 style="text-align: center; color: #4CAF50;">${title}</h2>
-        <p style="font-size: 18px; color: #555;">${message}</p>
-        <div style="text-align: center; margin: 20px 0;">
+    <div style="
+        font-family: 'Arial', sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: rgb(29, 70, 111);
+        color: white;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    ">
+        <!-- BANASTHALI VIDYAPEETH -->
+        <h1 style="font-size: 28px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; color: #f1c40f;">
+            BANASTHALI VIDYAPEETH
+        </h1>
+        
+        <!-- Welcome Message -->
+        <h2 style="color: #ffffff; font-size: 22px; margin-bottom: 10px;">
+            Welcome to <span style="color: #f1c40f;">MENTOR MENTEE SYSTEM</span>
+        </h2>
+
+        <p style="font-size: 18px; line-height: 1.5; color: #f2f2f2;">${message}</p>
+        
+        <!-- CTA Button -->
+        <div style="margin: 20px 0;">
             <a href="${link}" 
-                style="background-color: #4CAF50; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 16px;">
+                style="
+                    display: inline-block;
+                    background-color: white;
+                    color: rgb(29, 70, 111);
+                    padding: 12px 24px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    text-decoration: none;
+                    border-radius: 6px;
+                    transition: 0.3s ease;
+                " >
                 Go to Portal
             </a>
         </div>
-        <p style="font-size: 14px; color: #888; text-align: center;">You are logged in as a <strong>${role}</strong>.</p>
-        <hr style="border: 1px solid #ccc; margin: 20px 0;">
-        <p style="font-size: 12px; color: #777; text-align: center;">If you didn't sign in, please contact support immediately.</p>
+
+        <p style="font-size: 14px; margin-top: 15px; color: white;">
+            You are logged in as a <strong>${role}</strong>.
+        </p>
+
+        <hr style="border: 1px solid #ffffff33; margin: 20px 0;">
+
+        <!-- Footer -->
+        <div style="text-align: center; font-size: 14px; color: #bbbbbb;">
+            <p>Email: <a href="mailto:deanadmin@banasthali.ac.in" style="color: #f1c40f; text-decoration: none;">deanadmin@banasthali.ac.in</a></p>
+            <p>Contact: <a href="tel:+911438228456" style="color: #f1c40f; text-decoration: none;">01438-228456</a></p>
+            <p style="margin-top: 10px; font-size: 12px;">© 2025 Banasthali Vidyapith. All rights reserved.</p>
+        </div>
     </div>
 `;
 
-// send Student Email
+// Send Student Email
 export const sendStudentEmail = async (recipientEmail) => {
     try {
         const mailOptions = {
@@ -76,7 +117,7 @@ export const sendTeacherEmail = async (recipientEmail) => {
     }
 };
 
-// 👑 Send Admin Email
+// Send Admin Email
 export const sendAdminEmail = async (recipientEmail) => {
     try {
         const mailOptions = {

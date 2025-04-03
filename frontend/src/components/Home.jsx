@@ -6,8 +6,7 @@ import {
   Logo, 
   NavigationLinks, 
   NavLink, 
-  ButtonsContainer, 
-  LoginButton 
+  ButtonsContainer
 } from '../styles/styles'; // Ensure correct path
 import bvgate from "../assets/bvgate.jpg"; 
 import department from "../assets/department.webp"; 
@@ -15,6 +14,7 @@ import soa from "../assets/soa.jpg";
 import auto1 from "../assets/auto1.jpg"; 
 import cms from "../assets/cms.jpg";
 import apaji from "../assets/apaji.jpg";
+
 const images = [bvgate, department, auto1, cms, soa, apaji];
 
 const Home = () => {
@@ -61,37 +61,10 @@ const Home = () => {
           <NavLink to="/Coordinator">Message</NavLink>
           <NavLink to="/teacher-details">Mentors</NavLink>
         </NavigationLinks>
-        {/* <button 
-            onClick={handleTeamRegisterClick} 
-            style={{
-              backgroundColor: "#4CAF50",
-              color: "white",
-              padding: "10px 15px",
-              marginLeft: "10px",
-              border: "none",
-              cursor: "pointer",
-              borderRadius: "5px",
-              fontSize: "16px"
-            }}
-          >
-            Team Register
-          </button>  */}
-          
+        
         <ButtonsContainer>
-          <button onClick={handleTeamRegisterClick}
-          style={{
-            backgroundColor: "4CAF50",
-            color:"white",
-            padding:"10px 15px",
-            marginLeft:"10px",
-            border:"none",
-            cursor:"pointer",
-            borderRadius:"5px",
-            fontSize:"16px",
-          }}>
-            Team Register
-            </button>
-          <LoginButton onClick={handleLoginClick}>Sign In</LoginButton>
+          <Button onClick={handleTeamRegisterClick}>Team Register</Button>
+          <Button onClick={handleLoginClick}>Sign In</Button>
         </ButtonsContainer>
       </Navbar>
 
@@ -102,6 +75,15 @@ const Home = () => {
           $isAnimating={isAnimating}
         />
       </HeroSection>
+
+      {/* Footer Section */}
+      <Footer>
+        <FooterContent>
+          <p>Email: <a href="mailto:deanadmin@banasthali.ac.in">deanadmin@banasthali.ac.in</a></p>
+          <p> | Contact: <a href="tel:+911438228456">01438-228456</a></p>
+        </FooterContent>
+        <p>© 2025 Banasthali Vidyapith. All rights reserved.</p>
+      </Footer>
     </> 
   );
 };
@@ -143,9 +125,59 @@ const ImageSlider = styled.div`
 const MentorMenteeTitle = styled.h1`
   font-size: 50px;
   font-weight: bold;
-  color:rgb(255, 255, 255);
-  text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8);
+  color: rgb(24, 60, 95);
+  text-shadow: 0px 0px 10px white;
   margin: 0 20px;
   font-family: 'Poppins', sans-serif;
   flex-shrink: 0;
+`;
+
+// 💡 Button Styles (Updated to `rgb(29, 70, 111)`)
+const Button = styled.button`
+  background-color: rgb(29, 70, 111);
+  color: white;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: rgb(24, 60, 95);
+    box-shadow: 0px 0px 10px rgba(29, 70, 111, 0.8);
+  }
+`;
+
+// 💡 Footer Styles (Updated Height & Layout)
+const Footer = styled.footer`
+  background: rgb(29, 70, 111);
+  color: white;
+  text-align: center;
+  padding: 10px 0; /* Reduced height */
+  font-size: 14px;
+  border-top: 3px solid #f1c40f;
+`;
+
+const FooterContent = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px; /* Adds space between email and contact */
+
+  a {
+    color: #f1c40f;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  p {
+    margin: 5px 0;
+    display: inline-block; /* Keeps email and contact on the same line */
+  }
 `;

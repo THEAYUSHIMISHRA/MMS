@@ -78,7 +78,7 @@ const AdminEvents = () => {
         <h1>Events</h1>
         <AddEventForm onSubmit={handleAddEvent}>
           <EventInput type="text" value={newEvent} onChange={(e) => setNewEvent(e.target.value)} placeholder="Enter Event Title" />
-          <DatePicker selected={eventDate} onChange={(date) => setEventDate(date)} dateFormat="yyyy-MM-dd" />
+          {<DatePicker selected={eventDate} onChange={(date) => setEventDate(date)} dateFormat="yyyy-MM-dd" />}
           <AddEventButton type="submit">Add Event</AddEventButton>
         </AddEventForm>
         <EventList events={events} onDelete={handleDeleteEvent} allowEdit={true} />

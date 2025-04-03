@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import AdminSignIn from './AdminSignIn'; // Import AdminSignIn directly
-import { AdminSignInContainer, FormContainer, InputField, SubmitButton } from '../styles/AdminSignInStyles';
+import { AdminSignInContainer, FormContainer, InputField, SubmitButton, Heading } from '../styles/AdminSignInStyles';
 import axios from 'axios';
 
 const AdminSignIn = () => {
@@ -11,8 +10,6 @@ const AdminSignIn = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    // const email = "swadhasri@gmail.com";
-    // const password = "swagger123";
 
     try {
       const response = await fetch("http://localhost:4000/api/v1/users/admin/signin", {
@@ -20,25 +17,24 @@ const AdminSignIn = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
       });
-  
-    const data = await response.json();
-    console.log("Login Response:", data);
 
-    if (data.success) {
-      localStorage.setItem("admin", JSON.stringify(data.admin));
-      navigate("/admin/dashboard"); // Redirect to dashboard page
+      const data = await response.json();
+      console.log("Login Response:", data);
 
-    } else {
-      alert(data.message || "Unauthorized access");
-    } 
-  }catch (error) {
+      if (data.success) {
+        localStorage.setItem("admin", JSON.stringify(data.admin));
+        navigate("/admin/dashboard"); // Redirect to dashboard page
+      } else {
+        alert(data.message || "Unauthorized access");
+      } 
+    } catch (error) {
       alert("Login failed, please try again.");
     }
   };
 
   return (
     <AdminSignInContainer>
-      <h2>Admin Sign In</h2>
+      <Heading>Admin Sign In</Heading>
       <FormContainer>
         <InputField
           type="email"
@@ -54,7 +50,6 @@ const AdminSignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {/* <SubmitButton to="../Admin/Dashboard" onClick={handleSignIn}>Sign In</SubmitButton> */}
         <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton>
       </FormContainer>
     </AdminSignInContainer>
