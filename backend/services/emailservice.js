@@ -6,8 +6,8 @@ const transporter = createTransport({
     port: 587,
     secure: false,                  // TLS
     auth: {
-        user: "himanidobriyal8@gmail.com",  // Your Gmail account
-        pass: "hoshppyjahctbxbd"            // App-specific password
+        user: "mentor.mentee.banasthali@gmail.com",  // Your Gmail account
+        pass: "qsmk fceh oeof czjf"            // App-specific password
     }
 });
 
