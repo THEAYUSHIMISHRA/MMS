@@ -51,10 +51,15 @@ const TeamRegister = () => {
         teamName,
         students,
       });
+<<<<<<< HEAD
       alert(`Team registered successfully! Team ID: ${teamID}`);
       //alert("Team registered successfully! Invitations sent.");
       // navigate(`/pages/Teams/team/${response.data.teamId}`);//by client
       navigate(`/Teams/team/${response.data.teamID}`);//by Dev
+=======
+      alert("Team registered successfully! Invitations sent.");
+      navigate(`/Teams/team/${response.data.teamId}`);
+>>>>>>> 98e9eb98b1aff9b22a867b3a21d75f9a3befd730
     } catch (error) {
       console.error("Error registering team:", error);
       alert("Failed to register team. Please try again.");
@@ -62,6 +67,7 @@ const TeamRegister = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div style={styles.container}>
       <h2 style={styles.heading}>Register a Team</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
@@ -104,95 +110,231 @@ const TeamRegister = () => {
               <label style={styles.label}>Member {index + 1} ID:</label>
               <input type="text" placeholder="Enter ID" value={student.studentId} onChange={(e) => setStudents([...students.slice(0, index), { ...student, studentId: e.target.value }, ...students.slice(index + 1)])} required style={styles.input} />
             </div>
+=======
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgb(29, 70, 111)",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "600px",
+          width: "100%",
+          padding: "25px",
+          backgroundColor: "white",
+          color: "black",
+          borderRadius: "10px",
+          boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+          textAlign: "center",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "26px",
+            marginBottom: "20px",
+            fontWeight: "bold",
+            textTransform: "uppercase",
+            letterSpacing: "1px",
+            color: "rgb(29, 70, 111)",
+          }}
+        >
+          Register a Team
+        </h2>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+          }}
+        >
+          <div style={{ textAlign: "left" }}>
+            <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
+              Team Name:
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Team Name"
+              value={teamName}
+              onChange={(e) => setTeamName(e.target.value)}
+              required
+              style={{
+                width: "93%",
+                padding: "12px",
+                borderRadius: "5px",
+                border: "1px solid rgb(29, 70, 111)",
+                fontSize: "16px",
+                backgroundColor: "white",
+                color: "black",
+                marginTop: "5px",
+              }}
+            />
+>>>>>>> 98e9eb98b1aff9b22a867b3a21d75f9a3befd730
           </div>
-        ))}
 
-        <button type="button" onClick={handleAddMember} style={styles.addButton}>+ Add Member</button>
-        <button type="submit" style={styles.submitButton}>Register Team</button>
-      </form>
+          <div style={{ textAlign: "left" }}>
+            <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
+              Leader Email:
+            </label>
+            <input
+              type="email"
+              placeholder="Enter Leader Email"
+              value={leaderEmail}
+              onChange={(e) => setLeaderEmail(e.target.value)}
+              required
+              style={{
+                width: "93%",
+                padding: "12px",
+                borderRadius: "5px",
+                border: "1px solid rgb(29, 70, 111)",
+                fontSize: "16px",
+                backgroundColor: "white",
+                color: "black",
+                marginTop: "5px",
+              }}
+            />
+          </div>
+
+          <h3 style={{ fontSize: "20px", marginTop: "20px", marginBottom: "10px", color: "rgb(29, 70, 111)" }}>
+            Team Members
+          </h3>
+
+          {members.map((member, index) => (
+            <div
+              key={index}
+              style={{
+                padding: "15px",
+                backgroundColor: "rgb(240, 240, 240)",
+                borderRadius: "8px",
+                marginBottom: "10px",
+              }}
+            >
+              <div style={{ textAlign: "left" }}>
+                <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
+                  Member {index + 1} Name:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Name"
+                  value={member.name}
+                  onChange={(e) =>
+                    setMembers([...members.slice(0, index), { ...member, name: e.target.value }, ...members.slice(index + 1)])
+                  }
+                  required
+                  style={{
+                    width: "93%",
+                    padding: "12px",
+                    borderRadius: "5px",
+                    border: "1px solid rgb(29, 70, 111)",
+                    fontSize: "16px",
+                    backgroundColor: "white",
+                    color: "black",
+                    marginTop: "5px",
+                  }}
+                />
+              </div>
+
+              <div style={{ textAlign: "left", marginTop: "10px" }}>
+                <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
+                  Member {index + 1} Email:
+                </label>
+                <input
+                  type="email"
+                  placeholder="Enter Email"
+                  value={member.email}
+                  onChange={(e) =>
+                    setMembers([...members.slice(0, index), { ...member, email: e.target.value }, ...members.slice(index + 1)])
+                  }
+                  required
+                  style={{
+                    width: "93%",
+                    padding: "12px",
+                    borderRadius: "5px",
+                    border: "1px solid rgb(29, 70, 111)",
+                    fontSize: "16px",
+                    backgroundColor: "white",
+                    color: "black",
+                    marginTop: "5px",
+                  }}
+                />
+              </div>
+
+              <div style={{ textAlign: "left", marginTop: "10px" }}>
+                <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
+                  Course:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Course"
+                  value={member.course}
+                  onChange={(e) =>
+                    setMembers([...members.slice(0, index), { ...member, course: e.target.value }, ...members.slice(index + 1)])
+                  }
+                  required
+                  style={{
+                    width: "93%",
+                    padding: "12px",
+                    borderRadius: "5px",
+                    border: "1px solid rgb(29, 70, 111)",
+                    fontSize: "16px",
+                    backgroundColor: "white",
+                    color: "black",
+                    marginTop: "5px",
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={handleAddMember}
+            style={{
+              padding: "12px",
+              backgroundColor: "rgb(29, 70, 111)",
+              color: "white",
+              fontSize: "16px",
+              border: "none",
+              cursor: "pointer",
+              borderRadius: "5px",
+              transition: "0.3s",
+              fontWeight: "bold",
+              marginLeft: "15px",
+              marginRight:"25px",
+
+            }}
+          >
+            + Add Member
+          </button>
+
+          <button
+            type="submit"
+            style={{
+              padding: "12px",
+              marginTop: "15px",
+              backgroundColor: "rgb(29, 70, 111)",
+              color: "white",
+              fontSize: "18px",
+              fontWeight: "bold",
+              border: "none",
+              cursor: "pointer",
+              borderRadius: "5px",
+              transition: "0.3s",
+              marginLeft: "15px",
+              marginRight:"25px",
+            }}
+          >
+            Register Team
+          </button>
+        </form>
+      </div>
     </div>
   );
-};
-
-// 🎨 **Inline CSS Styles**
-const styles = {
-  container: {
-    maxWidth: "600px",
-    margin: "50px auto",
-    padding: "25px",
-    backgroundColor: "#343a40",
-    color: "white",
-    borderRadius: "10px",
-    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-    textAlign: "center",
-  },
-  heading: {
-    fontSize: "26px",
-    marginBottom: "20px",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    letterSpacing: "1px",
-    color: "white",
-    
-  },
-  subheading: {
-    fontSize: "20px",
-    marginTop: "20px",
-    marginBottom: "10px",
-    textDecoration: "underline",
-    color: "white",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-  },
-  formGroup: {
-    display: "flex",
-    flexDirection: "column",
-    textAlign: "left",
-  },
-  label: {
-    fontSize: "16px",
-    fontWeight: "bold",
-    marginBottom: "5px",
-  },
- 
-  input: {
-    padding: "10px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    fontSize: "16px",
-  },
-  memberContainer: {
-    padding: "15px",
-    backgroundColor: "#495057",
-    borderRadius: "8px",
-    marginBottom: "10px",
-  },
-  addButton: {
-    padding: "10px 15px",
-    marginTop: "10px",
-    backgroundColor: "#28a745",
-    color: "white",
-    fontSize: "16px",
-    border: "none",
-    cursor: "pointer",
-    borderRadius: "5px",
-    transition: "0.3s",
-  },
-  submitButton: {
-    padding: "12px",
-    marginTop: "15px",
-    backgroundColor: "#007bff",
-    color: "white",
-    fontSize: "18px",
-    fontWeight: "bold",
-    border: "none",
-    cursor: "pointer",
-    borderRadius: "5px",
-    transition: "0.3s",
-  },
 };
 
 export default TeamRegister;

@@ -11,7 +11,7 @@ import AboutUs from '../src/components/AboutUs';
 import Coordinator from '../src/components/Coordinator';
 import StudentUpload from "./pages/Admin/StudentUpload";
 import TeacherUpload from "./pages/Admin/TeacherUpload";
-import forgotpassword from '../src/components/forgotpassword';
+import ForgotPassword from '../src/components/forgotpassword';
 import verifyotp from '../src/components/verifyotp';
 import AdminDashboard from '../src/pages/Admin/Dashboard';
 import StudentDashboard from '../src/pages/Students/Dashboard';
@@ -74,7 +74,7 @@ const App = () => {
 
   return (
     <contexts.Provider value={{ ContextDetails, setContextDetails }}>
-      <Router>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           <Route path="/" element={<Home />} />
 
@@ -85,6 +85,8 @@ const App = () => {
           <Route exact path="/admin-signIn" element={<AdminSignIn />} />
           <Route exact path="/student-signIn" element={<StudentSignIn />} />
           <Route exact path="/teacher-signIn" element={<TeacherSignIn />} />
+          <Route exact path="/teacher-signIn/forgotpassword" element={<ForgotPassword />} />
+          <Route exact path="/student-signIn/forgotpassword" element={<ForgotPassword />} />
           <Route exact path="/admin/register" element={<AdminRegister />} />
           <Route exact path="/Team-signIn" element={<TeamLeaderLogin />} />
           {/* Informational sections */}
@@ -92,7 +94,7 @@ const App = () => {
           <Route exact path="/aboutus" element={<AboutUs />} />
           {/* <Route exact path="/csv-uploader" element={<CsvUploader />} /> */}
           <Route exact path="/coordinator" element={<Coordinator />} />
-          <Route exact path="/forgot-password" element={<forgotpassword />} />
+          {/* <Route exact path="/forgotpassword" element={<ForgotPassword />} /> */}
           <Route exact path="/verify-otp" element={<verifyotp />} />
 
           {/* All the dashboard routes */}

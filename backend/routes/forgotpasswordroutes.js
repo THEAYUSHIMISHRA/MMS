@@ -1,6 +1,6 @@
 import express from 'express';
 import { generateOTP, sendOTP } from '../services/otpservice.js'; // Ensure otpservice.js is in the correct path
-import { User } from '../models/userModel.js'; // Assuming you have a User model for your database
+//import { User } from '../models/userModel.js'; // Assuming you have a User model for your database
 import bcrypt from 'bcryptjs'; // For password hashing
 
 const router = express.Router();

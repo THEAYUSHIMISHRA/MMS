@@ -67,17 +67,16 @@ const titleGlow = keyframes`
 const Container = styled.div`
   text-align: center;
   padding: 40px;
-  background: linear-gradient(to right,rgb(53, 44, 78),rgb(20, 5, 5));
+  background-color: #34495e; /* Keeping your original background color */
   min-height: 100vh;
   color: #ffffff;
 `;
 
 const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: bold;
   color: #f8b400;
-  text-shadow: 2px 2px 15px rgba(248, 180, 0, 0.7);
-  animation: ${titleGlow} 1.5s infinite alternate;
+  text-shadow: 1px 1px 10px rgba(248, 180, 0, 0.6);
 `;
 
 const CardContainer = styled.div`
@@ -89,17 +88,15 @@ const CardContainer = styled.div`
 `;
 
 const Card = styled.div`
-  background: #222;
-  width: 370px;
-  border-radius: 15px;
+  background: #2c3e50; /* Soft contrast background */
+  width: 350px;
+  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  border: 5px solid rgba(142, 136, 135, 0.2);
-  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
 
   &:hover {
-    transform: scale(1.05);
-    animation: ${glow} 2.5s infinite alternate;
+    transform: scale(1.03);
   }
 `;
 
@@ -110,63 +107,54 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 400px;
+  height: 380px;
   object-fit: cover;
-  transition: transform 0.5s ease-in-out, filter 0.3s ease-in-out;
-
-  &:hover {
-    transform: scale(1.1);
-    filter: brightness(1.25);
-  }
 `;
 
 const CardContent = styled.div`
-  padding: 20px;
-  background:rgb(225, 81, 55);
-  transition: background 0.3s ease-in-out;
-
-  &:hover {
-    background: #333;
-  }
+  padding: 20px; /* Increased padding for better spacing */
+  background: #ffffff;
+  color: #333;
+  min-height: 180px; /* Added minimum height for balance */
 `;
 
 const Name = styled.h2`
-  margin: 10px 0;
-  color: #f8b400;
-  font-size: 24px;
-  text-shadow: 0px 0px 8px rgba(248, 180, 0, 0.8);
+  margin: 5px 0;
+  color: #34495e;
+  font-size: 22px;
 `;
 
 const Designation = styled.h3`
-  margin: 5px 0;
+  margin: 3px 0;
   font-size: 16px;
-  color: #bbb;
+  color: #666;
   font-weight: normal;
 `;
 
 const Department = styled.h4`
-  margin: 5px 0;
-  font-size: 15px;
-  color: #ccc;
+  margin: 3px 0;
+  font-size: 14.5px;
+  color: #777;
   font-weight: normal;
 `;
 
 const Email = styled.a`
-  font-size: 14px;
-  color: #f8b400;
+  font-size: 16px;
+  color: #f39c12;
   text-decoration: none;
-  margin-bottom: 10px;
   display: block;
   font-weight: bold;
 
   &:hover {
     text-decoration: underline;
-    text-shadow: 0px 0px 10px rgba(194, 16, 243, 0.9);
+    color:blue;
   }
 `;
 
 const Message = styled.p`
-  font-size: 14px;
-  color: #dddddd;
-  line-height: 1.4;
+  font-size: 16px; /* Slightly larger text for readability */
+  color: #555;
+  line-height: 1.6;
+  margin-top: 10px;
+  height:
 `;
