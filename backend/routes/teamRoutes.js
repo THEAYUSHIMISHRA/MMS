@@ -6,28 +6,50 @@ import mongoose from "mongoose";
 const router = express.Router();
 
 // Register a new team
-
 router.post("/register", async (req, res) => {
-  const { teamName, leaderEmail, members } = req.body;
 
   try {
-      // Save team in DB with auto-generated password
-      const newTeam = new Team({ 
-          teamName, 
-          leaderEmail, 
-          members 
-      });
+
+      const { teamName, students } = req.body;
+      // Extract courses from students
+      const uniqueCourses = [...new Set(students.map(student => student.course?.[0] || ""))].join("");
+      // Find the last registered team with the same course prefix
+      const lastTeam = await Team.findOne({ teamId: new RegExp(`^${uniqueCourses}\\d{2}$`) })
+      .sort({ teamId: -1 });
+      // Generate serial number
+      let serialNumber = "01";
+      if (lastTeam) {
+          const lastNumber = parseInt(lastTeam.teamId.slice(uniqueCourses.length), 10);
+          serialNumber = String(lastNumber + 1).padStart(2, "0");
+      }
+      // Generate the team ID
+      const teamId = `${uniqueCourses}${serialNumber}`;
+       // Create and save the team
+       const newTeam = new Team({
+        teamId,
+        teamName,
+        students: students.map(student => ({
+          name: student.name,  
+          email: student.email,
+            studentId: student.studentId,
+            course: student.course,
+        })),
+    });
 
       const savedTeam = await newTeam.save();
 
-      console.log("Saved team members with IDs:", savedTeam.members);
+      console.log("Saved team members with IDs:", savedTeam.students);
 
       // Send email invitations with proper IDs
       try {
           // Send invitation emails to team members
-          for (const member of savedTeam.members) {
+          for (const student of savedTeam.students) {
+            if (!student.email) {
+              console.error("Skipping email: No recipient defined for student", student);
+              continue; // Skip if email is missing
+            }
               await sendEmail(
-                  member.email,
+                  student.email,
                   `Join Team ${teamName}`,
                   
                   `<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="background: #ffffff; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
@@ -41,7 +63,7 @@ router.post("/register", async (req, res) => {
                         <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
                         <h3 style="color: #333;">Steps to Join:</h3>
                         <ol style="text-align: left; color: #555; font-size: 14px; line-height: 22px; padding-left: 20px;">
-                            <li>Copy this link - (http://localhost:4000/api/team/join-team/${savedTeam._id})</li>
+                            <li>Copy this link - (http://localhost:4000/api/team/join-team/${savedTeam.teamId})</li>
                             <li>Login to the student panel</li>
                             <li>Go to the 'Join Team' section</li>
                             <li>Insert the link</li>
@@ -52,7 +74,7 @@ router.post("/register", async (req, res) => {
             </table>`
                   
               );
-              console.log("Member ID:", member._id);  
+              console.log("Member ID:", students.studentId);  
           }
 
           // Create the table with the actual team data
@@ -65,15 +87,15 @@ router.post("/register", async (req, res) => {
                       <tr>
                           <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">Team Name</th>
                           <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">Leader Email</th>
-                          <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">UserID</th>
+                          <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">Team ID</th>
                           <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">Password</th>
                       </tr>
                   </thead>
                   <tbody>
                       <tr>
                           <td style="padding: 10px; border: 1px solid #ddd;">${savedTeam.teamName}</td>
-                          <td style="padding: 10px; border: 1px solid #ddd;">${savedTeam.leaderEmail}</td>
-                          <td style="padding: 10px; border: 1px solid #ddd;">${savedTeam._id}</td>
+                          <td style="padding: 10px; border: 1px solid #ddd;">${savedTeam.students}</td>
+                          <td style="padding: 10px; border: 1px solid #ddd;">${savedTeam.teamId}</td>
                           <td style="padding: 10px; border: 1px solid #ddd;">${savedTeam.password}</td>
                       </tr>
                   </tbody>
@@ -82,14 +104,14 @@ router.post("/register", async (req, res) => {
 
           // Send email to team leader
           await sendEmail(
-              leaderEmail,
+              students,
               `You have created Team ${teamName}`,
               body
           );
 
           res.status(201).json({ 
               message: "Team registered successfully! Invitations sent.", 
-              teamId: savedTeam._id 
+              teamId 
           });
 
       } catch (emailError) {
@@ -108,16 +130,40 @@ router.post("/register", async (req, res) => {
       });
   }
 });
+
+router.get("/courses", async (req, res ) => {
+
+  const teams = await Team.find({}, "students"); // Fetch only students field
+    let allCourses = [];
+
+    teams.forEach(team => {
+      team.students.forEach(student => {
+        allCourses.push(student.course);
+      });
+    });
+
+  // Extract unique first letters from each course
+  const uniqueLetters = [...new Set(allCourses.map(course => course.charAt(0)))].join('');
+
+  // Count existing teams to generate a unique serial number
+  const teamCount = await Team.countDocuments() + 1;
+
+  res.json({ teamId: `${uniqueLetters}${String(teamCount).padStart(2, '0')}` });
+});
+
 // Join a team (member clicks the link)
 router.post("/join-team/:teamId", async (req, res) => {
   const { teamId } = req.params;
   const { email, studentId } = req.body;
-console.log(teamId,email,studentId);
+
+  console.log(teamId,email,studentId);
   try {
-    const team = await Team.findById(teamId);
+
+    const team = await Team.findOne({teamId: teamId});
 
     if (!team) return res.status(404).json({ message: "Team not found" });
-    const member = team.members.find((m) => {  
+    
+    const member = team.students.find((m) => {  
       return m.email === email});
     if (!member) return res.status(400).json({ message: "Not invited to this team" });
 
@@ -172,7 +218,7 @@ router.get("/join-team/:teamId/:studentId/:email", async (req, res) => {
   try {
     const team = await Team.findById(teamId);
     if (!team) return res.status(404).json({ message: "Team not found" });
-    const member = team.members.find((m) => m.email === email);
+    const member = team.students.find((m) => m.email === email);
     console.log(team.members)
     if (!member) return res.status(400).json({ message: "Not invited to this team" });
 
@@ -221,11 +267,11 @@ router.get("/join-team/:teamId/:studentId/:email", async (req, res) => {
 });
 
 router.get("/Teamlogin", async (req, res) => {
-  const { Ids, password } = req.query;  // Use query parameters for GET requests
-  console.log(Ids, password,req.query)
+  const { teamId, password } = req.query;  // Use query parameters for GET requests
+  console.log(teamId, password,req.query)
   try {
       // Convert Ids to ObjectId
-      const objectId = new mongoose.Types.ObjectId(Ids);
+      const objectId = new mongoose.Types.ObjectId(teamId);
 
       // Use `findOne()` with ObjectId and password
       const team = await Team.findOne({ _id: objectId, password: password });
@@ -261,9 +307,9 @@ router.get("/:teamId/performance", async (req, res) => {
     if (!team) return res.status(404).json({ message: "Team not found" });
 
     res.json({
-      teamId: team._id,
       teamName: team.teamName,
-      leaderEmail: team.leaderEmail,
+      students: team.students,
+      teamId: team.teamId,
       performance: team.performance || [],
     });
   } catch (error) {

@@ -4,25 +4,57 @@ import { useNavigate } from "react-router-dom";
 
 const TeamRegister = () => {
   const [teamName, setTeamName] = useState("");
-  const [leaderEmail, setLeaderEmail] = useState("");
-  const [members, setMembers] = useState([{ name: "", email: "", course: "" }]);
+  const [students, setStudents] = useState([{ name: "", email: "", course: "", studentId: "" }]);
   const navigate = useNavigate();
 
+  const generateTeamId = async (students) => {
+    if ( !students || students.length === 0) return "T00"
+    // Extract first letter from each unique course
+    const uniqueCourses = [...new Set(students.map((m) => m.course?.charAt(0).toUpperCase() || ""))];
+    
+    // Sort letters for consistency
+    const courseCode = uniqueCourses.sort().join("");
+  
+    try {
+      // Fetch the total number of teams
+    const response = await axios.get("http://localhost:4000/api/v1/team/courses");
+    const totalTeams = response.data.count || 0;
+
+    // Generate Team ID (Next number in sequence)
+    const serialNumber = String(totalTeams + 1).padStart(2, "0");
+
+    return `${courseCode}${serialNumber}`;
+
+    } catch (error) {
+
+      console.error("Error fetching team count:", error);
+      //return `${courseCode}01`; // Default if count fetch fails
+    }
+  };
+
   const handleAddMember = () => {
-    setMembers([...members, { name: "", email: "", course: "" }]);
+    setStudents([...students, { name: "", email: "", course: "", studentId: `S${students.length + 1}` }]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!students || students.length === 0) {
+      alert("Please add at least one member to the team.");
+      return;
+    }
+
+    const teamID = await generateTeamId(students);
     try {
-      const response = await axios.post("http://localhost:4000/api/team/register", {
+      const response = await axios.post("http://localhost:4000/api/v1/team/register", {
+        teamID,
         teamName,
-        leaderEmail,
-        members,
+        students,
       });
-      alert("Team registered successfully! Invitations sent.");
+      alert(`Team registered successfully! Team ID: ${teamID}`);
+      //alert("Team registered successfully! Invitations sent.");
       // navigate(`/pages/Teams/team/${response.data.teamId}`);//by client
-      navigate(`/Teams/team/${response.data.teamId}`);//by Dev
+      navigate(`/Teams/team/${response.data.teamID}`);//by Dev
     } catch (error) {
       console.error("Error registering team:", error);
       alert("Failed to register team. Please try again.");
@@ -38,27 +70,39 @@ const TeamRegister = () => {
           <input type="text" placeholder="Enter Team Name" value={teamName} onChange={(e) => setTeamName(e.target.value)} required style={styles.input} />
         </div>
 
-        <div style={styles.formGroup}>
+        {/* <div style={styles.formGroup}>
           <label style={styles.label}>Leader Email:</label>
           <input type="email" placeholder="Enter Leader Email" value={leaderEmail} onChange={(e) => setLeaderEmail(e.target.value)} required style={styles.input} />
         </div>
 
+        <div style={styles.formGroup}>
+          <label style={styles.label}>Leader Course:</label>
+          <input type="text" placeholder="Enter as CS, AI, IT" value={leaderCourse} onChange={(e) => setLeaderCourse(e.target.value)} required style={styles.input} />
+
+        </div> */}
+
         <h3 style={styles.subheading}>Team Members</h3>
-        {members.map((member, index) => (
+        {students.map((student, index) => (
           <div key={index} style={styles.memberContainer}>
+
             <div style={styles.formGroup}>
               <label style={styles.label}>Member {index + 1} Name:</label>
-              <input type="text" placeholder="Enter Name" value={member.name} onChange={(e) => setMembers([...members.slice(0, index), { ...member, name: e.target.value }, ...members.slice(index + 1)])} required style={styles.input} />
+              <input type="text" placeholder="Enter Name" value={student.name} onChange={(e) => setStudents([...students.slice(0, index), { ...student, name: e.target.value }, ...students.slice(index + 1)])} required style={styles.input} />
             </div>
 
             <div style={styles.formGroup}>
               <label style={styles.label}>Member {index + 1} Email:</label>
-              <input type="email" placeholder="Enter Email" value={member.email} onChange={(e) => setMembers([...members.slice(0, index), { ...member, email: e.target.value }, ...members.slice(index + 1)])} required style={styles.input} />
+              <input type="email" placeholder="Enter Email" value={student.email} onChange={(e) => setStudents([...students.slice(0, index), { ...student, email: e.target.value }, ...students.slice(index + 1)])} required style={styles.input} />
             </div>
 
             <div style={styles.formGroup}>
               <label style={styles.label}>Course:</label>
-              <input type="text" placeholder="Enter Course" value={member.course} onChange={(e) => setMembers([...members.slice(0, index), { ...member, course: e.target.value }, ...members.slice(index + 1)])} required style={styles.input} />
+              <input type="text" placeholder="Enter Course" value={student.course} onChange={(e) => setStudents([...students.slice(0, index), { ...student, course: e.target.value }, ...students.slice(index + 1)])} required style={styles.input} />
+            </div>
+          
+            <div style={styles.formGroup}>
+              <label style={styles.label}>Member {index + 1} ID:</label>
+              <input type="text" placeholder="Enter ID" value={student.studentId} onChange={(e) => setStudents([...students.slice(0, index), { ...student, studentId: e.target.value }, ...students.slice(index + 1)])} required style={styles.input} />
             </div>
           </div>
         ))}

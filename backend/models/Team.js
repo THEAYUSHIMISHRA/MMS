@@ -10,30 +10,41 @@ function generatePassword(length = 8) {
     return password;
 }
 
+const StudentSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    course: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    studentId: {
+        type: String,
+        required: true,
+        trim: true
+    }
+});
+
 const TeamSchema = new mongoose.Schema({
     teamName: { 
         type: String, 
         required: [true, "Please provide a Unique Name"], 
         
     },
-    leaderEmail: { 
-        type: String, 
-        required: [true, "Please provide a Unique Email"], 
-        unique: true,
-        match: [/.+\@.+\..+/, "Please provide a valid email"]  // Email validation
+    students: [StudentSchema],
+    teamId: {
+        type: String,
+        required: true,
+        unique: true
     },
-    members: [
-        {
-            name: { type: String, required: true },
-            email: { 
-                type: String, 
-                required: true, 
-                match: [/.+\@.+\..+/, "Please provide a valid email"] 
-            },
-            course: { type: String, required: true },
-            studentId: { type: String, default: null } // Set after joining
-        }
-    ],
     password: {
         type: String,
         required: true,
