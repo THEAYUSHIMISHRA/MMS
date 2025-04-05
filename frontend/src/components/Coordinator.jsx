@@ -1,7 +1,7 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import maam from "../assets/maam.png";
-import man from "../assets/sir.png"; 
+import man from "../assets/sir.png";
 
 const coordinators = [
   {
@@ -48,26 +48,12 @@ const CoordinatorMessage = () => {
 
 export default CoordinatorMessage;
 
-// Glow effect for cards
-const glow = keyframes`
-  0% { box-shadow: 0 0 5px rgba(248,180,0,0.3); }
-  50% { box-shadow: 0 0 20px rgba(248,180,0,0.8); }
-  100% { box-shadow: 0 0 5px rgba(248,180,0,0.3); }
-`;
-
-// Animated Title Glow Effect
-const titleGlow = keyframes`
-  0% { text-shadow: 0 0 10px #ffb400; }
-  50% { text-shadow: 0 0 20px #ffcc00; }
-  100% { text-shadow: 0 0 10px #ffb400; }
-`;
-
 // Styled Components
 
 const Container = styled.div`
   text-align: center;
   padding: 40px;
-  background-color: #34495e; /* Keeping your original background color */
+  background-color: #34495e;
   min-height: 100vh;
   color: #ffffff;
 `;
@@ -88,11 +74,13 @@ const CardContainer = styled.div`
 `;
 
 const Card = styled.div`
-  background: #2c3e50; /* Soft contrast background */
+  background: #2c3e50;
   width: 350px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column; /* Key: enables column layout */
   transition: transform 0.3s ease-in-out;
 
   &:hover {
@@ -101,21 +89,24 @@ const Card = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  overflow: hidden;
-  border-radius: 12px 12px 0 0;
+  width: 100%;
+  flex-shrink: 0;
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: 380px;
+  height: auto;
+  aspect-ratio: 3 / 4; /* Ensures uniform image shape */
   object-fit: cover;
 `;
 
 const CardContent = styled.div`
-  padding: 20px; /* Increased padding for better spacing */
   background: #ffffff;
   color: #333;
-  min-height: 180px; /* Added minimum height for balance */
+  padding: 20px;
+  flex-grow: 1; /* Ensures it fills remaining space */
+  display: flex;
+  flex-direction: column;
 `;
 
 const Name = styled.h2`
@@ -147,14 +138,14 @@ const Email = styled.a`
 
   &:hover {
     text-decoration: underline;
-    color:blue;
+    color: blue;
   }
 `;
 
 const Message = styled.p`
-  font-size: 16px; /* Slightly larger text for readability */
+  font-size: 16px;
   color: #555;
   line-height: 1.6;
   margin-top: 10px;
-  height:
 `;
+
