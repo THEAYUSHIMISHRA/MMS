@@ -11,7 +11,7 @@ export const StudentSignInContainer = styled.div`
   padding: 20px;
 `;
 export const Logo2 = styled.img`
-  width: 110px;
+  width: 120px;
   margin-top: 0px;
   margin-bottom: 140px;
   animation: glow 2s ease-in-out infinite;
@@ -39,16 +39,18 @@ export const FormContainer = styled.form`
   align-items: center;
   width: 100%;
   max-width: 350px; /* Increased width for better spacing */
-  padding: 25px;
+  padding: 22px;
   border-radius: 10px;
   background-color: white; /* White form background */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   border: 5px solid black;
+  padding-left: 25px;  /* Side padding added */
+  padding-right: 25px; /* Side padding added */
 `;
 
 export const InputField = styled.input`
-  width: 100%;
+  width: 91%;
   padding: 12px;
   margin: 10px 0;
   border-radius: 5px;
