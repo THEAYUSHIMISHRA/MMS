@@ -61,7 +61,7 @@ const Container = styled.div`
 const Title = styled.h1`
   font-size: 2.2rem;
   font-weight: bold;
-  color: #f8b400;
+  color: white;
   text-shadow: 1px 1px 10px rgba(248, 180, 0, 0.6);
 `;
 

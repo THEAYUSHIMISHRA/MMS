@@ -5,6 +5,8 @@ import Sidebar from './Sidebar';
 import { TeacherDashboardContainer, Content, Section, SectionTitle, CardContainer, Card, CardTitle, CardContent } 
 from '../../styles/DashboardStyles';
 import Announcement from './Announcement';
+import FeedbackForm from "../../components/Feedback/FeedbackForm"; // adjust path if needed
+
 
 const TeacherDashboard = () => {
 
@@ -85,7 +87,11 @@ const TeacherDashboard = () => {
           <SectionTitle></SectionTitle>
           <Announcement announcements={announcements} />
         </Section>
-
+        {/* Feedback Form Section for Mentor */}
+        <Section>
+          <SectionTitle>Give Feedback to Coordinator</SectionTitle>
+          <FeedbackForm />
+        </Section>
         {/* <Section>
           <SectionTitle>Upcoming Events</SectionTitle> */}
           {/* Add a calendar or list of upcoming events */}
