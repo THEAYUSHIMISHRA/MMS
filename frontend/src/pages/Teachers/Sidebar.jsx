@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'; 
-import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsPower, BsFillArrowLeftSquareFill } from 'react-icons/bs';
+import { BsGraphUp, BsDoorOpen, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsPower, BsFillArrowLeftSquareFill } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
   position: fixed;
@@ -15,14 +15,14 @@ const SidebarContainer = styled.div`
   flex-direction: column; /* Ensures Logout stays at the bottom */
   justify-content: space-between;
   overflow-y: auto;
-  padding-top: 60px;
+  padding-top: 20px;
   transition: width 0.3s ease;
   z-index: 100;
 `;
 
 const SidebarTitle = styled.h3`
   color: white; /* Change text color to white */
-  margin-top: 10px;
+  margin-top: 5px;
 `;
 
 const SidebarHeader = styled.div`
@@ -43,7 +43,7 @@ const SidebarNavItem = styled.li`
   align-items: center;
   padding: 12px 20px;
   font-size: 18px;
-  border-bottom: 1px solid #34495e;
+  border-bottom: 0px solid #34495e;
   transition: background-color 0.3s ease;
   &:hover {
     background-color: #34495e;
@@ -62,7 +62,7 @@ const SidebarIcon = styled.div`
 
 const Logo = styled.img`
   width: ${({ isOpen }) => (isOpen ? '100px' : '50px')};
-  height: auto;
+  height: 100%;
   transition: width 0.3s ease;
 `;
 
@@ -103,21 +103,19 @@ const Sidebar = () => {
             <StyledLink to="/teacher/dashboard">Dashboard</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-          <SidebarIcon>
-            <BsChatDots />
-          </SidebarIcon>
-          <StyledLink to="/teacher/messaging" $isOpen={isOpen}>
-            Messaging
-          </StyledLink>
+            <SidebarIcon><BsCalendar /></SidebarIcon>
+            <StyledLink to="/teacher/attendance">Attendance</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+          <SidebarIcon><BsChatDots /></SidebarIcon>
+          <StyledLink to="/teacher/messaging">Messaging</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
-          <SidebarIcon>
-            <BsChatDots />
-          </SidebarIcon>
+          <SidebarIcon><BsDoorOpen /></SidebarIcon>
           <StyledLink to="/teacher/requests">Requests</StyledLink>
         </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon><BsChatDots /></SidebarIcon>
+            <SidebarIcon><BsBook /></SidebarIcon>
             <StyledLink to="/teacher/communication">Announcement</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
@@ -125,7 +123,7 @@ const Sidebar = () => {
             <StyledLink to="/teacher/events">Events & Calendar</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon><BsCalendarEvent /></SidebarIcon>
+            <SidebarIcon><BsGraphDown /></SidebarIcon>
             <StyledLink to="/teacher/marks">Marks</StyledLink>
           </SidebarNavItem>
           {/* ✅ Teacher Profile option added before Settings */}

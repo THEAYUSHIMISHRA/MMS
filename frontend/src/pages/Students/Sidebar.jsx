@@ -10,6 +10,7 @@ import {
   BsChatDots,
   BsGear,
   BsTrophy,
+  BsPeople,
 } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
@@ -154,7 +155,7 @@ const Sidebar = () => {
         // </SidebarNavItem> */} 
         <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
-            <BsBook />
+            <BsCalendar />
           </SidebarIcon>
           <StyledLink to="/student/events" isOpen={isOpen}>
             Events
@@ -162,7 +163,7 @@ const Sidebar = () => {
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
-            <BsChatDots />
+            <BsBook />
           </SidebarIcon>
           <StyledLink to="/student/communication" isOpen={isOpen}>
             Announcement
@@ -178,7 +179,7 @@ const Sidebar = () => {
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
-            <BsGear />
+            <BsPeople />
           </SidebarIcon>
           <StyledLink to="/student/settings" isOpen={isOpen}>
             Profile

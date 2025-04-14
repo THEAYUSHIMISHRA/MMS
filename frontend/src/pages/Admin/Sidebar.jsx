@@ -122,18 +122,10 @@ const Sidebar = () => {
           <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/admin/exams">Exams</StyledLink>
         </SidebarNavItem> */}
-        {/* <SidebarNavItem>
-          <SidebarIcon><BsGraphDown /></SidebarIcon>
-          <StyledLink to="/admin/performance">Performance</StyledLink>
-        </SidebarNavItem> */}
-        {/* <SidebarNavItem>
+        <SidebarNavItem>
           <SidebarIcon><BsCalendar /></SidebarIcon>
           <StyledLink to="/admin/attendance">Attendance</StyledLink>
-        </SidebarNavItem> */}
-        {/* <SidebarNavItem>
-          <SidebarIcon><BsBook /></SidebarIcon>
-          <StyledLink to="/admin/library">Library</StyledLink>
-        </SidebarNavItem> */}
+        </SidebarNavItem> 
         <SidebarNavItem>
           <SidebarIcon><BsChatDots /></SidebarIcon>
           <StyledLink to="/admin/communication">Announcement</StyledLink>
@@ -143,7 +135,7 @@ const Sidebar = () => {
           <StyledLink to="/admin/events">Events & Calendar</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
-          <SidebarIcon><BsCalendarEvent /></SidebarIcon>
+          <SidebarIcon><BsGraphDown /></SidebarIcon>
           <StyledLink to="/admin/marks">Marks</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
@@ -151,11 +143,11 @@ const Sidebar = () => {
           <StyledLink to="/admin/suploads">Student Upload</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
-          <SidebarIcon><BsFile /></SidebarIcon>
+          <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/admin/tuploads">Teacher Upload</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
-          <SidebarIcon><BsGear /></SidebarIcon>
+          <SidebarIcon><BsPerson /></SidebarIcon>
           <StyledLink to="/admin/settings">Settings & Profile</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>

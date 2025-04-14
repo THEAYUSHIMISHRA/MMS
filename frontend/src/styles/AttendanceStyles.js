@@ -39,6 +39,10 @@ export const StudentName = styled.span`
   flex: 1;
 `;
 
+export const StudentEmail = styled.span`
+  flex: 1;
+`;
+
 export const CheckboxLabel = styled.label`
   margin-right: 10px;
 `;
