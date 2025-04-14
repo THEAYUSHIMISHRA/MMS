@@ -144,11 +144,12 @@ const styles = {
     marginBottom: "40px",
   },
   card: {
-    backgroundColor: "rgb(29, 70, 111)",
-    color: "white",
+    backgroundColor: "white",
+    color: "solid rgb(29, 70, 111)",
     borderRadius: "12px",
     padding: "20px",
     width: "300px",
+    border:"8px solid rgb(29, 70, 111)",
     boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
   },
   cardTitle: {
@@ -158,6 +159,7 @@ const styles = {
   cardText: {
     fontSize: "16px",
     margin: "4px 0",
+    
   },
   cardActions: {
     marginTop: "15px",
