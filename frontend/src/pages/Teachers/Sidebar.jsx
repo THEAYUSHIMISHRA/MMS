@@ -125,11 +125,11 @@ const Sidebar = () => {
           <SidebarNavItem>
             <SidebarIcon><BsGraphDown /></SidebarIcon>
             <StyledLink to="/teacher/performance">Performance</StyledLink>
-          </SidebarNavItem>
+          </SidebarNavItem> */}
           <SidebarNavItem>
             <SidebarIcon><BsCalendar /></SidebarIcon>
             <StyledLink to="/teacher/attendance">Attendance</StyledLink>
-          </SidebarNavItem> */}
+          </SidebarNavItem>
           <SidebarNavItem>
           <SidebarIcon>
             <BsChatDots />
@@ -147,10 +147,10 @@ const Sidebar = () => {
             Requests
           </StyledLink>
         </SidebarNavItem>
-          {/* <SidebarNavItem>
+           <SidebarNavItem>
             <SidebarIcon><BsChatDots /></SidebarIcon>
             <StyledLink to="/teacher/communication">Announcement</StyledLink>
-          </SidebarNavItem> */}
+          </SidebarNavItem> 
           <SidebarNavItem>
             <SidebarIcon><BsCalendarEvent /></SidebarIcon>
             <StyledLink to="/teacher/events">Events & Calendar</StyledLink>

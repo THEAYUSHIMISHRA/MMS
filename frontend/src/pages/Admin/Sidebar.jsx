@@ -126,10 +126,10 @@ const Sidebar = () => {
           <SidebarIcon><BsGraphDown /></SidebarIcon>
           <StyledLink to="/admin/performance">Performance</StyledLink>
         </SidebarNavItem> */}
-        {/* <SidebarNavItem>
+        <SidebarNavItem>
           <SidebarIcon><BsCalendar /></SidebarIcon>
           <StyledLink to="/admin/attendance">Attendance</StyledLink>
-        </SidebarNavItem> */}
+        </SidebarNavItem> 
         {/* <SidebarNavItem>
           <SidebarIcon><BsBook /></SidebarIcon>
           <StyledLink to="/admin/library">Library</StyledLink>
