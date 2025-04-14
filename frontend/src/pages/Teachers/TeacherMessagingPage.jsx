@@ -80,8 +80,8 @@ const boxStyle = {
   overflowY: "auto",
   padding: "20px",
   borderRadius: "10px",
-  border: "2px solid rgb(29, 50, 90)",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+  border: "5px solid rgb(29, 50, 90)",
+  boxShadow:"0 8px 20px rgba(0, 0, 0, 0.5)",
   backgroundColor: "#f9f9f9",
 };
 
