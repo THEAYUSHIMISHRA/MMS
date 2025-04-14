@@ -161,7 +161,11 @@ const Sidebar = () => {
             <SidebarIcon><BsPerson /></SidebarIcon>
             <StyledLink to="/teacher-profile">Teacher Profile</StyledLink>
           </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon><BsFileText /></SidebarIcon>
+            <StyledLink to="/teacher/feedback">Feedback</StyledLink>
 
+          </SidebarNavItem>
           <SidebarNavItem>
             <SidebarIcon><BsGear /></SidebarIcon>
             <StyledLink to="/teacher/settings">Settings & Profile</StyledLink>

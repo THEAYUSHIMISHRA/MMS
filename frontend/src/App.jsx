@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 //import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import FeedbackForm from './components/Feedback/FeedbackForm';
 import Home from '../src/components/Home.jsx';
 import ChooseUser from '../src/components/ChooseUser';
 import AdminSignIn from '../src/components/AdminSignIn';
@@ -17,6 +18,7 @@ import AdminDashboard from '../src/pages/Admin/Dashboard';
 import StudentDashboard from '../src/pages/Students/Dashboard';
 import Sidebar from '../src/pages/Students/Sidebar';
 import TeacherDashboard from '../src/pages/Teachers/Dashboard';
+
 
 import Classes from '../src/pages/Admin/Classes';
 import Exam from '../src/pages/Admin/Exam';
@@ -169,6 +171,7 @@ const App = () => {
             path="/teacher-details"
             element={<TeacherDetails teachers={teachers} setTeachers={setTeachers} />}
           />
+          <Route path="/teacher/feedback" element={<FeedbackForm />} />
         </Routes>
       </Router></contexts.Provider>
   );
