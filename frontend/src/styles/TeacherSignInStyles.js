@@ -11,9 +11,9 @@ export const TeacherSignInContainer = styled.div`
   padding: 20px;
 `;
 export const Logo = styled.img`
-  width: 120px;
-  margin-top: 40px;
-  margin-bottom: 130px;
+  width: 150px;
+  margin-top: 0px;
+  margin-bottom: 120px;
   animation: glow 2s ease-in-out infinite;
   filter: drop-shadow(0 0 10px white);
 

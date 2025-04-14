@@ -65,6 +65,7 @@ const TeacherProfile = ({ teachers = [], setTeachers }) => {
                   <option value="APAJI">Aim N Act</option>
                   <option value="SURYA MANDIR">SURYA Mandir</option>
                   <option value="URJA MANDIR">Urja Mandir</option>
+                  <option value="Artificial Intelligence">Artificial Intelligence</option>
                   
                 </select>
               ) : (

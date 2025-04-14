@@ -6,7 +6,7 @@ const JoinTeamPage = () => {
 
   const handleGoToDashboard = () => {
     // navigate(`/team/${teamId}`);//by client
-    navigate(`/teams/team/${teamId}`);//by Dev
+    navigate(`/teams/team/${teamId}`);
   };
 
   return (

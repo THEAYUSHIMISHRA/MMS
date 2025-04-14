@@ -30,6 +30,8 @@ const Marks = () => {
       internal1: 0,
       internal2: 0,
       finalInternal: 0,
+      report: 0,
+      attendance: 0,
     }));
     setMarksData(initial);
   };
@@ -147,6 +149,8 @@ const Marks = () => {
                     { label: "Internal 1", field: "internal1" },
                     { label: "Internal 2", field: "internal2" },
                     { label: "Final Internal", field: "finalInternal" },
+                    { label: "Report", field: "report" },
+                    { label: "Attendance", field: "attendance" },
                   ].map(({ label, field }) => (
                     <div key={field} style={{ margin: "0 10px" }}>
                       <label

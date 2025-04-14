@@ -36,18 +36,18 @@ const Requests = () => {
   const dummyRequests = [
     {
       _id: "dummy1",
-      studentName: "Isha",
-      studentEmail: "isha@example.com",
-      projectDetails: "Hospital Management (Java)",
-      groupId: "CSD060",
+      studentName: "Himani",
+      studentEmail: "btbti22141_himani@banasthali.in",
+      projectDetails: "Website from Websites (MERN)",
+      groupId: "CI1",
       status: "pending",
     },
     {
       _id: "dummy2",
       studentName: "Ayushi",
-      studentEmail: "ayushi@example.com",
+      studentEmail: "btbti22088_ayushi@banasthali.in",
       projectDetails: "Hospital Management (Java)",
-      groupId: "CSD060",
+      groupId: "AI1",
       status: "pending",
     },
   ];
@@ -70,15 +70,15 @@ const Requests = () => {
                 <p style={styles.cardText}><strong>Project:</strong> {req.projectDetails}</p>
                 <p style={styles.cardText}><strong>Group ID:</strong> {req.groupId}</p>
                 <div style={styles.cardActions}>
-                  <button style={styles.acceptBtn}>Accept</button>
-                  <button style={styles.rejectBtn}>Reject</button>
-                  <button style={styles.queryBtn}>Query</button>
+                  <button style={styles.acceptBtn} onClick={() => handleResponse(req._id, "Accepted")}>Accept</button>
+                  <button style={styles.rejectBtn} onClick={() => handleResponse(req._id, "Rejected")}>Reject</button>
+                  <button style={styles.queryBtn} onClick={() => handleResponse(req._id, "Query")}>Query</button>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Table-based dynamic requests */}
+          {/* Table-based dynamic requests
           {requests.length > 0 && (
             <table style={styles.requestTable}>
               <thead>
@@ -116,7 +116,7 @@ const Requests = () => {
                 ))}
               </tbody>
             </table>
-          )}
+          )} */}
         </div>
       </Content>
     </ProfileContainer>
@@ -126,9 +126,9 @@ const Requests = () => {
 // ✅ Inline styles
 const styles = {
   requestContainer: {
-    padding: "20px",
+    padding: "10px",
     background: "#f9f9f9",
-    minHeight: "100vh",
+    minHeight: "90vh",
   },
   heading: {
     textAlign: "center",

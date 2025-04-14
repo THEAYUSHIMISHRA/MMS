@@ -22,7 +22,7 @@ import {
 const AdminDashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
   //const [events, setEvents] = useState([]);
-  //const [announcements, setAnnouncements] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
   //const [studentPerformance, setStudentPerformance] = useState([]);
   const [teacherCount, setTeacherCount] = useState(0);
   const [studentCount, setStudentCount] = useState(0);
@@ -31,7 +31,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     //fetchEvents();
-    //fetchAnnouncements();
+    fetchAnnouncements();
     //fetchStudentPerformance();
     fetchTeacherCount();
     fetchStudentCount();
@@ -84,14 +84,14 @@ const AdminDashboard = () => {
   //   }
   // };
 
-  // const fetchAnnouncements = async () => {
-  //   try {
-  //     const response = await axios.get('http://localhost:4000/api/v1/announcements/getall');
-  //     setAnnouncements(response.data.announcements || []);
-  //   } catch (error) {
-  //     console.error('Error fetching announcements:', error);
-  //   }
-  // };
+  const fetchAnnouncements = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/announcements/getall');
+      setAnnouncements(response.data.announcements || []);
+    } catch (error) {
+      console.error('Error fetching announcements:', error);
+    }
+  };
 
   // const fetchStudentPerformance = async () => {
   //   try {
@@ -130,10 +130,10 @@ const AdminDashboard = () => {
           </Section> */}
         </TopContent>
 
-        {/* <BottomContent>
+        <BottomContent>
           {/* <Performance studentPerformance={studentPerformance} /> */}
-          {/* <Announcement announcements={announcements} /> */}
-        {/* </BottomContent> */}
+          <Announcement announcements={announcements} />
+        </BottomContent>
       </Content>
     </AdminDashboardContainer>
   );

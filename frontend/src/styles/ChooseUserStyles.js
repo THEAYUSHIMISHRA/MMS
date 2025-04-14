@@ -20,9 +20,9 @@ export const ChooseUserContainer = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 120px;
+  width: 150px;
   margin-top: 40px;
-  margin-bottom: 190px;
+  margin-bottom: 120px;
   animation: glow 2s ease-in-out infinite;
   filter: drop-shadow(0 0 10px white);
 

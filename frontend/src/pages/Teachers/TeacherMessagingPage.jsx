@@ -7,10 +7,10 @@ const TeacherMessagingPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const exampleRequests = [
-    { _id: "1", studentName: "Isha", groupId: "CSD059", projectDetails: "AI Chatbot", status: "pending" },
-    { _id: "2", studentName: "Himani", groupId: "CSD060", projectDetails: "Smart Attendance", status: "accepted" },
-    { _id: "3", studentName: "Ayushi Mishra", groupId: "CSD061", projectDetails: "E-learning Platform", status: "query" },
-    { _id: "4", studentName: "Swadha Sri", groupId: "CSD062", projectDetails: "Health Tracker", status: "pending" },
+    { _id: "1", studentName: "Swadha Sri", groupId: "CI1", projectDetails: "Website from Websites", status: "pending" },
+    { _id: "2", studentName: "Himani", groupId: "CI1", projectDetails: "Website from Websites", status: "accepted" },
+    { _id: "3", studentName: "Ayushi Mishra", groupId: "AI1", projectDetails: "Hospital Management", status: "query" },
+    { _id: "4", studentName: "Isha", groupId: "AI1", projectDetails: "Hospital Management", status: "pending" },
   ];
 
   useEffect(() => {

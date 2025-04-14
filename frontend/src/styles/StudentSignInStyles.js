@@ -11,9 +11,9 @@ export const StudentSignInContainer = styled.div`
   padding: 20px;
 `;
 export const Logo2 = styled.img`
-  width: 120px;
+  width: 150px;
   margin-top: 0px;
-  margin-bottom: 140px;
+  margin-bottom: 120px;
   animation: glow 2s ease-in-out infinite;
   filter: drop-shadow(0 0 10px white);
 

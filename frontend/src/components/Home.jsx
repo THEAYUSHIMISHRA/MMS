@@ -63,8 +63,8 @@ const Home = () => {
         </NavigationLinks>
         
         <ButtonsContainer>
-          <Button onClick={handleTeamRegisterClick}>Team Register</Button>
           <Button onClick={handleLoginClick}>Sign In</Button>
+          <Button onClick={handleTeamRegisterClick}>Team Register</Button>
         </ButtonsContainer>
       </Navbar>
 
@@ -104,7 +104,7 @@ const zoomOutEffect = keyframes`
 const HeroSection = styled.div`
   position: relative;
   width: 100%;
-  height: 88.1vh; /* Reduced from 100vh */
+  height: 89.2vh; /* Reduced from 100vh */
   overflow: hidden;
 `;
 
@@ -156,19 +156,20 @@ const Footer = styled.footer`
   background: rgb(29, 70, 111);
   color: white;
   text-align: center;
-  padding: 5px 0; /* Reduced height */
+  padding: 1px 1px; /* Reduced height */
   font-size: 14px;
   border-top: 3px solid #f1c40f;
 `;
 
 const FooterContent = styled.div`
   max-width: 600px;
-  margin: 0 auto;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 5px; /* Adds space between email and contact */
+  padding-top: 10px;
 
   a {
     color: #f1c40f;
@@ -177,7 +178,7 @@ const FooterContent = styled.div`
   }
 
   p {
-    margin: 5px 0;
+    margin: 0px 0px;
     display: inline-block; /* Keeps email and contact on the same line */
   }
 `;

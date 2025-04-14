@@ -10,9 +10,9 @@ export const AdminSignInContainer = styled.div`
   min-height: 100vh;
 `;
 export const Logo1 = styled.img`
-  width: 120px;
+  width: 150px;
   margin-top: 40px;
-  margin-bottom: 130px;
+  margin-bottom: 100px;
   animation: glow 2s ease-in-out infinite;
   filter: drop-shadow(0 0 10px white);
 
