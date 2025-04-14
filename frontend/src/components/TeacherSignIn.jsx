@@ -225,6 +225,21 @@ const TeacherSignIn = () => {
         <InputField type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <InputField type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <SubmitButton as="button" type="submit">Sign In</SubmitButton>
+        {/* Forgot Password Button */}
+        <button
+          type="button"
+          onClick={handleForgotPassword}
+          style={{
+            marginTop: '10px',
+            color: 'blue',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            textDecoration: 'underline',
+          }}
+        >
+          Forgot Password?
+        </button>
       </FormContainer>
     </TeacherSignInContainer>
   );

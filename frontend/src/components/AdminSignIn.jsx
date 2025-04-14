@@ -35,7 +35,10 @@ const AdminSignIn = () => {
       alert("Login failed, please try again.");
     }
   };
-
+  // Navigate to forgot password page
+  const handleForgotPassword = () => {
+    navigate('/teacher-signIn/forgotpassword'); // Correct navigation
+  };
   return (
     <AdminSignInContainer>
        <Logo1 src={logo1} alt="Logo" /> {/* Adjusted logo positioning */}
@@ -56,6 +59,21 @@ const AdminSignIn = () => {
           required
         />
         <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton>
+        {/* Forgot Password Button */}
+        <button
+          type="button"
+          onClick={handleForgotPassword}
+          style={{
+            marginTop: '10px',
+            color: 'blue',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            textDecoration: 'underline',
+          }}
+        >
+          Forgot Password?
+        </button>
       </FormContainer>
     </AdminSignInContainer>
   );

@@ -1,36 +1,33 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const FeedbackForm = () => {
+  const [email, setEmail] = useState("");
   const [feedbackText, setFeedbackText] = useState("");
   const [rating, setRating] = useState("");
   const [teamId, setTeamId] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const mentorId = localStorage.getItem("mentorId");
+    const feedbackData = {
+      email,
+      feedbackText,
+      rating,
+      teamId,
+    };
 
-    try {
-      await axios.post("http://localhost:4000/api/v1/feedback", {
-        feedbackText,
-        rating,
-        teamId,
-        mentorId,
-      });
+    // Save to localStorage (simulate backend)
+    const existing = JSON.parse(localStorage.getItem("feedbacks")) || [];
+    localStorage.setItem("feedbacks", JSON.stringify([...existing, feedbackData]));
 
-      setSuccess("✅ Feedback submitted successfully!");
-      setFeedbackText("");
-      setRating("");
-      setTeamId("");
-    } catch (error) {
-      console.error("Error submitting feedback:", error);
-      setSuccess("❌ Failed to submit feedback.");
-    }
+    setSuccess("✅ Feedback submitted successfully!");
+    setEmail("");
+    setFeedbackText("");
+    setRating("");
+    setTeamId("");
   };
 
-  // Page background
   const pageStyle = {
     backgroundColor: "#34495e",
     minHeight: "100vh",
@@ -40,7 +37,6 @@ const FeedbackForm = () => {
     padding: "20px",
   };
 
-  // Form container
   const containerStyle = {
     backgroundColor: "white",
     borderRadius: "12px",
@@ -52,7 +48,7 @@ const FeedbackForm = () => {
 
   const titleStyle = {
     backgroundColor: "white",
-    color: "black", //  changed from #fff to black
+    color: "black",
     padding: "16px",
     margin: "-40px -40px 30px -40px",
     borderTopLeftRadius: "12px",
@@ -62,7 +58,6 @@ const FeedbackForm = () => {
     fontWeight: "600",
   };
 
-  // Labels and input fields
   const labelStyle = {
     display: "block",
     marginBottom: "6px",
@@ -80,7 +75,6 @@ const FeedbackForm = () => {
     boxSizing: "border-box",
   };
 
-  // Button style
   const buttonStyle = {
     width: "100%",
     padding: "12px",
@@ -105,6 +99,17 @@ const FeedbackForm = () => {
         <div style={titleStyle}>Feedback Form</div>
 
         <form onSubmit={handleSubmit}>
+          <div>
+            <label style={labelStyle}>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={inputStyle}
+              required
+            />
+          </div>
+
           <div>
             <label style={labelStyle}>Team ID</label>
             <input
@@ -151,4 +156,3 @@ const FeedbackForm = () => {
 };
 
 export default FeedbackForm;
-

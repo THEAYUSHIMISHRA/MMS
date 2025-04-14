@@ -2,9 +2,9 @@ import { Feedback } from "../models/feedback.js";
 
 export const createFeedback = async (req, res) => {
   try {
-    const { feedbackText, rating, mentorId, teamId } = req.body;
+    const { feedbackText, rating, email, teamId } = req.body;
 
-    const feedback = new Feedback({ feedbackText, rating, mentorId, teamId });
+    const feedback = new Feedback({ feedbackText, rating, email, teamId });
     await feedback.save();
 
     res.status(201).json({ message: "Feedback submitted successfully!" });
@@ -17,7 +17,7 @@ export const createFeedback = async (req, res) => {
 export const getAllFeedbacks = async (req, res) => {
   try {
     const feedbacks = await Feedback.find()
-      .populate("mentorId", "name")
+      .populate("email", "name")
       .populate("teamId", "name");
 
     res.status(200).json(feedbacks);

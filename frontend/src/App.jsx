@@ -18,7 +18,8 @@ import StudentDashboard from '../src/pages/Students/Dashboard';
 import Sidebar from '../src/pages/Students/Sidebar';
 import TeacherDashboard from '../src/pages/Teachers/Dashboard';
 
-// Admin Section Routes
+import AdminFeedbackView from "./components/AdminFeedback/AdminFeedbackView";
+
 import Classes from '../src/pages/Admin/Classes';
 import Exam from '../src/pages/Admin/Exam';
 import Attendance from '../src/pages/Admin/Attendance';
@@ -119,6 +120,7 @@ const App = () => {
           <Route exact path="/admin/communication" element={<Announcement />} />
           <Route exact path="/admin/events" element={<EventCalender />} />
           <Route exact path="/admin/settings" element={<SettingsProfile />} />
+          <Route exact path="/admin/feedback" element={<AdminFeedbackView />} />
 
           {/* Student Routes */}
           <Route exact path="/student/assignments" element={<StudentAssignments />} />

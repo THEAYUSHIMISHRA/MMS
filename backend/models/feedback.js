@@ -11,7 +11,7 @@ const feedbackSchema = new mongoose.Schema({
     max: 5,
     default: 3,
   },
-  mentorId: {
+  email: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Teacher", // ✅ must match model name for teachers
     required: true,
