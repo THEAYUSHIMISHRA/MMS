@@ -7,23 +7,25 @@ const router = express.Router();
 
 // Register a new team
 router.post("/register", async (req, res) => {
-
+  const { teamName, students } = req.body;
   try {
-
-      const { teamName, students } = req.body;
-      // Extract courses from students
+    console.log("Received registration request:", req.body)
+      
+      // Step 1: Extract course letters
       const uniqueCourses = [...new Set(students.map(student => student.course?.[0] || ""))].join("");
-      // Find the last registered team with the same course prefix
-      const lastTeam = await Team.findOne({ teamId: new RegExp(`^${uniqueCourses}\\d{2}$`) })
-      .sort({ teamId: -1 });
-      // Generate serial number
-      let serialNumber = "01";
-      if (lastTeam) {
-          const lastNumber = parseInt(lastTeam.teamId.slice(uniqueCourses.length), 10);
-          serialNumber = String(lastNumber + 1).padStart(2, "0");
-      }
+
+      // Step 2: Count existing teams with the same prefix
+      const teamCount = await Team.countDocuments({ teamId: new RegExp(`^${uniqueCourses}`) }) + 1;
+
+      // Step 3: Generate serial number
+      const serialNumber = String(teamCount).padStart(2, "0");
       // Generate the team ID
       const teamId = `${uniqueCourses}${serialNumber}`;
+
+      if (!students || students.length === 0) {
+        return res.status(400).json({ message: "At least one student is required to form a team" });
+      }
+
        // Create and save the team
        const newTeam = new Team({
         teamId,
@@ -31,8 +33,8 @@ router.post("/register", async (req, res) => {
         students: students.map(student => ({
           name: student.name,  
           email: student.email,
-            studentId: student.studentId,
-            course: student.course,
+          studentId: student.studentId,
+          course: student.course,
         })),
     });
 
@@ -74,7 +76,7 @@ router.post("/register", async (req, res) => {
             </table>`
                   
               );
-              console.log("Member ID:", students.studentId);  
+              console.log("Member ID:", student.studentId);  
           }
 
           // Create the table with the actual team data
@@ -86,7 +88,7 @@ router.post("/register", async (req, res) => {
                   <thead>
                       <tr>
                           <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">Team Name</th>
-                          <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">Leader Email</th>
+                          // <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">Leader Email</th>
                           <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">Team ID</th>
                           <th style="background: #3498db; color: #fff; padding: 10px; border: 1px solid #ddd;">Password</th>
                       </tr>
@@ -111,7 +113,8 @@ router.post("/register", async (req, res) => {
 
           res.status(201).json({ 
               message: "Team registered successfully! Invitations sent.", 
-              teamId 
+              teamId: savedTeam.teamId,
+              password: savedTeam.password
           });
 
       } catch (emailError) {
@@ -143,7 +146,7 @@ router.get("/courses", async (req, res ) => {
     });
 
   // Extract unique first letters from each course
-  const uniqueLetters = [...new Set(allCourses.map(course => course.charAt(0)))].join('');
+  const uniqueLetters = [...new Set(allCourses.map(course => course?.charAt(0) || ""))].join('');
 
   // Count existing teams to generate a unique serial number
   const teamCount = await Team.countDocuments() + 1;
@@ -154,24 +157,24 @@ router.get("/courses", async (req, res ) => {
 // Join a team (member clicks the link)
 router.post("/join-team/:teamId", async (req, res) => {
   const { teamId } = req.params;
-  const { email, studentId } = req.body;
+  const { email } = req.body;
 
-  console.log(teamId,email,studentId);
+  console.log(teamId,email);
   try {
 
-    const team = await Team.findOne({teamId: teamId});
+    const team = await Team.findOne({ teamId });
 
     if (!team) return res.status(404).json({ message: "Team not found" });
     
-    const member = team.students.find((m) => {  
-      return m.email === email});
-    if (!member) return res.status(400).json({ message: "Not invited to this team" });
+    const student = team.students.find((m) => m.email === email );
+    if (!student) return res.status(400).json({ message: "Not invited to this team" });
 
-    if (member.studentId) return res.status(400).json({ message: "You have already joined this team" });
+    if (!student.studentId) return res.status(400).json({ message: "Student ID not found in the team data" });
 
-    member.studentId = studentId; // Mark as joined
+    // student.studentId = studentId; // Mark as joined
+    student.joined = true;
     await team.save();
-
+    // res.status(200).json({ message: "Successfully joined!", studentId: student.studentId });
     try {
       await sendEmail(email, "Welcome to the team!", `You have joined ${team.teamName}`);
       res.status(200).json({ message: "You have joined the team!" });
@@ -211,60 +214,64 @@ router.post("/join-team/:teamId", async (req, res) => {
     res.status(500).json({ message: "Error joining team", error: error.message });
   }
 });
-router.get("/join-team/:teamId/:studentId/:email", async (req, res) => {
-  const { teamId ,email, studentId} = req.params;
+// router.get("/join-team/:teamId/:studentId/:email", async (req, res) => {
+//   const { teamId ,email, studentId} = req.params;
   
-  console.log(teamId)
-  try {
-    const team = await Team.findById(teamId);
-    if (!team) return res.status(404).json({ message: "Team not found" });
-    const member = team.students.find((m) => m.email === email);
-    console.log(team.members)
-    if (!member) return res.status(400).json({ message: "Not invited to this team" });
+//   console.log(teamId)
+//   try {
+//     const team = await Team.findOne({ teamId });
 
-    if (member.studentId) return res.status(400).json({ message: "You have already joined this team" });
+//     if (!team) return res.status(404).json({ message: "Team not found" });
 
-    member.studentId = studentId; // Mark as joined
-    await team.save();
+//     const member = team.students.find((m) => m.email === email);
+//     console.log(team.members)
 
-    try {
-      await sendEmail(email, "Welcome to the team!", `You have joined ${team.teamName}`);
-    } catch (emailError) {
-      console.error("Error sending welcome email:", emailError.message);
-    }
+//     if (!member) return res.status(400).json({ message: "Not invited to this team" });
 
-    const htmlResponse = `
-    <html>
-      <head>
-        <title>Team Joined</title>
-        <style>
-          body { font-family: Arial, sans-serif; line-height: 1.6; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-          h1 { color: #4CAF50; }
-          p { color: #555; }
-          ul { list-style: none; padding: 0; }
-          li { padding: 5px 0; }
-          .footer { margin-top: 20px; font-size: 12px; color: #888; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>You have joined the team!</h1>
+//     if (member.studentId) return res.status(400).json({ message: "You have already joined this team" });
+
+//     member.studentId = studentId; // Mark as joined
+//     await team.save();
+
+//     try {
+//       await sendEmail(email, "Welcome to the team!", `You have joined ${team.teamName}`);
+//     } catch (emailError) {
+//       console.error("Error sending welcome email:", emailError.message);
+//     }
+
+//     const htmlResponse = `
+//     <html>
+//       <head>
+//         <title>Team Joined</title>
+//         <style>
+//           body { font-family: Arial, sans-serif; line-height: 1.6; }
+//           .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+//           h1 { color: #4CAF50; }
+//           p { color: #555; }
+//           ul { list-style: none; padding: 0; }
+//           li { padding: 5px 0; }
+//           .footer { margin-top: 20px; font-size: 12px; color: #888; }
+//         </style>
+//       </head>
+//       <body>
+//         <div class="container">
+//           <h1>You have joined the team!</h1>
           
 
-          <div class="footer">
-            <p>Thank you for joining the team!</p>
-          </div>
-        </div>
-      </body>
-    </html>
-  `;
-  res.send(htmlResponse)
-    // res.json({ message: "You have joined the team!", teamDetails: team });
-  } catch (error) {
-    res.status(500).json({ message: "Error joining team", error: error.message });
-  }
-});
+//           <div class="footer">
+//             <p>Thank you for joining the team!</p>
+//           </div>
+//         </div>
+//       </body>
+//     </html>
+//   `;
+//   // return res.redirect(`http://localhost:4000/team-dashboard/${teamId}`);
+//   res.send(htmlResponse)
+//     // res.json({ message: "You have joined the team!", teamDetails: team });
+//   } catch (error) {
+//     res.status(500).json({ message: "Error joining team", error: error.message });
+//   }
+// });
 
 router.get("/Teamlogin", async (req, res) => {
   const { teamId, password } = req.query;  // Use query parameters for GET requests
@@ -290,11 +297,17 @@ router.get("/Teamlogin", async (req, res) => {
 // NEW: Fetch team by ID
 router.get("/:teamId", async (req, res) => {
   const { teamId } = req.params;
+  console.log(`Received teamId:,"${teamId}"`);
   try {
-    const team = await Team.findById(teamId);
-    if (!team) return res.status(404).json({ message: "Team not found" });
+    const team = await Team.findOne({ teamId: String(teamId) });
+    if (!team) {
+      console.log("Team not found in DB for ID:", teamId);
+      return res.status(404).json({ message: "Team not found" });
+    }
+    console.log("Team found:", team);
     res.json(team);
   } catch (error) {
+    console.error("Error fetching team:", error.message);
     res.status(500).json({ message: "Error fetching team", error: error.message });
   }
 });
@@ -303,7 +316,7 @@ router.get("/:teamId", async (req, res) => {
 router.get("/:teamId/performance", async (req, res) => {
   const { teamId } = req.params;
   try {
-    const team = await Team.findById(teamId);
+    const team = await Team.findOne(teamId);
     if (!team) return res.status(404).json({ message: "Team not found" });
 
     res.json({
@@ -323,7 +336,7 @@ router.post("/:teamId/performance", async (req, res) => {
   const { studentId, marks, attendance } = req.body;
 
   try {
-    const team = await Team.findById(teamId);
+    const team = await Team.findOne(teamId);
     if (!team) return res.status(404).json({ message: "Team not found" });
 
     const member = team.members.find((m) => m.studentId === studentId);
@@ -359,7 +372,8 @@ router.get("/all-teams", async (req, res) => {
 
 router.get("/get-matching-teams/:email/:studentId", async (req, res) => {
   const { email, studentId } = req.params;
-  console.log(email)
+  console.log(`Searching for student with email: ${email} and studentId: ${studentId}`);
+ 
   if (!email || !studentId) {
       return res.status(400).json({ message: "Email and Student ID are required" });
   }
@@ -367,14 +381,16 @@ router.get("/get-matching-teams/:email/:studentId", async (req, res) => {
   try {
       // Find teams with matching email and studentId in members array
       const teams = await Team.find({
-          members: {
+        students: {
               $elemMatch: {
-                  email: email,
-                  studentId: studentId
-              }
-          }
+                  email: { $regex: new RegExp(email, "i") },
+                  studentId: { $regex: new RegExp(studentId, "i") },
+              },
+          },
       });
-
+      res.status(200).json({ teams });
+      console.log(`Found teams: ${teams.length}`);
+      
       if (teams.length === 0) {
           return res.status(404).json({ message: "No matching teams found" });
       }

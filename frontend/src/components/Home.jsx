@@ -156,13 +156,13 @@ const Footer = styled.footer`
   background: rgb(29, 70, 111);
   color: white;
   text-align: center;
-  padding: 10px 0; /* Reduced height */
+  padding: 5px 0; /* Reduced height */
   font-size: 14px;
   border-top: 3px solid #f1c40f;
 `;
 
 const FooterContent = styled.div`
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
   display: flex;
   justify-content: center;

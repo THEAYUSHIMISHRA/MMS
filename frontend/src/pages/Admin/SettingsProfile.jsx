@@ -18,6 +18,7 @@ const SettingsProfile = () => {
   //const adminEmail = localStorage.getItem("adminEmail"); // Retrieve email from localStorage
   const storedAdmin = JSON.parse(localStorage.getItem("admin"));
   const adminEmail = storedAdmin?.email || ""; // Retrieve email from localStorage
+  
   const handleLogin = async () => {
     const response = await fetch("/admin/login", {
       method: "POST",

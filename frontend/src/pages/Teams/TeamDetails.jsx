@@ -11,9 +11,11 @@ const TeamDetails = () => {
   useEffect(() => {
     const fetchTeam = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/team/${teamId}`);
+        const response = await axios.get(`http://localhost:4000/api/v1/team/${teamId}`);
+        console.log("Team data received:", response.data);
         setTeam(response.data);
       } catch (error) {
+        console.error("Failed to fetch team details.", error);
         setError("Failed to fetch team details.");
       }
     };
@@ -33,15 +35,15 @@ const TeamDetails = () => {
         <h2 style={styles.heading}>Team Details</h2>
         <h3 style={styles.subHeading}>Team ID: {teamId}</h3>
         <h3 style={styles.subHeading}>Team Name: {team.teamName}</h3>
-        <h3 style={styles.subHeading}>Leader: {team.leaderEmail}</h3>
+        {/* <h3 style={styles.subHeading}>Leader: {team.leaderEmail}</h3> */}
         
         <h3 style={styles.subHeading}>Members:</h3>
         <ul style={styles.list}>
-          {team.members?.map((member, index) => (
+          {team.students?.map((students, index) => (
             <li key={index} style={styles.listItem}>
-              {member.name} - {member.course} - {member.email}
-              <span style={member.studentId ? styles.joined : styles.pending}>
-                ({member.studentId ? "Joined" : "Pending"})
+              {students.name} - {students.course} - {students.email}
+              <span style={students.studentId ? styles.joined : styles.pending}>
+                ({students.studentId ? "Joined" : "Pending"})
               </span>
             </li>
           ))}

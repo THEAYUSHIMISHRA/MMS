@@ -9,10 +9,10 @@ export default function AdminNav({ teamId, styles }) {
         <ul style={styles.navList}>
           <li style={styles.navItem}>
             {/* <Link to="/dashboard" style={styles.navLink}>Dashboard</Link> */}{/* by client */}
-            <Link to={"/teams/team/" + teamId} style={styles.navLink}>Dashboard</Link>{/* by Dev */}
+            <Link to={`/teams/team/${teamId}`} style={styles.navLink}>Dashboard</Link>{/* by Dev */}
           </li>
           <li style={styles.navItem}>
-            <Link to={"/teams/details/" + teamId} style={styles.navLink}>Team Details</Link>
+            <Link to={`/teams/details/${teamId}`} style={styles.navLink}>Team Details</Link>
           </li>
           {/* <li style={styles.navItem}>
             <Link to={"/teams/TPerformance/" + teamId} style={styles.navLink}>TPerformance</Link>

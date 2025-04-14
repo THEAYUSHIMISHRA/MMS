@@ -6,19 +6,20 @@ import { FormContainer, InputField, SubmitButton } from '../../styles/TeacherSig
 import contexts from '../../components/ContextApi'
 
 export default function JoinTeam() {
-	let { ContextDetails } = useContext(contexts)
+	const { ContextDetails } = useContext(contexts)
 
 	const [Link, setLink] = useState('')
 	const [SubmitBtn, SetSubmitBtn] = useState('Join')
-	let [teams, setTeams] = useState([])
+	const [teams, setTeams] = useState([])
 	const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const fetchTeams = async () => {
-		let studentId = ContextDetails.StudentId
-		let email = ContextDetails.StudentEmail
+		const studentId = ContextDetails.StudentId;
+		const email = ContextDetails.StudentEmail;
         if (!email || !studentId) {
-            alert('Please enter both Email and Student ID');
+            setError('Please enter both Email and Student ID');
             return;
         }
 
@@ -48,33 +49,47 @@ export default function JoinTeam() {
 
 	const handleSignIn = async (e) => {
 		e.preventDefault();
-		let teamId = Link.split("join-team/")[1]
+		if (isSubmitting) return; 
+		const match = Link.match(/join-team\/([A-Za-z0-9]+)/);
+		if (!match) {
+			alert("Invalid join link format. Please use the correct link.");
+			return;
+		}
 
-		let studentId = ContextDetails.StudentId
-		let email = ContextDetails.StudentEmail
+		setIsSubmitting(true);
+  		try {
+    		// ... existing code ...
+  		} finally {
+    	setIsSubmitting(false);
+    	SetSubmitBtn("Join");
+  		}
+		
+		const teamId = match[1];
+		const studentEmail = ContextDetails.StudentEmail;
+		console.log(teamId);
+		const studentId = ContextDetails.StudentId;
+		const email = ContextDetails.StudentEmail;
+
 		if (!Link) {
 			alert('Please fill in all required fields');
 			return;
 		}
 
 		try {
-			const body = { studentId, email}
 
-			SetSubmitBtn("loading...")
+			SetSubmitBtn("Joining...")
 			const response = await fetch(`http://localhost:4000/api/team/join-team/${teamId}`,{
 				method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-			}
-			);
+  				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email: studentEmail }),
+		});
 
 			const data = await response.json();
 
 			if (response.ok) {
-				alert(data.message || 'Join in successfully!');
+				alert('Join in successfully!');
+				setLink('');
 				SetSubmitBtn("Join")
-
-
 			} else {
 				SetSubmitBtn("Join")
 				alert(data.message || 'Failed to Join');
@@ -86,8 +101,13 @@ export default function JoinTeam() {
 	};
 
 	useEffect(()=>{
+
+		if (!ContextDetails.StudentId || !ContextDetails.StudentEmail) {
+			console.error("Student ID or Email missing in context");
+			return;
+		}
 		fetchTeams()
-	},[])
+	},[ContextDetails.StudentId, ContextDetails.StudentEmail]);
 	return (
 		<div>
 			<StudentDashboardContainer>
@@ -97,8 +117,6 @@ export default function JoinTeam() {
 						<div style={{ display: "flex", justifyContent: "center" }}>
 							<FormContainer onSubmit={handleSignIn}>
 								<h1>Join Team</h1>
-
-
 								{/* Common Fields */}
 								<InputField style={{ width: "95%" }}
 									type="text"
@@ -125,21 +143,24 @@ export default function JoinTeam() {
                             {teams.length > 0 ? (
                                 teams.map((team, index) => {
 									console.log(team)
-									
 									return(
-										<a href='#' id={team._id}>
-                                    <div key={index}   style={{ border: '1px solid #ddd', padding: '15px', margin: '10px', borderRadius: '8px' }}>
+										// <a href='#' id={team._id}>
+                                    	<div key={index}  
+										onClick={() => setLink(`http://localhost:4000/join-team/${team.teamId}`)} 
+										style={{ border: '1px solid #ddd', padding: '15px', margin: '10px', borderRadius: '8px', cursor: 'pointer' }}>
                                         <h3>{team.teamName}</h3>
-                                        <p>Leader: {team.leaderEmail}</p>
-                                        <p>Members: {team.members.length}</p>
+										<p>Team ID: {team.teamId}</p>
+                                        {/* <p>Leader: {team.leaderEmail}</p> */}
+                                        <p>Members: {team.students.length}</p>
                                         <ul>
-                                            {team.members.map((member, idx) => (
+                                            {team.students.map((member, idx) => (
                                                 <li key={idx}>
                                                     {member.name} - {member.email}
                                                 </li>
                                             ))}
                                         </ul>
-                                    </div></a>
+                                    </div>
+									// </a>
                                 )})
                             ) : (
                                 !loading && <p>No teams found.</p>
