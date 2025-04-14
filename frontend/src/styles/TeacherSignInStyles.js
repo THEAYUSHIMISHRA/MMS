@@ -59,20 +59,25 @@ export const InputField = styled.input`
 export const SubmitButton = styled(Link)`
   width: 100%;
   padding: 12px;
-  margin-top: 15px;
+  margin-top: 20px;
   border: none;
-  border-radius: 5px;
-  background-color: #4CAF50; /* Matching theme */
+  border-radius: 8px;
+  background-color: #4caf50;
   color: white;
   font-size: 18px;
   text-decoration: none;
   text-align: center;
-  cursor: pointer;
-  transition: 0.3s ease;
   font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
 
   &:hover {
-    background-color: #4CAF50;
+    background-color: #45a049;
+  }
+
+  &:active {
+    transform: scale(0.97); /* visually shows a press */
+    background-color: #3e9144; /* darker shade on click */
   }
 
   @media screen and (max-width: 768px) {
