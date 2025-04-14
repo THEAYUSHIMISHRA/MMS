@@ -155,7 +155,10 @@ const Sidebar = () => {
             <SidebarIcon><BsCalendarEvent /></SidebarIcon>
             <StyledLink to="/teacher/events">Events & Calendar</StyledLink>
           </SidebarNavItem>
-
+          <SidebarNavItem>
+            <SidebarIcon><BsCalendarEvent /></SidebarIcon>
+            <StyledLink to="/teacher/marks">Marks</StyledLink>
+          </SidebarNavItem>
           {/* ✅ Teacher Profile option added before Settings */}
           <SidebarNavItem>
             <SidebarIcon><BsPerson /></SidebarIcon>

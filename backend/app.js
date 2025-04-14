@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import cors from "cors";
 import { dbConnection } from "./database/dbConnection.js";
+
 // Import existing routes
 import messagingRoutes from "./routes/messagingRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
@@ -17,14 +18,13 @@ import attendanceRouter from "./router/attendanceRouter.js";
 import usersRouter from "./router/usersRouter.js";
 import adminRegisterRouter from "./router/adminRegisterRouter.js";
 import sendEmailRoutes from "./routes/sendEmailRoutes.js";
-import forgotpassRoutes from "./routes/forgotpasswordroutes.js"
-import feedbackRouter from "./router/feedbackRouter.js";//feedback feature
-
-import { errorHandler } from "./middlewares/errorHandler.js";
+import forgotpassRoutes from "./routes/forgotpasswordroutes.js";
+import feedbackRouter from "./router/feedbackRouter.js"; // Feedback feature
 import teams from "./routes/teamRoutes.js";
+import authRoutes from "./routes/authroutes.js"; // OTP-based password reset
 
-// ✅ Import the new OTP-based password reset routes
-import authRoutes from "./routes/authroutes.js";
+// ✅ Import the new Marks routes
+import Router from "./routes/marksRoutes.js"; // <-- Make sure you have this file
 
 const app = express();
 config();
@@ -37,7 +37,6 @@ app.use(
         methods: ["GET", "POST", "PUT", "DELETE"],
     })
 );
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -59,10 +58,11 @@ app.use("/api/v1/requests", requestRoutes);
 app.use("/api/v1/team", teams);
 app.use("/api/v1/send-email", sendEmailRoutes);
 app.use("/api/vi/forgotpass", forgotpassRoutes);
-app.use('/api/v1/feedback', feedbackRouter);
-
-// ✅ Add the new route for OTP-based forgot password
+app.use("/api/v1/feedback", feedbackRouter);
 app.use("/api/v1/auth", authRoutes);
+
+// ✅ Add Marks Route to API
+app.use("/api/v1/marks", Router); // <--- Added this line for marks feature
 
 // Global Error Handler
 app.use((err, req, res, next) => {
@@ -70,6 +70,7 @@ app.use((err, req, res, next) => {
     errorHandler(err, req, res, next);
 });
 
+// Connect to DB
 dbConnection();
 
 export default app;
