@@ -7,7 +7,6 @@ const TeamRegister = () => {
   const [students, setStudents] = useState([{ name: "", email: "", course: "", studentId: "" }]);
   const navigate = useNavigate();
 
-<<<<<<< HEAD
   // const generateTeamId = async (students) => {
   //   if ( !students || students.length === 0) return "T00"
   //   // Extract first letter from each unique course
@@ -32,7 +31,6 @@ const TeamRegister = () => {
   //     return `${courseCode}01`; // Default if count fetch fails
   //   }
   // };
-=======
   const generateTeamId = async (students) => {
     if (!students || students.length === 0) return "T00";
 
@@ -48,7 +46,6 @@ const TeamRegister = () => {
       console.error("Error fetching team count:", error);
     }
   };
->>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
 
   const handleAddMember = () => {
     setStudents([...students, { name: "", email: "", course: "", studentId: "" }]);
@@ -69,7 +66,6 @@ const TeamRegister = () => {
         teamName,
         students,
       });
-<<<<<<< HEAD
       
       const teamId = response.data.teamId;
 
@@ -77,10 +73,6 @@ const TeamRegister = () => {
       //alert("Team registered successfully! Invitations sent.");
       // navigate(`/pages/Teams/team/${response.data.teamId}`);//by client
       navigate(`/teams/team/${teamId}`);//by Dev
-=======
-      alert(`Team registered successfully! Team ID: ${teamID}`);
-      navigate(`/Teams/team/${response.data.teamID}`);
->>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
     } catch (error) {
       console.error("Error registering team:", error);
       alert("Failed to register team. Please try again.");
@@ -88,7 +80,6 @@ const TeamRegister = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div style={styles.container}>
       <h2 style={styles.heading}>Register a Team</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
@@ -134,145 +125,8 @@ const TeamRegister = () => {
             </div>
           </div>
         ))}
-    {/* <div
-=======
-    <div
->>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
-      style={{
-        backgroundColor: "rgb(29, 70, 111)",
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "20px",
-<<<<<<< HEAD
-      }}>
-      <div
-=======
-      }}
-    >
-      <form
-        onSubmit={handleSubmit}
->>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
-        style={{
-          width: "100%",
-          maxWidth: "750px",
-          backgroundColor: "#ffffff",
-          padding: "30px 40px",
-          borderRadius: "10px",
-          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.15)",
-          maxHeight: "95vh",
-          overflowY: "auto",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <h2
-          style={{
-            fontSize: "28px",
-            color: "rgb(29, 70, 111)",
-            marginBottom: "25px",
-            textAlign: "center",
-            fontWeight: "bold",
-          }}
-        >
-          Register a Team
-        </h2>
 
-        <div style={{ marginBottom: "20px" }}>
-          <label
-            style={{
-              fontWeight: "bold",
-              display: "block",
-              marginBottom: "6px",
-              color: "rgb(29, 70, 111)",
-              fontSize: "16px",
-            }}
-          >
-            Team Name:
-          </label>
-          <input
-            type="text"
-            placeholder="Enter Team Name"
-            value={teamName}
-            onChange={(e) => setTeamName(e.target.value)}
-            required
-            style={inputStyle}
-          />
-        </div>
-
-        <h3
-          style={{
-            fontSize: "22px",
-            marginTop: "20px",
-            marginBottom: "15px",
-            color: "rgb(29, 70, 111)",
-            borderBottom: "2px solid rgb(29, 70, 111)",
-            paddingBottom: "5px",
-          }}
-        >
-<<<<<<< HEAD
-          <div style={{ textAlign: "left" }}>
-            <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
-              Team Name:
-            </label>
-            <input
-              type="text"
-              placeholder="Enter Team Name"
-              value={teamName}
-              onChange={(e) => setTeamName(e.target.value)}
-              required
-              style={{
-                width: "93%",
-                padding: "12px",
-                borderRadius: "5px",
-                border: "1px solid rgb(29, 70, 111)",
-                fontSize: "16px",
-                backgroundColor: "white",
-                color: "black",
-                marginTop: "5px",
-              }}
-            />
-          </div>
-=======
-          Team Members
-        </h3>
->>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
-
-        {students.map((student, index) => (
-          <div
-            key={index}
-            style={{
-              padding: "20px",
-              backgroundColor: "#f0f4f8",
-              borderRadius: "8px",
-              marginBottom: "20px",
-              border: "1px solid rgb(29, 70, 111)",
-            }}
-          >
-            <div style={{ marginBottom: "15px" }}>
-              <label style={labelStyle}>Member {index + 1} Name:</label>
-              <input
-                type="text"
-                placeholder="Enter Name"
-                value={student.name}
-                onChange={(e) =>
-                  setStudents([
-                    ...students.slice(0, index),
-                    { ...student, name: e.target.value },
-                    ...students.slice(index + 1),
-                  ])
-                }
-                required
-                style={inputStyle}
-              />
-            </div>
-<<<<<<< HEAD
-          ))} */}
-=======
->>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
-
-            <div style={{ marginBottom: "15px" }}>
+            {/* <div style={{ marginBottom: "15px" }}>
               <label style={labelStyle}>Member {index + 1} Email:</label>
               <input
                 type="email"
@@ -325,8 +179,7 @@ const TeamRegister = () => {
                 style={inputStyle}
               />
             </div>
-          </div>
-        ))}
+          </div> */}
 
         <div
           style={{
@@ -349,13 +202,10 @@ const TeamRegister = () => {
           >
             Register Team
           </button>
-<<<<<<< HEAD
-        </form>
-      </div>
-    // </div>
-    // </form>
-    // </div>
-    );
+        </div>
+      </form>
+    </div>
+  );
 };
 
 const styles = {
@@ -372,12 +222,6 @@ const styles = {
     borderRadius: "8px",
     marginBottom: "15px",
   },
-=======
-        </div>
-      </form>
-    </div>
-  );
->>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
 };
 
 const labelStyle = {

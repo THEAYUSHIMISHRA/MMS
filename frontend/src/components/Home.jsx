@@ -104,7 +104,7 @@ const zoomOutEffect = keyframes`
 const HeroSection = styled.div`
   position: relative;
   width: 100%;
-  height: 86vh; /* Reduced from 100vh */
+  height: 88.1vh; /* Reduced from 100vh */
   overflow: hidden;
 `;
 
