@@ -7,6 +7,7 @@ const TeamRegister = () => {
   const [students, setStudents] = useState([{ name: "", email: "", course: "", studentId: "" }]);
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   // const generateTeamId = async (students) => {
   //   if ( !students || students.length === 0) return "T00"
   //   // Extract first letter from each unique course
@@ -31,6 +32,23 @@ const TeamRegister = () => {
   //     return `${courseCode}01`; // Default if count fetch fails
   //   }
   // };
+=======
+  const generateTeamId = async (students) => {
+    if (!students || students.length === 0) return "T00";
+
+    const uniqueCourses = [...new Set(students.map((m) => m.course?.charAt(0).toUpperCase() || ""))];
+    const courseCode = uniqueCourses.sort().join("");
+
+    try {
+      const response = await axios.get("http://localhost:4000/api/v1/team/courses");
+      const totalTeams = response.data.count || 0;
+      const serialNumber = String(totalTeams + 1).padStart(2, "0");
+      return `${courseCode}${serialNumber}`;
+    } catch (error) {
+      console.error("Error fetching team count:", error);
+    }
+  };
+>>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
 
   const handleAddMember = () => {
     setStudents([...students, { name: "", email: "", course: "", studentId: "" }]);
@@ -51,6 +69,7 @@ const TeamRegister = () => {
         teamName,
         students,
       });
+<<<<<<< HEAD
       
       const teamId = response.data.teamId;
 
@@ -58,6 +77,10 @@ const TeamRegister = () => {
       //alert("Team registered successfully! Invitations sent.");
       // navigate(`/pages/Teams/team/${response.data.teamId}`);//by client
       navigate(`/teams/team/${teamId}`);//by Dev
+=======
+      alert(`Team registered successfully! Team ID: ${teamID}`);
+      navigate(`/Teams/team/${response.data.teamID}`);
+>>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
     } catch (error) {
       console.error("Error registering team:", error);
       alert("Failed to register team. Please try again.");
@@ -65,6 +88,7 @@ const TeamRegister = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div style={styles.container}>
       <h2 style={styles.heading}>Register a Team</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
@@ -111,46 +135,83 @@ const TeamRegister = () => {
           </div>
         ))}
     {/* <div
+=======
+    <div
+>>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
       style={{
+        backgroundColor: "rgb(29, 70, 111)",
         minHeight: "100vh",
         display: "flex",
-        justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgb(29, 70, 111)",
+        justifyContent: "center",
         padding: "20px",
+<<<<<<< HEAD
       }}>
       <div
+=======
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+>>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
         style={{
-          maxWidth: "600px",
           width: "100%",
-          padding: "25px",
-          backgroundColor: "white",
-          color: "black",
+          maxWidth: "750px",
+          backgroundColor: "#ffffff",
+          padding: "30px 40px",
           borderRadius: "10px",
-          boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
-          textAlign: "center",
+          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.15)",
+          maxHeight: "95vh",
+          overflowY: "auto",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <h2
           style={{
-            fontSize: "26px",
-            marginBottom: "20px",
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            letterSpacing: "1px",
+            fontSize: "28px",
             color: "rgb(29, 70, 111)",
+            marginBottom: "25px",
+            textAlign: "center",
+            fontWeight: "bold",
           }}
         >
           Register a Team
         </h2>
-        <form
-          onSubmit={handleSubmit}
+
+        <div style={{ marginBottom: "20px" }}>
+          <label
+            style={{
+              fontWeight: "bold",
+              display: "block",
+              marginBottom: "6px",
+              color: "rgb(29, 70, 111)",
+              fontSize: "16px",
+            }}
+          >
+            Team Name:
+          </label>
+          <input
+            type="text"
+            placeholder="Enter Team Name"
+            value={teamName}
+            onChange={(e) => setTeamName(e.target.value)}
+            required
+            style={inputStyle}
+          />
+        </div>
+
+        <h3
           style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "15px",
+            fontSize: "22px",
+            marginTop: "20px",
+            marginBottom: "15px",
+            color: "rgb(29, 70, 111)",
+            borderBottom: "2px solid rgb(29, 70, 111)",
+            paddingBottom: "5px",
           }}
         >
+<<<<<<< HEAD
           <div style={{ textAlign: "left" }}>
             <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
               Team Name:
@@ -173,161 +234,122 @@ const TeamRegister = () => {
               }}
             />
           </div>
+=======
+          Team Members
+        </h3>
+>>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
 
-          <div style={{ textAlign: "left" }}>
-            <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
-              Leader Email:
-            </label>
-            <input
-              type="email"
-              placeholder="Enter Leader Email"
-              value={leaderEmail}
-              onChange={(e) => setLeaderEmail(e.target.value)}
-              required
-              style={{
-                width: "93%",
-                padding: "12px",
-                borderRadius: "5px",
-                border: "1px solid rgb(29, 70, 111)",
-                fontSize: "16px",
-                backgroundColor: "white",
-                color: "black",
-                marginTop: "5px",
-              }}
-            />
-          </div>
-
-          <h3 style={{ fontSize: "20px", marginTop: "20px", marginBottom: "10px", color: "rgb(29, 70, 111)" }}>
-            Team Members
-          </h3>
-
-          {members.map((member, index) => (
-            <div
-              key={index}
-              style={{
-                padding: "15px",
-                backgroundColor: "rgb(240, 240, 240)",
-                borderRadius: "8px",
-                marginBottom: "10px",
-              }}
-            >
-              <div style={{ textAlign: "left" }}>
-                <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
-                  Member {index + 1} Name:
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Name"
-                  value={member.name}
-                  onChange={(e) =>
-                    setMembers([...members.slice(0, index), { ...member, name: e.target.value }, ...members.slice(index + 1)])
-                  }
-                  required
-                  style={{
-                    width: "93%",
-                    padding: "12px",
-                    borderRadius: "5px",
-                    border: "1px solid rgb(29, 70, 111)",
-                    fontSize: "16px",
-                    backgroundColor: "white",
-                    color: "black",
-                    marginTop: "5px",
-                  }}
-                />
-              </div>
-
-              <div style={{ textAlign: "left", marginTop: "10px" }}>
-                <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
-                  Member {index + 1} Email:
-                </label>
-                <input
-                  type="email"
-                  placeholder="Enter Email"
-                  value={member.email}
-                  onChange={(e) =>
-                    setMembers([...members.slice(0, index), { ...member, email: e.target.value }, ...members.slice(index + 1)])
-                  }
-                  required
-                  style={{
-                    width: "93%",
-                    padding: "12px",
-                    borderRadius: "5px",
-                    border: "1px solid rgb(29, 70, 111)",
-                    fontSize: "16px",
-                    backgroundColor: "white",
-                    color: "black",
-                    marginTop: "5px",
-                  }}
-                />
-              </div>
-
-              <div style={{ textAlign: "left", marginTop: "10px" }}>
-                <label style={{ fontSize: "16px", fontWeight: "bold", color: "black" }}>
-                  Course:
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Course"
-                  value={member.course}
-                  onChange={(e) =>
-                    setMembers([...members.slice(0, index), { ...member, course: e.target.value }, ...members.slice(index + 1)])
-                  }
-                  required
-                  style={{
-                    width: "93%",
-                    padding: "12px",
-                    borderRadius: "5px",
-                    border: "1px solid rgb(29, 70, 111)",
-                    fontSize: "16px",
-                    backgroundColor: "white",
-                    color: "black",
-                    marginTop: "5px",
-                  }}
-                />
-              </div>
+        {students.map((student, index) => (
+          <div
+            key={index}
+            style={{
+              padding: "20px",
+              backgroundColor: "#f0f4f8",
+              borderRadius: "8px",
+              marginBottom: "20px",
+              border: "1px solid rgb(29, 70, 111)",
+            }}
+          >
+            <div style={{ marginBottom: "15px" }}>
+              <label style={labelStyle}>Member {index + 1} Name:</label>
+              <input
+                type="text"
+                placeholder="Enter Name"
+                value={student.name}
+                onChange={(e) =>
+                  setStudents([
+                    ...students.slice(0, index),
+                    { ...student, name: e.target.value },
+                    ...students.slice(index + 1),
+                  ])
+                }
+                required
+                style={inputStyle}
+              />
             </div>
+<<<<<<< HEAD
           ))} */}
+=======
+>>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
 
+            <div style={{ marginBottom: "15px" }}>
+              <label style={labelStyle}>Member {index + 1} Email:</label>
+              <input
+                type="email"
+                placeholder="Enter Email"
+                value={student.email}
+                onChange={(e) =>
+                  setStudents([
+                    ...students.slice(0, index),
+                    { ...student, email: e.target.value },
+                    ...students.slice(index + 1),
+                  ])
+                }
+                required
+                style={inputStyle}
+              />
+            </div>
+
+            <div style={{ marginBottom: "15px" }}>
+              <label style={labelStyle}>Course:</label>
+              <input
+                type="text"
+                placeholder="Enter Course"
+                value={student.course}
+                onChange={(e) =>
+                  setStudents([
+                    ...students.slice(0, index),
+                    { ...student, course: e.target.value },
+                    ...students.slice(index + 1),
+                  ])
+                }
+                required
+                style={inputStyle}
+              />
+            </div>
+
+            <div style={{ marginBottom: "15px" }}>
+              <label style={labelStyle}>Member {index + 1} ID:</label>
+              <input
+                type="text"
+                placeholder="Enter ID"
+                value={student.studentId}
+                onChange={(e) =>
+                  setStudents([
+                    ...students.slice(0, index),
+                    { ...student, studentId: e.target.value },
+                    ...students.slice(index + 1),
+                  ])
+                }
+                required
+                style={inputStyle}
+              />
+            </div>
+          </div>
+        ))}
+
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "20px",
+            marginBottom: "10px",
+          }}
+        >
           <button
             type="button"
             onClick={handleAddMember}
-            style={{
-              padding: "12px",
-              backgroundColor: "rgb(29, 70, 111)",
-              color: "white",
-              fontSize: "16px",
-              border: "none",
-              cursor: "pointer",
-              borderRadius: "5px",
-              transition: "0.3s",
-              fontWeight: "bold",
-              marginLeft: "15px",
-              marginRight:"25px",
-
-            }}
+            style={buttonStyle}
           >
             + Add Member
           </button>
 
           <button
             type="submit"
-            style={{
-              padding: "12px",
-              marginTop: "15px",
-              backgroundColor: "rgb(29, 70, 111)",
-              color: "white",
-              fontSize: "18px",
-              fontWeight: "bold",
-              border: "none",
-              cursor: "pointer",
-              borderRadius: "5px",
-              transition: "0.3s",
-              marginLeft: "15px",
-              marginRight:"25px",
-            }}
+            style={{ ...buttonStyle, marginLeft: "10px" }}
           >
             Register Team
           </button>
+<<<<<<< HEAD
         </form>
       </div>
     // </div>
@@ -350,6 +372,41 @@ const styles = {
     borderRadius: "8px",
     marginBottom: "15px",
   },
+=======
+        </div>
+      </form>
+    </div>
+  );
+>>>>>>> 69d42d8e545ce1b0056ad2d888f165cd3be582e5
+};
+
+const labelStyle = {
+  fontWeight: "bold",
+  display: "block",
+  marginBottom: "5px",
+  color: "rgb(29, 70, 111)",
+};
+
+const inputStyle = {
+  width: "100%",
+  padding: "10px",
+  fontSize: "16px",
+  borderRadius: "5px",
+  border: "1px solid rgb(29, 70, 111)",
+  backgroundColor: "#fff",
+  color: "black",
+  boxSizing: "border-box",
+};
+
+const buttonStyle = {
+  padding: "12px 24px",
+  backgroundColor: "rgb(29, 70, 111)",
+  color: "white",
+  fontSize: "16px",
+  fontWeight: "bold",
+  border: "none",
+  cursor: "pointer",
+  borderRadius: "6px",
 };
 
 export default TeamRegister;

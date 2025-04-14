@@ -143,6 +143,10 @@ const Sidebar = () => {
           <StyledLink to="/admin/events">Events & Calendar</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
+          <SidebarIcon><BsCalendarEvent /></SidebarIcon>
+          <StyledLink to="/admin/marks">Marks</StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
           <SidebarIcon><BsFile /></SidebarIcon>
           <StyledLink to="/admin/suploads">Student Upload</StyledLink>
         </SidebarNavItem>
@@ -153,6 +157,10 @@ const Sidebar = () => {
         <SidebarNavItem>
           <SidebarIcon><BsGear /></SidebarIcon>
           <StyledLink to="/admin/settings">Settings & Profile</StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
+            <SidebarIcon><BsFileText /></SidebarIcon>
+            <StyledLink to="/admin/feedback">Feedback</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>

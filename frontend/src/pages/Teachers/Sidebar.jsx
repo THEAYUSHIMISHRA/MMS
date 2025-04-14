@@ -155,13 +155,19 @@ const Sidebar = () => {
             <SidebarIcon><BsCalendarEvent /></SidebarIcon>
             <StyledLink to="/teacher/events">Events & Calendar</StyledLink>
           </SidebarNavItem>
-
+          <SidebarNavItem>
+            <SidebarIcon><BsCalendarEvent /></SidebarIcon>
+            <StyledLink to="/teacher/marks">Marks</StyledLink>
+          </SidebarNavItem>
           {/* ✅ Teacher Profile option added before Settings */}
           <SidebarNavItem>
             <SidebarIcon><BsPerson /></SidebarIcon>
             <StyledLink to="/teacher-profile">Teacher Profile</StyledLink>
           </SidebarNavItem>
-
+          <SidebarNavItem>
+            <SidebarIcon><BsFileText /></SidebarIcon>
+            <StyledLink to="/teacher/feedback">Feedback</StyledLink>
+          </SidebarNavItem>
           <SidebarNavItem>
             <SidebarIcon><BsGear /></SidebarIcon>
             <StyledLink to="/teacher/settings">Settings & Profile</StyledLink>

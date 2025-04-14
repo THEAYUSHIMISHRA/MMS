@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 //import EventCalendar from './EventCalender';
 import Announcement from './Announcement';
 //import Performance from './Performance';
+import FeedbackList from "../../components/Feedback/FeedbackList";
 import axios from 'axios';
 import {
   AdminDashboardContainer,
@@ -63,7 +64,17 @@ const AdminDashboard = () => {
       console.error('Error fetching announcement count:', error);
     }
   };
-
+  const CoordinatorDashboard = () => {
+    return (
+      <div>
+        {/* other coordinator tools */}
+  
+        <section className="mt-10">
+          <FeedbackList />
+        </section>
+      </div>
+    );
+  };
   // const fetchEvents = async () => {
   //   try {
   //     const response = await axios.get('http://localhost:4000/api/v1/events/getall');

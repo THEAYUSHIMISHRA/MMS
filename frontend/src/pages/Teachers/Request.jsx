@@ -7,101 +7,123 @@ import Sidebar from "./Sidebar";
 
 const Requests = () => {
   const [requests, setRequests] = useState([]);
-
-  let { ContextDetails } = useContext(contexts)
-  console.log(ContextDetails)
-  // const teacherId = localStorage.getItem("teacherId") || ""; // Get from local storage or auth context
-  const teacherId = ContextDetails.TeacherId; // Get from local storage or auth context
+  let { ContextDetails } = useContext(contexts);
+  const teacherId = ContextDetails.TeacherId;
 
   useEffect(() => {
     if (teacherId) fetchRequests();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teacherId]);
 
-  // ✅ Fetch requests assigned to the logged-in teacher
   const fetchRequests = async () => {
     try {
       const response = await axios.get(`http://localhost:4000/api/v1/requests/teacher/${teacherId}`);
-      console.log(response)
       setRequests(response.data.requests);
     } catch (error) {
       console.error("Error fetching requests:", error);
     }
   };
 
-  // ✅ Handle request response (Accept/Reject/Query)
   const handleResponse = async (requestId, status) => {
     try {
       await axios.post("http://localhost:4000/api/v1/requests/respond", { requestId, status });
-      fetchRequests(); // Refresh the request list
+      fetchRequests();
     } catch (error) {
       console.error("Error updating request:", error);
     }
   };
 
+  // Dummy data for cards
+  const dummyRequests = [
+    {
+      _id: "dummy1",
+      studentName: "Isha",
+      studentEmail: "isha@example.com",
+      projectDetails: "Hospital Management (Java)",
+      groupId: "CSD060",
+      status: "pending",
+    },
+    {
+      _id: "dummy2",
+      studentName: "Ayushi",
+      studentEmail: "ayushi@example.com",
+      projectDetails: "Hospital Management (Java)",
+      groupId: "CSD060",
+      status: "pending",
+    },
+  ];
+
   return (
     <ProfileContainer>
-    <SidebarContainer>
-      <Sidebar />
-    </SidebarContainer>
-    <Content>
-    <div style={styles.requestContainer}>
-      <h2 style={styles.heading}>Student Mentorship Requests</h2>
-      {requests.length === 0 ? (
-        <p style={styles.noRequests}>No mentorship requests available.</p>
-      ) : (
-        <table style={styles.requestTable}>
-          <thead>
-            <tr>
-              <th style={styles.tableHeader}>Student Name</th>
-              <th style={styles.tableHeader}>Email</th>
-              <th style={styles.tableHeader}>Project Details</th>
-              <th style={styles.tableHeader}>Group ID</th>
-              <th style={styles.tableHeader}>Status</th>
-              <th style={styles.tableHeader}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests.map((req) => {
-              console.log(req)
-              return(
-              <tr key={req._id}>
-                <td style={styles.tableCell}>{req?.studentName || "N/A"}</td>
-                <td style={styles.tableCell}>{req?.studentEmail || "N/A"}</td>
-                <td style={styles.tableCell}>{req.projectDetails}</td>
-                <td style={styles.tableCell}>{req.groupId}</td>
-                <td style={{ ...styles.tableCell, ...styles.status[req.status?.toLowerCase()] }}>
-                  {req.status}
-                </td>
-                <td style={styles.tableCell}>
-                  {req.status === "pending" ? (
-                    <>
-                      <button style={styles.acceptBtn} onClick={() => handleResponse(req._id, "Accepted")}>
-                        Accept
-                      </button>
-                      <button style={styles.rejectBtn} onClick={() => handleResponse(req._id, "Rejected")}>
-                        Reject
-                      </button>
-                      <button style={styles.queryBtn} onClick={() => handleResponse(req._id, "Query")}>
-                        Query
-                      </button>
-                    </>
-                  ) : (
-                    <span>{req.status}</span>
-                  )}
-                </td>
-              </tr>
-            )})}
-          </tbody>
-        </table>
-      )}
-    </div>
-    </Content>
+      <SidebarContainer>
+        <Sidebar />
+      </SidebarContainer>
+      <Content>
+        <div style={styles.requestContainer}>
+          <h2 style={styles.heading}>Student Mentorship Requests</h2>
+
+          {/* Dummy request cards */}
+          <div style={styles.cardContainer}>
+            {dummyRequests.map((req) => (
+              <div key={req._id} style={styles.card}>
+                <h3 style={styles.cardTitle}>{req.studentName}</h3>
+                <p style={styles.cardText}><strong>Email:</strong> {req.studentEmail}</p>
+                <p style={styles.cardText}><strong>Project:</strong> {req.projectDetails}</p>
+                <p style={styles.cardText}><strong>Group ID:</strong> {req.groupId}</p>
+                <div style={styles.cardActions}>
+                  <button style={styles.acceptBtn}>Accept</button>
+                  <button style={styles.rejectBtn}>Reject</button>
+                  <button style={styles.queryBtn}>Query</button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Table-based dynamic requests */}
+          {requests.length > 0 && (
+            <table style={styles.requestTable}>
+              <thead>
+                <tr>
+                  <th style={styles.tableHeader}>Student Name</th>
+                  <th style={styles.tableHeader}>Email</th>
+                  <th style={styles.tableHeader}>Project Details</th>
+                  <th style={styles.tableHeader}>Group ID</th>
+                  <th style={styles.tableHeader}>Status</th>
+                  <th style={styles.tableHeader}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {requests.map((req) => (
+                  <tr key={req._id}>
+                    <td style={styles.tableCell}>{req?.studentName || "N/A"}</td>
+                    <td style={styles.tableCell}>{req?.studentEmail || "N/A"}</td>
+                    <td style={styles.tableCell}>{req.projectDetails}</td>
+                    <td style={styles.tableCell}>{req.groupId}</td>
+                    <td style={{ ...styles.tableCell, ...styles.status[req.status?.toLowerCase()] }}>
+                      {req.status}
+                    </td>
+                    <td style={styles.tableCell}>
+                      {req.status === "pending" ? (
+                        <>
+                          <button style={styles.acceptBtn} onClick={() => handleResponse(req._id, "Accepted")}>Accept</button>
+                          <button style={styles.rejectBtn} onClick={() => handleResponse(req._id, "Rejected")}>Reject</button>
+                          <button style={styles.queryBtn} onClick={() => handleResponse(req._id, "Query")}>Query</button>
+                        </>
+                      ) : (
+                        <span>{req.status}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </Content>
     </ProfileContainer>
   );
 };
 
-// ✅ Inline CSS Styles
+// ✅ Inline styles
 const styles = {
   requestContainer: {
     padding: "20px",
@@ -110,12 +132,63 @@ const styles = {
   },
   heading: {
     textAlign: "center",
-    color: "#333",
+    color: "#1d466f",
+    fontSize: "28px",
+    marginBottom: "30px",
   },
-  noRequests: {
-    textAlign: "center",
+  cardContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    justifyContent: "center",
+    marginBottom: "40px",
+  },
+  card: {
+    backgroundColor: "white",
+    color: "solid rgb(29, 70, 111)",
+    borderRadius: "12px",
+    padding: "20px",
+    width: "300px",
+    border:"8px solid rgb(29, 70, 111)",
+    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+  },
+  cardTitle: {
+    fontSize: "22px",
+    marginBottom: "10px",
+  },
+  cardText: {
     fontSize: "16px",
-    color: "#777",
+    margin: "4px 0",
+    
+  },
+  cardActions: {
+    marginTop: "15px",
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  acceptBtn: {
+    backgroundColor: "#28a745",
+    color: "white",
+    padding: "5px 10px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+  },
+  rejectBtn: {
+    backgroundColor: "#dc3545",
+    color: "white",
+    padding: "5px 10px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+  },
+  queryBtn: {
+    backgroundColor: "#ffc107",
+    color: "black",
+    padding: "5px 10px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
   },
   requestTable: {
     width: "100%",
@@ -133,32 +206,8 @@ const styles = {
     padding: "10px",
     textAlign: "center",
     border: "1px solid #ddd",
-  },
-  acceptBtn: {
-    backgroundColor: "green",
-    color: "white",
-    padding: "5px 10px",
-    border: "none",
-    cursor: "pointer",
-    marginRight: "5px",
-    borderRadius: "5px",
-  },
-  rejectBtn: {
-    backgroundColor: "red",
-    color: "white",
-    padding: "5px 10px",
-    border: "none",
-    cursor: "pointer",
-    marginRight: "5px",
-    borderRadius: "5px",
-  },
-  queryBtn: {
-    backgroundColor: "orange",
-    color: "white",
-    padding: "5px 10px",
-    border: "none",
-    cursor: "pointer",
-    borderRadius: "5px",
+    backgroundColor: "#fff",
+    color: "#000",
   },
   status: {
     accepted: { color: "green", fontWeight: "bold" },
