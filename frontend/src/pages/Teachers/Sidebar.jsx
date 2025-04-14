@@ -164,7 +164,6 @@ const Sidebar = () => {
           <SidebarNavItem>
             <SidebarIcon><BsFileText /></SidebarIcon>
             <StyledLink to="/teacher/feedback">Feedback</StyledLink>
-
           </SidebarNavItem>
           <SidebarNavItem>
             <SidebarIcon><BsGear /></SidebarIcon>

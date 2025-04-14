@@ -155,6 +155,10 @@ const Sidebar = () => {
           <StyledLink to="/admin/settings">Settings & Profile</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
+            <SidebarIcon><BsFileText /></SidebarIcon>
+            <StyledLink to="/admin/feedback">Feedback</StyledLink>
+        </SidebarNavItem>
+        <SidebarNavItem>
           <SidebarIcon isOpen={isOpen}>
             <BsGear />
               </SidebarIcon>
