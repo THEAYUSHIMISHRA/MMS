@@ -45,6 +45,7 @@ export const FormContainer = styled.form`
   background-color: white; /* White form background */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
+  border: 5px solid black;
 `;
 
 export const InputField = styled.input`
