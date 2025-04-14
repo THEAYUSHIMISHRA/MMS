@@ -10,11 +10,18 @@ export const AdminSignInContainer = styled.div`
   min-height: 100vh;
 `;
 export const Logo1 = styled.img`
-  width: 100px; /* Small logo */
-  height: auto;
-  margin-bottom: 95px; /* Reduced space below the logo */
-  margin-top: -90px; /* Moves the logo higher */
-`;
+  width: 110px;
+  margin-top: 40px;
+  margin-bottom: 130px;
+  animation: glow 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px white);
+
+  @keyframes glow {
+    0% { filter: drop-shadow(0 0 5px white); }
+    50% { filter: drop-shadow(0 0 15px white); }
+    100% { filter: drop-shadow(0 0 5px white); }
+  }
+    `;
 export const Heading = styled.h2`
   color: white;
   font-size: 28px;

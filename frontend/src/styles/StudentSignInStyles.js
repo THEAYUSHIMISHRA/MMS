@@ -11,11 +11,18 @@ export const StudentSignInContainer = styled.div`
   padding: 20px;
 `;
 export const Logo2 = styled.img`
-  width: 100px; /* Small logo */
-  height: auto;
-  margin-bottom: 115px; /* Reduced space below the logo */
-  margin-top: -100px; /* Moves the logo higher */
-`;
+  width: 110px;
+  margin-top: 0px;
+  margin-bottom: 140px;
+  animation: glow 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px white);
+
+  @keyframes glow {
+    0% { filter: drop-shadow(0 0 5px white); }
+    50% { filter: drop-shadow(0 0 15px white); }
+    100% { filter: drop-shadow(0 0 5px white); }
+  }
+    `;
 export const Heading = styled.h2`
   color: white; /* White text */
   font-size: 26px; /* Larger heading */
