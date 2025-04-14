@@ -20,7 +20,7 @@ export const ChooseUserContainer = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 110px;
+  width: 120px;
   margin-top: 40px;
   margin-bottom: 190px;
   animation: glow 2s ease-in-out infinite;
