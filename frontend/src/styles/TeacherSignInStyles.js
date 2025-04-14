@@ -11,7 +11,7 @@ export const TeacherSignInContainer = styled.div`
   padding: 20px;
 `;
 export const Logo = styled.img`
-  width: 110px;
+  width: 120px;
   margin-top: 40px;
   margin-bottom: 130px;
   animation: glow 2s ease-in-out infinite;
@@ -40,7 +40,7 @@ export const FormContainer = styled.form`
   align-items: center;
   width: 100%;
   max-width: 350px; /* Increased width for better spacing */
-  padding: 25px;
+  padding: 15px;
   border-radius: 10px;
   background-color: white; /* White form background */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -49,7 +49,7 @@ export const FormContainer = styled.form`
 `;
 
 export const InputField = styled.input`
-  width: 100%;
+  width: 85%;
   padding: 12px;
   margin: 10px 0;
   border-radius: 5px;
@@ -66,7 +66,7 @@ export const InputField = styled.input`
 `;
 
 export const SubmitButton = styled(Link)`
-  width: 100%;
+  width: 95%;
   padding: 12px;
   margin-top: 20px;
   border: none;
