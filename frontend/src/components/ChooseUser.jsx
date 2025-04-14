@@ -21,10 +21,10 @@ const ChooseUser = () => {
           <Title>Teacher</Title>
           <Button to="/teacher-signIn">Login as Teacher</Button>
         </UserSection>
-        <UserSection>
+        {/* <UserSection>
           <Title>Team</Title>
           <Button to="/team-signIn">Login for Team</Button>
-        </UserSection>
+        </UserSection> */}
       </BoxWrapper>
     </ChooseUserContainer>
   );

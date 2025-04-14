@@ -3,128 +3,114 @@ import axios from "axios";
 
 const TeacherMessagingPage = () => {
   const [requests, setRequests] = useState([]);
-  const [message, setMessage] = useState("");
-  const [selectedRequest, setSelectedRequest] = useState(null);
-  const [messages, setMessages] = useState([]);
+  const [filteredRequests, setFilteredRequests] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetch requests from the API
+  const exampleRequests = [
+    { _id: "1", studentName: "Isha", groupId: "CSD059", projectDetails: "AI Chatbot", status: "pending" },
+    { _id: "2", studentName: "Himani", groupId: "CSD060", projectDetails: "Smart Attendance", status: "accepted" },
+    { _id: "3", studentName: "Ayushi Mishra", groupId: "CSD061", projectDetails: "E-learning Platform", status: "query" },
+    { _id: "4", studentName: "Swadha Sri", groupId: "CSD062", projectDetails: "Health Tracker", status: "pending" },
+  ];
+
   useEffect(() => {
     axios
       .get("/api/teacher/requests", { params: { teacherId: "teacher_id_here" } })
       .then((response) => {
-        console.log("Fetched Requests:", response.data);
-        setRequests(Array.isArray(response.data) ? response.data : []);
+        const data = Array.isArray(response.data) ? response.data : exampleRequests;
+        setRequests(data);
+        setFilteredRequests(data);
       })
-      .catch((error) => {
-        console.error("Error fetching requests:", error);
+      .catch(() => {
+        setRequests(exampleRequests);
+        setFilteredRequests(exampleRequests);
       });
   }, []);
 
-  // Fetch messages for a particular request
-  const fetchMessages = (requestId) => {
-    axios
-      .get(`/api/messages/${requestId}`)
-      .then((response) => {
-        console.log("Fetched Messages:", response.data);
-        setMessages(Array.isArray(response.data) ? response.data : []);
-      })
-      .catch((error) => {
-        console.error("Error fetching messages:", error);
-      });
-  };
-
-  // Responding to a request
-  const handleResponse = (requestId, status) => {
-    axios
-      .post("/api/teacher/respondRequest", { requestId, status })
-      .then(() => {
-        // Update request status locally
-        setRequests((prevRequests) =>
-          prevRequests.map((request) =>
-            request._id === requestId ? { ...request, status } : request
-          )
-        );
-        setSelectedRequest(requestId);
-        fetchMessages(requestId); // Fetch messages after updating status
-      })
-      .catch((error) => {
-        console.error("Error updating request status:", error);
-      });
-  };
-
-  // Sending a message in chat
-  const handleSendMessage = () => {
-    if (selectedRequest && message.trim() !== "") {
-      axios
-        .post("/api/sendMessage", {
-          requestId: selectedRequest,
-          sender: "teacher",
-          message,
-        })
-        .then(() => {
-          setMessage(""); // Clear input after sending
-          fetchMessages(selectedRequest); // Refresh messages
-        })
-        .catch((error) => {
-          console.error("Error sending message:", error);
-        });
-    }
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+    const filtered = requests.filter((req) =>
+      req.studentName.toLowerCase().includes(term)
+    );
+    setFilteredRequests(filtered);
   };
 
   return (
-    <div>
-      <h2>Requests from Students</h2>
-      {requests.length === 0 ? (
-        <p>No requests available</p>
-      ) : (
-        requests.map((request) => (
-          <div key={request._id} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}>
-            <h3>{request.studentName} (Group ID: {request.groupId})</h3>
-            <p>{request.projectDetails}</p>
-            <p><strong>Status:</strong> {request.status}</p>
+    <div style={containerStyle}>
+      <div style={boxStyle}>
+        <h2 style={titleStyle}>Messages</h2>
 
-            {/* If request is pending, allow teacher to respond */}
-            {request.status === "pending" && (
-              <div>
-                <button onClick={() => handleResponse(request._id, "accepted")}>Accept</button>
-                <button onClick={() => handleResponse(request._id, "rejected")}>Reject</button>
-                <button onClick={() => handleResponse(request._id, "query")}>Query</button>
-              </div>
-            )}
+        {/* Search bar */}
+        <input
+          type="text"
+          placeholder="Search student..."
+          value={searchTerm}
+          onChange={handleSearch}
+          style={searchStyle}
+        />
 
-            {/* Show chat if request is accepted or queried */}
-            {(request.status === "accepted" || request.status === "query") && (
-              <div>
-                <h4>Chat:</h4>
-                <div style={{ maxHeight: "200px", overflowY: "auto", border: "1px solid #ddd", padding: "5px" }}>
-                  {/* Display messages */}
-                  {selectedRequest === request._id && messages.length > 0 ? (
-                    messages.map((msg, index) => (
-                      <div key={index} style={{ textAlign: msg.sender === "teacher" ? "right" : "left" }}>
-                        <p><strong>{msg.sender}:</strong> {msg.message}</p>
-                      </div>
-                    ))
-                  ) : (
-                    <p>No messages yet.</p>
-                  )}
-                </div>
-
-                {/* Chat box */}
-                <textarea
-                  placeholder="Type your message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  rows="3"
-                  style={{ width: "100%", marginTop: "5px" }}
-                />
-                <button onClick={handleSendMessage}>Send</button>
-              </div>
-            )}
-          </div>
-        ))
-      )}
+        {filteredRequests.length === 0 ? (
+          <p style={{ color: "#444", textAlign: "center" }}>No matching requests found</p>
+        ) : (
+          filteredRequests.map((request) => (
+            <div key={request._id} style={chatCardStyle}>
+              <p style={chatText}><strong>Name:</strong> {request.studentName}</p>
+              <p style={chatText}><strong>Group ID:</strong> {request.groupId}</p>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
+};
+
+// Styles
+const containerStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100vh",
+  backgroundColor: "#ffffff",
+};
+
+const boxStyle = {
+  width: "400px",
+  maxHeight: "90vh",
+  overflowY: "auto",
+  padding: "20px",
+  borderRadius: "10px",
+  border: "2px solid rgb(29, 50, 90)",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+  backgroundColor: "#f9f9f9",
+};
+
+const titleStyle = {
+  color: "rgb(29, 50, 90)",
+  marginBottom: "20px",
+  textAlign: "center",
+};
+
+const searchStyle = {
+  padding: "10px",
+  width: "90%",
+  borderRadius: "5px",
+  border: "1px solid #ccc",
+  marginBottom: "20px",
+};
+
+const chatCardStyle = {
+  backgroundColor: "rgb(29, 50, 90)",
+  color: "white",
+  padding: "15px",
+  borderRadius: "10px",
+  marginBottom: "15px",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+};
+
+const chatText = {
+  margin: 0,
+  fontSize: "16px",
 };
 
 export default TeacherMessagingPage;
