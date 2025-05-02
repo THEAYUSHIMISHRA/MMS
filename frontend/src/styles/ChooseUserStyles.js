@@ -6,7 +6,7 @@ export const ChooseUserContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 91.8vh;
   background-color: rgb(29, 70, 111);
   background-size: 300% 300%;
   animation: gradientAnimation 6s ease infinite;
@@ -22,7 +22,7 @@ export const ChooseUserContainer = styled.div`
 export const Logo = styled.img`
   width: 150px;
   margin-top: 40px;
-  margin-bottom: 120px;
+  margin-bottom: 100px;
   animation: glow 2s ease-in-out infinite;
   filter: drop-shadow(0 0 10px white);
 

@@ -123,7 +123,7 @@ const ImageSlider = styled.div`
 
 // 💡 New Mentor-Mentee Title Style inside Navbar
 const MentorMenteeTitle = styled.h1`
-  font-size: 50px;
+  font-size: 45px;
   font-weight: bold;
   color: rgb(24, 60, 95);
   text-shadow: 0px 0px 10px white;

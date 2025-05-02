@@ -210,7 +210,7 @@ const TeamRegister = () => {
 
 const styles = {
   container: { padding: "20px" },
-  heading: { fontSize: "24px", color: "rgb(29, 70, 111)", marginBottom: "20px",  },
+  heading: { fontSize: "24px", color: "rgb(29, 70, 111)", marginBottom: "20px", textAlign: "center" },
   subheading: { fontSize: "20px", marginTop: "20px", marginBottom: "10px", color: "rgb(29, 70, 111)" },
   form: { maxWidth: "700px", margin: "0 auto" },
   formGroup: { marginBottom: "15px" },

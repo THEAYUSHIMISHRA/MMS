@@ -5,12 +5,14 @@ const AboutUs = () => {
     return (
         <Container>
             <ContentWrapper>
-                <Title>About Us</Title>
-                <Description>
-                    Welcome to our platform! We are committed to providing an immersive experience 
-                    where technology meets innovation. Our goal is to foster growth, creativity, and 
-                    excellence in every step of the journey.
-                </Description>
+                <Card>
+                    <CardTitle>About Us</CardTitle>
+                    <CardText>
+                        Welcome to our platform! We are committed to providing an immersive experience 
+                        where technology meets innovation. Our goal is to foster growth, creativity, and 
+                        excellence in every step of the journey.
+                    </CardText>
+                </Card>
                 <Card>
                     <CardTitle>Who We Are</CardTitle>
                     <CardText>
@@ -44,9 +46,9 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 40px;
-    background: linear-gradient(120deg, #0f172a, #1e293b, #312e81);
+    min-height: 97.3vh;
+    padding: 10px;
+    background: linear-gradient(120deg,rgb(68, 93, 153),#344d76, #312e81);
     background-size: 300% 300%;
     animation: ${gradientAnimation} 8s ease infinite;
     color: #ffffff;
@@ -72,11 +74,11 @@ const Description = styled.p`
     font-size: 1.2rem;
     color: #cbd5e1;
     line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 `;
 
 const Card = styled.div`
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
@@ -86,14 +88,14 @@ const Card = styled.div`
 
     &:hover {
         transform: scale(1.05);
-        box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.6); /* Neon Magenta */
+        box-shadow: 0px 0px 15px rgba(0, 230, 230, 0.8); /* Neon Magenta */
     }
 `;
 
 const CardTitle = styled.h2`
     font-size: 1.8rem;
-    color: #ff00ff; /* Neon Magenta */
-    text-shadow: 0px 0px 10px rgba(255, 0, 255, 0.8);
+    color:rgba(0, 230, 230); /* Neon Magenta */
+    text-shadow: 0px 0px 10px rgba(0, 230, 230, 0.8);
 `;
 
 const CardText = styled.p`
@@ -108,7 +110,7 @@ const NeonGlow = styled.div`
     left: 50%;
     width: 350px;
     height: 350px;
-    background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 10%, transparent 80%);
+    background: radial-gradient(circle, rgba(0, 255, 255, 0) 10%, transparent 80%);
     transform: translate(-50%, -50%);
     z-index: 0;
     pointer-events: none;
